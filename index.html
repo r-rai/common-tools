@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,2500 +9,1010 @@
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
-  
+
+  <!-- Tailwind CSS & Google Fonts & Icons -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#C84B31",        // Terracotta (Light mode primary)
+            "primary-dark": "#FF6B35",   // Neon Saffron (Dark mode primary)
+            "background-light": "#FDFBF7",
+            "background-dark": "#08080C",
+            "surface-light": "#F4EFE6",
+            "surface-dark": "#12131C",
+            "text-light": "#2D2A26",
+            "text-dark": "#E8E9F3",
+            "muted-light": "#9C9283",
+            "muted-dark": "#5B5F77",
+            "muted-dark-bright": "#B0B3C8",
+            "accent-light": "#E3A857",   // Gold
+            "accent-dark": "#00F0FF"     // Cyber Cyan
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "heading": ["Rozha One", "serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px",
+            "arch": "200px 200px 0 0",
+            "sharp": "4px"
+          },
+          boxShadow: {
+            "card-light": "0 8px 30px rgba(200, 75, 49, 0.08)",
+            "card-dark": "0 0 15px rgba(255, 107, 53, 0.4)",
+            "card-hover-light": "0 12px 40px rgba(200, 75, 49, 0.15)",
+            "card-hover-dark": "0 0 25px rgba(255, 107, 53, 0.6)",
+            "cyan-glow": "0 0 15px rgba(0, 240, 255, 0.6)"
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* ========================================
-       RESET & BASE STYLES
-       ======================================== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Rozha One', serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
     }
     
-    /* ========================================
-       DESIGN TOKENS (CSS VARIABLES)
-       ======================================== */
+    /* Dynamic Theme Toggles */
+    .dark .theme-border-radius { border-radius: 4px; }
+    .light .theme-border-radius { border-radius: 1rem; }
+
+    .dark .theme-image-radius { border-radius: 4px; }
+    .light .theme-image-radius { border-radius: 1.5rem 1.5rem 0 0; }
+    
+    .dark .theme-border { border: 1px solid #5B5F77; }
+    .light .theme-border { border: 1px solid transparent; }
+    
+    .dark .theme-shadow { box-shadow: 0 0 15px rgba(255, 107, 53, 0.4); }
+    .light .theme-shadow { box-shadow: 0 8px 30px rgba(200, 75, 49, 0.08); }
+    
+    .dark .theme-shadow-hover:hover { box-shadow: 0 0 25px rgba(255, 107, 53, 0.6); }
+    .light .theme-shadow-hover:hover { box-shadow: 0 12px 40px rgba(200, 75, 49, 0.15); }
+    
+    /* Background grid textures */
+    .dark .jali-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF6B35' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    /* Backward compatibility tokens mapped to Tailwind themes */
     :root {
-      /* Colors - Dark Theme (Default) */
-      --color-bg-primary: #0f172a;
-      --color-bg-secondary: #1e293b;
-      --color-bg-tertiary: #334155;
-      --color-text-primary: #f1f5f9;
-      --color-text-secondary: #cbd5e1;
-      --color-text-muted: #94a3b8;
-      --color-accent: #38bdf8;
-      --color-accent-hover: #0ea5e9;
+      --color-bg-primary: #FDFBF7;
+      --color-bg-secondary: #F4EFE6;
+      --color-bg-tertiary: rgba(200, 75, 49, 0.08);
+      --color-text-primary: #2D2A26;
+      --color-text-secondary: #9C9283;
+      --color-text-muted: #9C9283;
+      --color-accent: #C84B31;
+      --color-accent-hover: #a03c27;
       --color-success: #22c55e;
       --color-error: #ef4444;
       --color-warning: #f59e0b;
-      
-      /* Spacing */
-      --spacing-xs: 0.25rem;
-      --spacing-sm: 0.5rem;
-      --spacing-md: 1rem;
-      --spacing-lg: 1.5rem;
-      --spacing-xl: 2rem;
-      --spacing-2xl: 3rem;
-      
-      /* Typography */
-      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-size-xs: 0.75rem;
-      --font-size-sm: 0.875rem;
-      --font-size-base: 1rem;
-      --font-size-lg: 1.125rem;
-      --font-size-xl: 1.25rem;
-      --font-size-2xl: 1.5rem;
-      --font-size-3xl: 2rem;
-      
-      /* Border Radius */
-      --radius-sm: 0.375rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-      --radius-xl: 1rem;
-      --radius-full: 9999px;
-      
-      /* Shadows */
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
-      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
-      
-      /* Z-Index */
-      --z-base: 0;
-      --z-dropdown: 100;
-      --z-sticky: 1000;
-      --z-modal: 2000;
-      
-      /* Layout */
-      --header-height: 56px;
-      --recent-bar-height: 48px;
-      --max-width-content: 1400px;
-      
-      /* Transitions */
-      --transition-quick: 150ms ease;
-      --transition-normal: 200ms ease;
-      --transition-slow: 300ms ease-in-out;
     }
     
-    [data-theme="light"] {
-      --color-bg-primary: #ffffff;
-      --color-bg-secondary: #f8fafc;
-      --color-bg-tertiary: #e2e8f0;
-      --color-text-primary: #0f172a;
-      --color-text-secondary: #475569;
-      --color-text-muted: #64748b;
-      --color-accent: #0284c7;
-      --color-accent-hover: #0369a1;
+    .dark {
+      --color-bg-primary: #08080C;
+      --color-bg-secondary: #12131C;
+      --color-bg-tertiary: #1C1D2A;
+      --color-text-primary: #E8E9F3;
+      --color-text-secondary: #B0B3C8;
+      --color-text-muted: #5B5F77;
+      --color-accent: #FF6B35;
+      --color-accent-hover: #e0531f;
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
     }
-    
-    /* ========================================
-       BODY & BASE
-       ======================================== */
-    body {
-      font-family: var(--font-family);
-      background-color: var(--color-bg-primary);
-      color: var(--color-text-primary);
-      line-height: 1.5;
-      overflow-x: hidden;
-      transition: background-color var(--transition-normal), color var(--transition-normal);
+
+    /* Custom scrollbar settings */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
     }
-    
-    /* ========================================
-       GLOBAL HEADER
-       ======================================== */
-    .global-header {
-      position: sticky;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--header-height);
-      background-color: var(--color-bg-secondary);
-      border-bottom: 1px solid var(--color-accent);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.5rem;
-      z-index: var(--z-sticky);
-      box-shadow: var(--shadow-md);
-      transition: background-color var(--transition-normal), border-color var(--transition-normal);
-    }
-    
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      width: 200px;
-    }
-    
-    .header-center {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      width: 120px;
-      justify-content: flex-end;
-    }
-    
-    .home-button,
-    .search-button,
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
+    ::-webkit-scrollbar-track {
       background: transparent;
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      font-size: 1.2rem;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #5B5F77;
+      border-radius: 20px;
+    }
+    .light ::-webkit-scrollbar-thumb {
+      background-color: #9C9283;
     }
     
-    .home-button:hover,
-    .search-button:hover,
-    .theme-toggle:hover {
-      background-color: var(--color-bg-tertiary);
-      transform: scale(1.05);
-    }
-    
-    .home-button:active,
-    .search-button:active,
-    .theme-toggle:active {
-      transform: scale(0.95);
-    }
-    
-    .home-button:focus-visible,
-    .search-button:focus-visible,
-    .theme-toggle:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    .app-title {
-      font-size: var(--font-size-xl);
-      font-weight: 600;
-      color: var(--color-accent);
-      letter-spacing: -0.02em;
-      margin: 0;
-      white-space: nowrap;
-    }
-    
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-    }
-    
-    .breadcrumb-item {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      transition: color var(--transition-quick);
-    }
-    
-    .breadcrumb-item:hover {
-      color: var(--color-text-primary);
-    }
-    
-    .breadcrumb-item.active {
-      color: var(--color-text-primary);
-      font-weight: 500;
-    }
-    
-    .breadcrumb-separator {
-      color: var(--color-text-muted);
-    }
-    
-    /* ========================================
-       RECENT APPS BAR
-       ======================================== */
-    .recent-apps-bar {
-      height: var(--recent-bar-height);
-      background-color: var(--color-bg-primary);
-      border-bottom: 1px solid var(--color-bg-tertiary);
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      overflow-x: auto;
-      overflow-y: hidden;
-      transition: background-color var(--transition-normal);
-    }
-    
-    .recent-apps-bar.empty {
-      display: none;
-    }
-    
-    .recent-label {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    
-    .recent-apps-list {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    
+    /* Dynamically populated recent apps list chip button */
     .recent-app-chip {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.375rem 0.75rem;
-      height: 32px;
-      border-radius: var(--radius-full);
-      background-color: var(--color-bg-secondary);
-      border: 1px solid var(--color-bg-tertiary);
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      background-color: var(--color-bg-tertiary);
       color: var(--color-text-primary);
-      font-size: var(--font-size-sm);
-      text-decoration: none;
+      border: 1px solid transparent;
       cursor: pointer;
-      transition: all var(--transition-quick);
+      font-size: 0.825rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
       white-space: nowrap;
-      max-width: 140px;
     }
-    
     .recent-app-chip:hover {
-      border-color: var(--color-accent);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
-    
-    .recent-app-chip.active {
       background-color: var(--color-accent);
-      color: var(--color-bg-primary);
-      font-weight: 600;
-      border-color: var(--color-accent);
-    }
-    
-    .recent-app-icon {
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    
-    .recent-app-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .clear-recent-btn {
-      margin-left: auto;
-      padding: 0.375rem 0.75rem;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: color var(--transition-quick);
-      white-space: nowrap;
-    }
-    
-    .clear-recent-btn:hover {
-      color: var(--color-error);
-    }
-    
-    /* ========================================
-       HOME PAGE
-       ======================================== */
-    .home-container {
-      max-width: var(--max-width-content);
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      min-height: calc(100vh - var(--header-height));
-    }
-    
-    .home-header {
-      margin-bottom: 2rem;
-    }
-    
-    .home-title {
-      font-size: var(--font-size-3xl);
-      font-weight: 700;
-      color: var(--color-text-primary);
-      margin-bottom: 0.5rem;
-    }
-    
-    .home-description {
-      font-size: var(--font-size-base);
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-    }
-    
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    /* ========================================
-       TOOL CARD COMPONENT
-       ======================================== */
-    .tool-card {
-      background-color: var(--color-bg-secondary);
-      border: 1px solid var(--color-bg-tertiary);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: all var(--transition-normal);
-      cursor: pointer;
-    }
-    
-    .tool-card:hover {
-      border-color: var(--color-accent);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .tool-card:active {
-      transform: translateY(-2px);
-    }
-    
-    .tool-card-placeholder {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    
-    .tool-card-placeholder:hover {
-      transform: none;
-      border-color: var(--color-bg-tertiary);
-      box-shadow: none;
-    }
-    
-    .card-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: rgba(56, 189, 248, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      font-size: 2rem;
-    }
-    
-    .card-title {
-      font-size: var(--font-size-lg);
-      font-weight: 600;
-      color: var(--color-text-primary);
-      margin-bottom: 0.5rem;
-    }
-    
-    .card-description {
-      flex: 1;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-    
-    .card-action {
-      width: 100%;
-      margin-top: auto;
-    }
-    
-    /* ========================================
-       JSON TOOL STYLES
-       ======================================== */
-    .json-tool-wrapper {
-      max-width: var(--max-width-content);
-      margin: 0 auto;
-      padding: var(--spacing-xl);
-    }
-    
-    /* Info/Help Panel */
-    .info-panel {
-      background: var(--color-bg-secondary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
-      max-height: 500px;
-      overflow: hidden;
-      transition: all var(--transition-slow);
-    }
-    
-    .info-panel.collapsed {
-      max-height: 0;
-      padding: 0;
-      margin-bottom: 0;
-      border-width: 0;
-      opacity: 0;
-    }
-    
-    .info-panel h3 {
-      color: var(--color-accent);
-      font-size: var(--font-size-xl);
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .info-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-lg);
-    }
-    
-    .info-item {
-      display: flex;
-      gap: var(--spacing-md);
-      align-items: flex-start;
-    }
-    
-    .info-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      color: var(--color-bg-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    
-    .info-text strong {
-      display: block;
-      color: var(--color-text-primary);
-      margin-bottom: 0.25rem;
-    }
-    
-    .info-text p {
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-sm);
-      margin: 0;
-    }
-    
-    /* Actions Section */
-    .actions {
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .action-buttons {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    
-    .help-toggle-btn {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.625rem 1rem;
-      background-color: var(--color-bg-secondary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      font-size: var(--font-size-sm);
-      font-weight: 500;
-    }
-    
-    .help-toggle-btn:hover {
-      background-color: var(--color-bg-tertiary);
+      color: #FFFFFF !important;
       transform: translateY(-1px);
     }
-    
-    .help-icon {
-      font-size: 1.2rem;
-    }
-    
-    /* Main Grid - Dynamic Layout for Progressive Schema Reveal */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--spacing-xl);
-      margin-bottom: var(--spacing-xl);
-      transition: grid-template-columns 0.3s ease-out;
-    }
-    
-    /* When schema is visible: side-by-side layout */
-    .main-grid[data-schema-visible="true"] {
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    }
-    
-    /* Mobile: always stack */
-    @media (max-width: 1100px) {
-      .main-grid,
-      .main-grid[data-schema-visible="true"] {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    /* Schema panel entrance animation */
-    .schema-output-wrapper {
-      animation: slideIn 0.3s ease-out;
-    }
-    
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    /* Panel Styles */
-    .panel {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-bg-tertiary);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
-      height: 600px;
-    }
-    
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-md);
-      padding: var(--spacing-md) var(--spacing-lg);
-      background: var(--color-bg-primary);
-      border-bottom: 1px solid var(--color-accent);
-      flex-wrap: wrap;
-    }
-    
-    .panel-header h2 {
-      font-size: var(--font-size-lg);
-      color: var(--color-accent);
-      margin: 0;
-    }
-    
-    .panel-title {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-    }
-    
-    .draft-selector-compact {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      font-size: var(--font-size-sm);
-    }
-    
-    .draft-selector-compact label {
-      color: var(--color-text-secondary);
-      font-weight: 500;
-    }
-    
-    .draft-select {
-      padding: 0.375rem 0.75rem;
-      background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      cursor: pointer;
-      transition: all var(--transition-quick);
-    }
-    
-    .draft-select:hover {
-      background-color: var(--color-bg-secondary);
-    }
-    
-    .draft-select:focus {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    .panel-header-badge {
-      padding: 0.25rem 0.625rem;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-muted);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-xs);
-      font-weight: 600;
-    }
-    
-    .panel-content {
-      flex: 1;
-      padding: var(--spacing-lg);
-      overflow: auto;
-    }
-    
-    .panel-content textarea {
-      width: 100%;
-      height: 100%;
-      min-height: 400px;
-      background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-md);
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      resize: vertical;
-      line-height: 1.5;
-    }
-    
-    .panel-content textarea:focus {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    .output-display {
-      width: 100%;
-      height: 100%;
-      min-height: 400px;
-      background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-md);
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      overflow: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    
-    .output-display.empty {
-      color: var(--color-text-muted);
-      font-style: italic;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    /* Panel Toolbar for Formatting Controls */
-    .panel-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--spacing-sm) var(--spacing-lg);
-      background: var(--color-bg-tertiary);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      min-height: 44px;
-    }
-    
-    .toolbar-group {
-      display: flex;
-      gap: var(--spacing-sm);
-      align-items: center;
-    }
-    
-    .toolbar-hint {
-      font-size: var(--font-size-xs);
-      color: var(--color-text-muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* Responsive toolbar adjustments */
-    @media (max-width: 768px) {
-      .toolbar-hint {
-        display: none;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .panel-toolbar {
-        padding: var(--spacing-xs) var(--spacing-md);
-      }
-      
-      .toolbar-group .btn-small {
-        font-size: 1.2rem;
-        padding: 0.5rem;
-      }
-      
-      .toolbar-group .btn-small span {
-        display: none;
-      }
-    }
-    
-    .control-bar {
-      display: flex;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md) var(--spacing-lg);
-      background: var(--color-bg-primary);
-      border-top: 1px solid var(--color-bg-tertiary);
-      flex-wrap: wrap;
-    }
-    
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.625rem 1.25rem;
-      border-radius: var(--radius-sm);
-      border: none;
-      font-size: var(--font-size-sm);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      text-decoration: none;
-    }
-    
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .btn-primary {
-      background-color: var(--color-accent);
-      color: var(--color-bg-primary);
-    }
-    
-    .btn-primary:hover:not(:disabled) {
-      background-color: var(--color-accent-hover);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
-    
-    .btn-secondary {
-      background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-bg-tertiary);
-    }
-    
-    .btn-secondary:hover:not(:disabled) {
-      background-color: var(--color-bg-secondary);
-      border-color: var(--color-accent);
-      transform: translateY(-1px);
-    }
-    
-    .btn-small {
-      padding: 0.375rem 0.75rem;
-      font-size: var(--font-size-xs);
-    }
-    
-    /* Validation Results */
-    .validation-result {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      margin-top: var(--spacing-xl);
-      border: 2px solid;
-    }
-    
-    .validation-result.success {
-      border-color: var(--color-success);
-    }
-    
-    .validation-result.error {
-      border-color: var(--color-error);
-    }
-    
-    .validation-result h3 {
-      margin: 0 0 var(--spacing-md) 0;
-      font-size: var(--font-size-xl);
-    }
-    
-    .validation-result.success h3 {
-      color: var(--color-success);
-    }
-    
-    .validation-result.error h3 {
-      color: var(--color-error);
-    }
-    
-    .error-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .error-item {
-      padding: var(--spacing-sm) var(--spacing-md);
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-sm);
-      margin-bottom: var(--spacing-sm);
-      font-family: 'Courier New', monospace;
-      font-size: var(--font-size-sm);
-    }
-    
-    .error-item strong {
-      color: var(--color-accent);
-    }
-    
-    /* Toast Notifications */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      padding: 1rem 1.5rem;
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-xl);
-      border: 1px solid;
-      font-size: var(--font-size-sm);
-      font-weight: 500;
-      z-index: var(--z-modal);
-      animation: slideIn 0.3s ease-out;
-    }
-    
-    @keyframes slideIn {
-      from {
-        transform: translateX(400px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-    
-    .toast.success {
-      border-color: var(--color-success);
-      color: var(--color-success);
-    }
-    
-    .toast.error {
-      border-color: var(--color-error);
-      color: var(--color-error);
-    }
-    
-    .toast.warning {
-      border-color: var(--color-warning);
-      color: var(--color-warning);
-    }
-    
-    .toast.info {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .json-tool-wrapper {
-        padding: var(--spacing-md);
-      }
-      
-      .action-buttons {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      
-      .help-toggle-btn {
-        margin-left: 0;
-      }
-      
-      .panel {
-        height: auto;
-        min-height: 400px;
-      }
-      
-      .panel-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .draft-selector-compact {
-        width: 100%;
-        justify-content: space-between;
-      }
-    }
-    
-
-    
-    .card-action {
-      width: 100%;
-      height: 40px;
-      background-color: var(--color-accent);
-      color: #ffffff;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      font-family: var(--font-family);
-    }
-    
-    .card-action:hover {
-      background-color: var(--color-accent-hover);
-    }
-    
-    .card-action:active {
-      transform: scale(0.98);
-    }
-    
-    .card-action:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      border: none;
-      font-family: var(--font-family);
-    }
-    
-    .btn-primary {
-      background-color: var(--color-accent);
-      color: #ffffff;
-    }
-    
-    .btn-primary:hover {
-      background-color: var(--color-accent-hover);
-    }
-    
-    .btn-secondary {
-      background-color: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-    }
-    
-    .btn-secondary:hover {
-      background-color: var(--color-bg-tertiary);
-      filter: brightness(1.1);
-    }
-    
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    /* ========================================
-       TOOL CONTAINER (for individual tools)
-       ======================================== */
-    .tool-container {
-      max-width: var(--max-width-content);
-      margin: 0 auto;
-      padding: 1.5rem;
-      min-height: calc(100vh - var(--header-height));
-      display: none;
-    }
-    
-    .tool-container.active {
-      display: block;
-    }
-    
-    .tool-header {
-      margin-bottom: var(--spacing-xl);
-      text-align: center;
-    }
-    
-    .tool-title {
-      font-size: var(--font-size-3xl);
-      color: var(--color-text-primary);
-      margin-bottom: var(--spacing-sm);
-      font-weight: 700;
-    }
-    
-    .tool-description {
-      font-size: var(--font-size-base);
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-    }
-    
-    /* ========================================
-       LOADING SPINNER
-       ======================================== */
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--color-bg-tertiary);
-      border-top-color: var(--color-accent);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* ========================================
-       RESPONSIVE BREAKPOINTS
-       ======================================== */
-    @media (max-width: 900px) {
-      .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
-      }
-    }
-    
-    @media (max-width: 600px) {
-      .tools-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      
-      .home-container {
-        padding: 1rem;
-      }
-      
-      .app-title {
-        display: none;
-      }
-      
-      .global-header {
-        padding: 0 1rem;
-      }
-      
-      .header-left {
-        width: auto;
-      }
-      
-      .header-right {
-        width: auto;
-      }
-      
-      .breadcrumb {
-        font-size: 0.75rem;
-      }
-    }
-    
-    /* ========================================
-       ACCESSIBILITY
-       ======================================== */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-    
-    button:focus-visible,
-    a:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    /* ========================================
-       UTILITY CLASSES
-       ======================================== */
-    .hidden {
-      display: none !important;
-    }
-    
-    /* ========================================
-       DIFF CHECKER STYLES
-       ======================================== */
-    .diff-options {
-      display: flex;
-      gap: var(--spacing-md);
-      align-items: center;
-      padding: var(--spacing-md);
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--spacing-lg);
-      flex-wrap: wrap;
-    }
-    
-    .form-select {
-      padding: 0.5rem 1rem;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      cursor: pointer;
-    }
-    
-    .checkbox-label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--color-text-secondary);
-      cursor: pointer;
-      font-size: var(--font-size-sm);
-    }
-    
-    .checkbox-label input[type="checkbox"] {
-      cursor: pointer;
-    }
-    
-    .diff-panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .diff-panel {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-    }
-    
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .panel-header h3 {
-      font-size: var(--font-size-lg);
-      color: var(--color-text-primary);
-      margin: 0;
-    }
-    
-    .char-count {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-    }
-    
-    .diff-panel textarea {
-      width: 100%;
-      min-height: 300px;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: var(--spacing-md);
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      resize: vertical;
-      line-height: 1.5;
-    }
-    
-    .action-bar {
-      display: flex;
-      gap: var(--spacing-md);
-      margin-bottom: var(--spacing-lg);
-      flex-wrap: wrap;
-    }
-    
-    .diff-results {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-      margin-top: var(--spacing-lg);
-    }
-    
-    .diff-output {
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-sm);
-      padding: var(--spacing-md);
-      max-height: 500px;
-      overflow-y: auto;
-    }
-    
-    .diff-line {
-      padding: 0.25rem 0.5rem;
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      white-space: pre-wrap;
-    }
-    
-    .diff-added {
-      background-color: rgba(34, 197, 94, 0.15);
-      color: var(--color-success);
-      border-left: 3px solid var(--color-success);
-    }
-    
-    .diff-removed {
-      background-color: rgba(239, 68, 68, 0.15);
-      color: var(--color-error);
-      border-left: 3px solid var(--color-error);
-    }
-    
-    .diff-unchanged {
-      color: var(--color-text-secondary);
-    }
-    
-    .diff-stats {
-      display: flex;
-      gap: var(--spacing-md);
-      flex-wrap: wrap;
-    }
-    
-    .stat-item {
-      padding: 0.25rem 0.75rem;
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-    }
-    
-    .stat-added { color: var(--color-success); }
-    .stat-removed { color: var(--color-error); }
-    
-    /* ========================================
-       MARKDOWN CONVERTER STYLES
-       ======================================== */
-    .converter-panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .converter-panel {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-    }
-    
-    .panel-actions {
-      display: flex;
-      gap: var(--spacing-sm);
-    }
-    
-    .btn-icon {
-      background: transparent;
-      border: none;
-      font-size: var(--font-size-lg);
-      cursor: pointer;
-      padding: 0.25rem;
-      transition: transform var(--transition-quick);
-    }
-    
-    .btn-icon:hover {
-      transform: scale(1.1);
-    }
-    
-    .converter-panel textarea {
-      width: 100%;
-      min-height: 300px;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      padding: var(--spacing-md);
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      resize: vertical;
-      line-height: 1.5;
-    }
-    
-    /* ========================================
-       CALCULATOR STYLES (SIP & EMI)
-       ======================================== */
-    .calculator-form {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-xl);
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .form-group {
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .form-group label {
-      display: block;
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-sm);
-      margin-bottom: var(--spacing-sm);
-      font-weight: 500;
-    }
-    
-    .form-group input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-base);
-      transition: border-color var(--transition-quick);
-    }
-    
-    .form-group input:focus {
-      outline: none;
-      border-color: var(--color-accent-hover);
-    }
-    
-    .input-with-prefix {
-      position: relative;
-    }
-    
-    .input-with-prefix .prefix {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--color-text-muted);
-      font-weight: 500;
-    }
-    
-    .input-with-prefix input {
-      padding-left: 2.5rem;
-    }
-    
-    .btn-large {
-      width: 100%;
-      padding: 1rem;
-      font-size: var(--font-size-base);
-      margin-top: var(--spacing-md);
-    }
-    
-    .calculator-results {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-xl);
-    }
-    
-    .results-summary {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .result-card {
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-      text-align: center;
-    }
-    
-    .card-label {
-      color: var(--color-text-muted);
-      font-size: var(--font-size-sm);
-      margin-bottom: var(--spacing-sm);
-    }
-    
-    .card-value {
-      color: var(--color-text-primary);
-      font-size: var(--font-size-2xl);
-      font-weight: 700;
-    }
-    
-    .card-value.success {
-      color: var(--color-success);
-    }
-    
-    .card-value.accent {
-      color: var(--color-accent);
-    }
-    
-    .results-table-container {
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .results-table-container h3 {
-      color: var(--color-text-primary);
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .results-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-    
-    .results-table th,
-    .results-table td {
-      padding: 0.75rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--color-bg-secondary);
-    }
-    
-    .results-table th {
-      background: var(--color-bg-secondary);
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-sm);
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    
-    .results-table td {
-      color: var(--color-text-primary);
-      font-size: var(--font-size-sm);
-    }
-    
-    .results-table td.success {
-      color: var(--color-success);
-    }
-    
-    .results-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-    
-    /* ========================================
-       SEARCH MODAL
-       ======================================== */
-    .search-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 10vh;
-      z-index: var(--z-modal);
-    }
-    
-    .search-modal.active {
-      display: flex;
-    }
-    
-    .search-modal-content {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      width: 90%;
-      max-width: 600px;
-      box-shadow: var(--shadow-xl);
-      overflow: hidden;
-    }
-    
-    .search-input-container {
-      padding: var(--spacing-lg);
-      border-bottom: 1px solid var(--color-bg-tertiary);
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-lg);
-    }
-    
-    .search-input:focus {
-      outline: none;
-    }
-    
-    .search-results {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-    
-    .search-result-item {
-      padding: var(--spacing-lg);
-      cursor: pointer;
-      border-bottom: 1px solid var(--color-bg-tertiary);
-      transition: background var(--transition-quick);
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-md);
-    }
-    
-    .search-result-item:hover,
-    .search-result-item.selected {
-      background: var(--color-bg-tertiary);
-    }
-    
-    .search-result-item:last-child {
-      border-bottom: none;
-    }
-    
-    .search-result-icon {
-      font-size: 1.5rem;
-    }
-    
-    .search-result-info {
-      flex: 1;
-    }
-    
-    .search-result-title {
-      color: var(--color-text-primary);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    
-    .search-result-description {
-      color: var(--color-text-muted);
-      font-size: var(--font-size-sm);
-    }
-    
-    .search-empty {
-      padding: var(--spacing-xl);
-      text-align: center;
-      color: var(--color-text-muted);
-    }
-    
-    /* ========================================
-       RESPONSIVE UPDATES FOR NEW TOOLS
-       ======================================== */
-    @media (max-width: 768px) {
-      .diff-panels,
-      .converter-panels {
-        grid-template-columns: 1fr;
-      }
-      
-      .action-bar {
-        flex-direction: column;
-      }
-      
-      .action-bar .btn {
-        width: 100%;
-      }
-      
-      .diff-panel textarea,
-      .converter-panel textarea {
-        min-height: 250px;
-      }
-    }
-    
-    /* ========================================
-       SCHEMA SOURCE PANEL
-       ======================================== */
-    .schema-source-panel {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-xl);
-      margin-top: var(--spacing-lg);
-      border: 1px solid var(--color-accent);
-    }
-    
-    .schema-source-panel h3 {
-      margin: 0 0 var(--spacing-lg) 0;
-      color: var(--color-text-primary);
-      font-size: var(--font-size-xl);
-    }
-    
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-md);
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .radio-label {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--spacing-md);
-      padding: var(--spacing-md);
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: all var(--transition-quick);
-      border: 2px solid transparent;
-    }
-    
-    .radio-label:hover {
-      background: var(--color-bg-primary);
-      border-color: var(--color-accent);
-    }
-    
-    .radio-label input[type=\"radio\"] {
-      margin-top: 0.25rem;
-      cursor: pointer;
-      width: 18px;
-      height: 18px;
-    }
-    
-    .radio-label input[type=\"radio\"]:checked + span {
-      color: var(--color-accent);
-      font-weight: 600;
-    }
-    
-    .radio-label > span:first-of-type {
-      flex: 1;
-    }
-    
-    .radio-description {
-      display: block;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      margin-top: var(--spacing-xs);
-    }
-    
-    .custom-schema-input {
-      margin-bottom: var(--spacing-lg);
-    }
-    
-    .custom-schema-input label {
-      display: block;
-      margin-bottom: var(--spacing-sm);
-      color: var(--color-text-primary);
-      font-weight: 600;
-    }
-    
-    .custom-schema-input textarea {
-      width: 100%;
-      min-height: 300px;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-md);
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      resize: vertical;
-      line-height: 1.5;
-    }
-    
-    .custom-schema-input textarea:focus {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    .helper-text {
-      margin-top: var(--spacing-sm);
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      font-style: italic;
-    }
-    
-    .schema-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-sm) var(--spacing-md);
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-      margin-top: var(--spacing-md);
-    }
-    
-    .schema-indicator.custom {
-      background: rgba(56, 189, 248, 0.1);
-      color: var(--color-accent);
-      border: 1px solid var(--color-accent);
-    }
-    
-    /* ========================================
-       EMI PREPAYMENT SECTION
-       ======================================== */
-    .prepayment-section {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
-      border: 1px solid var(--color-bg-tertiary);
-    }
-    
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      padding: var(--spacing-md);
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md);
-      transition: background var(--transition-quick);
-    }
-    
-    .section-header:hover {
-      background: var(--color-bg-primary);
-    }
-    
-    .section-header h3 {
-      margin: 0;
-      color: var(--color-text-primary);
-      font-size: var(--font-size-lg);
-    }
-    
-    .toggle-icon {
-      background: transparent;
-      border: none;
-      color: var(--color-accent);
-      font-size: var(--font-size-xl);
-      cursor: pointer;
-      transition: transform var(--transition-normal);
-    }
-    
-    .toggle-icon.expanded {
-      transform: rotate(180deg);
-    }
-    
-    .prepayment-form {
-      padding-top: var(--spacing-lg);
-    }
-    
-    .form-select {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background: var(--color-bg-tertiary);
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      font-size: var(--font-size-base);
-      cursor: pointer;
-      transition: border-color var(--transition-quick);
-    }
-    
-    .form-select:focus {
-      outline: none;
-      border-color: var(--color-accent-hover);
-    }
-    
-    .prepayment-comparison {
-      background: var(--color-bg-secondary);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-xl);
-      margin-top: var(--spacing-lg);
-      border: 1px solid var(--color-success);
-    }
-    
-    .prepayment-comparison h3 {
-      color: var(--color-text-primary);
-      margin-bottom: var(--spacing-lg);
-      font-size: var(--font-size-xl);
-    }
-    
-    .comparison-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .comparison-card {
-      background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-      border: 2px solid transparent;
-    }
-    
-    .comparison-card.highlight {
-      border-color: var(--color-success);
-      background: rgba(34, 197, 94, 0.05);
-    }
-    
-    .card-header {
-      font-size: var(--font-size-lg);
-      font-weight: 600;
-      margin-bottom: var(--spacing-lg);
-      color: var(--color-text-primary);
-      padding-bottom: var(--spacing-sm);
-      border-bottom: 1px solid var(--color-bg-primary);
-    }
-    
-    .card-header.success {
-      color: var(--color-success);
-    }
-    
-    .card-metric {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--spacing-md);
-      padding: var(--spacing-sm) 0;
-    }
-    
-    .metric-label {
-      color: var(--color-text-muted);
-      font-size: var(--font-size-sm);
-    }
-    
-    .metric-value {
-      color: var(--color-text-primary);
-      font-weight: 700;
-      font-size: var(--font-size-lg);
-    }
-    
-    .metric-value.success {
-      color: var(--color-success);
-    }
-    
-    .savings-banner {
-      background: linear-gradient(135deg, var(--color-success) 0%, #16a34a 100%);
-      color: white;
-      padding: var(--spacing-lg);
-      border-radius: var(--radius-md);
-      text-align: center;
-      font-size: var(--font-size-lg);
-      margin-top: var(--spacing-lg);
-      box-shadow: var(--shadow-md);
-    }
-    
-    .savings-banner strong {
-      font-size: var(--font-size-xl);
-    }
-    
-    @media (max-width: 900px) {
-      .comparison-cards {
-        grid-template-columns: 1fr;
-      }
+    .dark .recent-app-chip {
+      border-radius: 4px;
+      border: 1px solid rgba(255, 107, 53, 0.2);
     }
   </style>
+
+  <!-- Prevent light mode flash script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('devtools-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body>
-  <!-- Global Header -->
-  <header class="global-header" role="banner">
-    <div class="header-left">
-      <button class="home-button" onclick="navigateHome()" aria-label="Go to home page">
-        <span class="icon">🏠</span>
-      </button>
-      <h1 class="app-title">Dev Tools</h1>
-    </div>
-    
-    <div class="header-center">
-      <nav class="breadcrumb" aria-label="Breadcrumb" id="breadcrumb">
-        <span class="breadcrumb-item">Tools Dashboard</span>
-      </nav>
-    </div>
-    
-    <div class="header-right">
-      <button class="search-button" onclick="openSearch()" aria-label="Search tools (Ctrl+K)">
-        <span class="icon">🔍</span>
-      </button>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggleBtn">
-        <span class="icon" id="themeIcon">☀️</span>
-      </button>
-    </div>
-  </header>
-  
-  <!-- Recent Apps Bar -->
-  <aside class="recent-apps-bar" id="recentAppsBar" aria-label="Recently used tools">
-    <span class="recent-label">Recent:</span>
-    <div class="recent-apps-list" id="recentAppsList"></div>
-    <button class="clear-recent-btn" onclick="clearRecentApps()" aria-label="Clear recent apps">
-      Clear
-    </button>
-  </aside>
-  
-  <!-- Home Page -->
-  <div id="homePage" class="home-container">
-    <div class="home-header">
-      <h2 class="home-title">Developer Tools</h2>
-      <p class="home-description">
-        Select a tool to get started. All tools run locally in your browser for privacy and speed.
-      </p>
-    </div>
-    
-    <div class="tools-grid">
-      <article class="tool-card" onclick="launchTool('json')" tabindex="0" onkeypress="handleCardKeypress(event, 'json')">
-        <div class="card-icon"><span>📋</span></div>
-        <h3 class="card-title">JSON Schema Generator</h3>
-        <p class="card-description">
-          Generate JSON schemas, validate data, minify and beautify JSON with multiple draft version support.
-        </p>
-        <button class="card-action btn btn-primary">Launch Tool</button>
-      </article>
-      
-      <article class="tool-card" onclick="launchTool('markdown')" tabindex="0" onkeypress="handleCardKeypress(event, 'markdown')">
-        <div class="card-icon"><span>📝</span></div>
-        <h3 class="card-title">Markdown Converter</h3>
-        <p class="card-description">
-          Convert between HTML and Markdown formats with live preview
-        </p>
-        <button class="card-action btn btn-primary">Launch Tool</button>
-      </article>
-      
-      <article class="tool-card" onclick="launchTool('diff')" tabindex="0" onkeypress="handleCardKeypress(event, 'diff')">
-        <div class="card-icon"><span>🔍</span></div>
-        <h3 class="card-title">Text Diff Checker</h3>
-        <p class="card-description">
-          Compare texts to identify changes with line-by-line highlighting
-        </p>
-        <button class="card-action btn btn-primary">Launch Tool</button>
-      </article>
-      
-      <article class="tool-card" onclick="launchTool('sip')" tabindex="0" onkeypress="handleCardKeypress(event, 'sip')">
-        <div class="card-icon"><span>📊</span></div>
-        <h3 class="card-title">SIP Calculator</h3>
-        <p class="card-description">
-          Calculate mutual fund SIP returns and investment growth
-        </p>
-        <button class="card-action btn btn-primary">Launch Tool</button>
-      </article>
-      
-      <article class="tool-card" onclick="launchTool('emi')" tabindex="0" onkeypress="handleCardKeypress(event, 'emi')">
-        <div class="card-icon"><span>🏠</span></div>
-        <h3 class="card-title">EMI Calculator</h3>
-        <p class="card-description">
-          Calculate home loan EMI with prepayment scenarios
-        </p>
-        <button class="card-action btn btn-primary">Launch Tool</button>
-      </article>
-      
-      <article class="tool-card tool-card-placeholder" tabindex="0">
-        <div class="card-icon"><span>➕</span></div>
-        <h3 class="card-title">More Tools</h3>
-        <p class="card-description">
-          Additional utilities and converters coming soon
-        </p>
-        <button class="card-action btn btn-secondary" disabled>Coming Soon</button>
-      </article>
-    </div>
-  </div>
-  
-  <!-- JSON Tool Container (wrapped existing tool) -->
-  <div id="tool-json" class="tool-container" style="display:none;">
-    <!-- JSON Schema Generator Tool Content -->
-    <div class="json-tool-wrapper">
-      <!-- Info/Help Panel (Collapsible) -->
-      <div class="info-panel collapsed" id="infoPanel" aria-hidden="true">
-        <h3>ℹ️ How to Use</h3>
-        <div class="info-content">
-          <div class="info-item">
-            <div class="info-icon">1</div>
-            <div class="info-text">
-              <strong>Select Schema Draft</strong>
-              <p>Choose JSON Schema version (draft-07 recommended)</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">2</div>
-            <div class="info-text">
-              <strong>Paste JSON</strong>
-              <p>Enter any valid JSON in the left panel</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">3</div>
-            <div class="info-text">
-              <strong>Generate Schema</strong>
-              <p>Click to create schema with draft header</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">4</div>
-            <div class="info-text">
-              <strong>Validate & Export</strong>
-              <p>Verify data and download JSON/schema files</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
-      <!-- Action Buttons -->
-      <div class="actions">
-        <div class="action-buttons">
-          <button class="btn btn-primary" onclick="generateSchema()">
-            ⚙️ Generate Schema from JSON
+  <!-- Fixed background overlay -->
+  <div class="jali-overlay fixed inset-0 pointer-events-none z-0"></div>
+
+  <!-- Content Wrap -->
+  <div class="relative z-10 flex flex-col min-h-screen">
+    
+    <!-- TopNavBar -->
+    <header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-muted-light/20 dark:border-muted-dark/30 transition-colors duration-300">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3 cursor-pointer group select-none" onclick="navigateHome()">
+          <div class="h-10 w-10 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center text-primary dark:text-primary-dark group-hover:scale-105 transition-transform duration-300">
+            <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+          </div>
+          <span class="font-heading text-xl md:text-2xl font-normal tracking-wide text-text-light dark:text-text-dark">DevToolbox</span>
+        </div>
+
+        <!-- Breadcrumbs -->
+        <div class="hidden sm:flex flex-1 justify-center px-4">
+          <nav class="breadcrumb flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-[1.5px] text-text-light/80 dark:text-text-dark/80" aria-label="Breadcrumb" id="breadcrumb">
+            <span class="breadcrumb-item text-primary dark:text-primary-dark">Tools Dashboard</span>
+          </nav>
+        </div>
+
+        <!-- Quick actions menu -->
+        <div class="flex items-center gap-3">
+          <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="openSearch()" aria-label="Search tools (Ctrl+K)">
+            <span class="material-symbols-outlined text-xl">search</span>
           </button>
-          <button class="btn btn-primary" onclick="validateJSON()">
-            ✓ Validate JSON Against Schema
-          </button>
-          <button class="btn btn-secondary" onclick="loadSample()">
-            📦 Load Sample Data
-          </button>
-          <button class="help-toggle-btn" onclick="toggleHelp()" aria-label="Toggle help information" aria-expanded="false">
-            <span class="help-icon">ℹ️</span>
-            <span>Help</span>
+          <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-primary-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggleBtn">
+            <span class="material-symbols-outlined text-xl" id="themeIcon">light_mode</span>
           </button>
         </div>
       </div>
+    </header>
 
-      <!-- Schema Source Selection Panel (appears when validating) -->
-      <div class="schema-source-panel" id="schemaSourcePanel" style="display:none;">
-        <h3>Select Schema Source</h3>
+    <!-- Recent Apps Bar -->
+    <aside class="w-full bg-surface-light/40 dark:bg-surface-dark/40 border-b border-muted-light/10 dark:border-muted-dark/20 py-2 px-4 md:px-8 flex items-center justify-between gap-4 overflow-x-auto" id="recentAppsBar" style="display:none;" aria-label="Recently used tools">
+      <div class="flex items-center gap-3 overflow-x-auto">
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-muted-light dark:text-muted-dark whitespace-nowrap">Recent:</span>
+        <div class="flex items-center gap-2 overflow-x-auto" id="recentAppsList"></div>
+      </div>
+      <button class="text-[10px] font-bold uppercase tracking-widest text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark whitespace-nowrap cursor-pointer transition-colors" onclick="clearRecentApps()" aria-label="Clear recent apps">
+        Clear
+      </button>
+    </aside>
+
+    <!-- Main Container -->
+    <main class="flex-grow">
+      
+      <!-- Home Dashboard Page -->
+      <div id="homePage" class="max-w-[1400px] mx-auto px-4 md:px-8 py-12">
+        <div class="flex flex-col gap-4 p-4 mb-10 text-center lg:text-left">
+          <div class="inline-flex self-center lg:self-start items-center gap-2 px-4 py-2 rounded-full text-primary dark:text-primary-dark text-[11px] font-bold tracking-[1.5px] uppercase bg-primary/15 dark:bg-primary-dark/15 border border-primary/20 dark:border-primary-dark/30 w-fit">
+            <span class="w-2 h-2 rounded-full bg-primary dark:bg-primary-dark animate-pulse"></span>
+            Privacy-First Browser Execution
+          </div>
+          <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl text-text-light dark:text-text-dark font-normal leading-tight">
+            Digital <span class="text-primary dark:text-primary-dark">Artisan Toolkit</span>
+          </h1>
+          <p class="text-muted-light dark:text-muted-dark text-lg md:text-xl max-w-2xl leading-relaxed">
+            Fast, secure, and offline-first developer utilities blending ancient precision with hyper-modern code elements.
+          </p>
+        </div>
         
-        <div class="radio-group" role="radiogroup" aria-label="Schema source selection">
-          <label class="radio-label">
-            <input type="radio" name="schemaSource" value="generated" checked onchange="toggleSchemaInput()">
-            <span>
-              Use Generated Schema
-              <span class="radio-description">Use the schema created from JSON above</span>
-            </span>
-          </label>
+        <!-- Dashboard Card Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
           
-          <label class="radio-label">
-            <input type="radio" name="schemaSource" value="custom" onchange="toggleSchemaInput()">
-            <span>
-              Paste Custom Schema
-              <span class="radio-description">Validate against your own JSON Schema</span>
-            </span>
-          </label>
-        </div>
-        
-        <div id="customSchemaInput" class="custom-schema-input" style="display:none;">
-          <label for="customSchema">Paste JSON Schema</label>
-          <textarea id="customSchema" placeholder="Paste your JSON Schema here...&#10;&#10;Example:&#10;{&#10;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,&#10;  &quot;type&quot;: &quot;object&quot;,&#10;  &quot;properties&quot;: {&#10;    &quot;name&quot;: { &quot;type&quot;: &quot;string&quot; }&#10;  },&#10;  &quot;required&quot;: [&quot;name&quot;]&#10;}" spellcheck="false"></textarea>
-          <p class="helper-text">Supports JSON Schema draft-04, draft-06, draft-07, 2019-09, and 2020-12</p>
-        </div>
-        
-        <div class="action-bar">
-          <button class="btn btn-primary" onclick="runValidation()">
-            ✓ Validate Now
-          </button>
-          <button class="btn btn-secondary" onclick="closeSchemaPanel()">
-            Cancel
-          </button>
+          <!-- Card: JSON Generator -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('json')" tabindex="0" onkeypress="handleCardKeypress(event, 'json')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">code_blocks</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">JSON Generator</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">LOCAL</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Generate JSON schemas, format, minify, and validate JSON inputs with multi-draft version support.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Draft-07</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Validator</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: HTML↔Markdown -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('markdown')" tabindex="0" onkeypress="handleCardKeypress(event, 'markdown')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">menu_book</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Markdown Converter</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">HTML</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Convert HTML syntax directly to Markdown markup or render live markdown previews in high fidelity.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">GFM</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Live Preview</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Diff Checker -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('diff')" tabindex="0" onkeypress="handleCardKeypress(event, 'diff')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">difference</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Diff Checker</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">UTILITY</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Compare two blocks of text to dynamically highlight additions, deletions, and specific inline edits.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Line Diff</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Word-level</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: SIP Calculator -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('sip')" tabindex="0" onkeypress="handleCardKeypress(event, 'sip')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">finance</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">SIP Calculator</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">INVESTMENT</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Calculate estimated mutual fund SIP returns and investment growth over custom time frames.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">SIP</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Projections</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: EMI Calculator -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('emi')" tabindex="0" onkeypress="handleCardKeypress(event, 'emi')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">home_app_lite</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">EMI Calculator</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">LOAN</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Calculate home or vehicle loan EMIs with detailed support for custom loan prepayment scenarios.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">EMI</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Prepayment</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: More Tools Placeholder -->
+          <article class="flex flex-col gap-4 pb-6 opacity-50 select-none">
+            <div class="w-full aspect-[16/9] bg-surface-light/40 dark:bg-surface-dark/40 theme-image-radius border border-dashed border-text-light/15 dark:border-muted-dark/30 transition-all duration-300 flex items-center justify-center">
+              <span class="material-symbols-outlined text-5xl text-muted-light dark:text-muted-dark">add_circle</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light/70 dark:text-text-dark/70 font-normal">More Tools</h3>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">SOON</span>
+              </div>
+              <p class="text-text-light/60 dark:text-text-dark/60 text-sm leading-relaxed line-clamp-2 font-display">
+                Additional utilities, cryptographic validators, and system diagnostic scripts are currently in pipeline.
+              </p>
+            </div>
+          </article>
+
         </div>
       </div>
 
-      <!-- Main Grid with JSON Input and Schema Output -->
-      <div class="main-grid" data-schema-visible="false">
-        <div>
-          <div class="panel">
-            <div class="panel-header">
-              <h2>JSON Input</h2>
-              <span class="panel-header-badge" id="jsonSize">0 bytes</span>
+      <!-- ========================================
+         TOOL #1: JSON SCHEMA GENERATOR
+         ======================================== -->
+      <div id="tool-json" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📋 JSON Schema Generator</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Generate standard drafts, validate inputs, minify and format your JSON files.</p>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <!-- Info Panel -->
+          <div class="info-panel collapsed bg-surface-light/50 dark:bg-surface-dark/50 border border-muted-light/20 dark:border-muted-dark/30 rounded-lg overflow-hidden transition-all duration-300" id="infoPanel" aria-hidden="true">
+            <div class="p-4 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary dark:text-primary-dark">info</span>
+              <h3 class="font-bold text-sm uppercase tracking-wider text-text-light dark:text-text-dark">How to Use</h3>
             </div>
-            
-            <!-- Formatting Toolbar -->
-            <div class="panel-toolbar" role="toolbar" aria-label="JSON formatting controls">
-              <div class="toolbar-group">
-                <button class="btn btn-secondary btn-small" onclick="beautifyJSON()" aria-label="Beautify JSON">
-                  🎨 <span>Beautify</span>
-                </button>
-                <button class="btn btn-secondary btn-small" onclick="minifyJSON()" aria-label="Minify JSON">
-                  🗜️ <span>Minify</span>
-                </button>
+            <div class="p-6 info-content grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div class="flex gap-3">
+                <div class="h-6 w-6 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center font-bold text-xs text-primary dark:text-primary-dark shrink-0">1</div>
+                <div>
+                  <strong class="text-xs uppercase tracking-wider font-bold">Select Draft</strong>
+                  <p class="text-xs text-text-light/70 dark:text-text-dark/70 mt-1">Choose your JSON Schema version (Draft-07 standard recommended).</p>
+                </div>
               </div>
-              <span class="toolbar-hint">Format JSON</span>
-            </div>
-            
-            <div class="panel-content">
-              <textarea id="jsonInput" placeholder="Paste your JSON here..." spellcheck="false"></textarea>
-            </div>
-            <div class="control-bar">
-              <button class="btn btn-secondary btn-small" onclick="copyToClipboard('jsonInput')">
-                📋 Copy JSON
-              </button>
-              <button class="btn btn-secondary btn-small" onclick="downloadJSON()">
-                ⬇️ Download JSON
-              </button>
-              <button class="btn btn-secondary btn-small" onclick="clearJSON()">
-                🗑️ Clear
-              </button>
+              <div class="flex gap-3">
+                <div class="h-6 w-6 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center font-bold text-xs text-primary dark:text-primary-dark shrink-0">2</div>
+                <div>
+                  <strong class="text-xs uppercase tracking-wider font-bold">Paste JSON</strong>
+                  <p class="text-xs text-text-light/70 dark:text-text-dark/70 mt-1">Enter your valid raw JSON structure into the left-hand editor panel.</p>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="h-6 w-6 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center font-bold text-xs text-primary dark:text-primary-dark shrink-0">3</div>
+                <div>
+                  <strong class="text-xs uppercase tracking-wider font-bold">Generate Schema</strong>
+                  <p class="text-xs text-text-light/70 dark:text-text-dark/70 mt-1">Click schema generation controls to compute draft schemas automatically.</p>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="h-6 w-6 rounded-full bg-primary/10 dark:bg-primary-dark/10 flex items-center justify-center font-bold text-xs text-primary dark:text-primary-dark shrink-0">4</div>
+                <div>
+                  <strong class="text-xs uppercase tracking-wider font-bold">Validate & Export</strong>
+                  <p class="text-xs text-text-light/70 dark:text-text-dark/70 mt-1">Verify input integrity against the schema, copy strings, or download.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Schema Output Wrapper - Hidden Initially for Progressive Reveal -->
-        <div class="schema-output-wrapper" id="schemaOutputWrapper" style="display:none;" aria-live="polite">
-          <div class="panel">
-            <div class="panel-header">
-              <div class="panel-title">
-                <h2 id="schemaOutputHeading" tabindex="-1">JSON Schema Output</h2>
-              </div>
-              <div class="draft-selector-compact">
-                <label for="draftSelect">Schema Draft:</label>
-                <select id="draftSelect" class="draft-select" onchange="updateSchemaDraft()" aria-label="Select JSON Schema draft version">
-                  <option value="http://json-schema.org/draft-04/schema#">Draft-04</option>
-                  <option value="http://json-schema.org/draft-06/schema#">Draft-06</option>
-                  <option value="http://json-schema.org/draft-07/schema#" selected>Draft-07 ⭐</option>
-                  <option value="https://json-schema.org/draft/2019-09/schema">Draft 2019-09</option>
-                  <option value="https://json-schema.org/2020-12/schema">Draft 2020-12</option>
-                </select>
-              </div>
-              <span class="panel-header-badge" id="schemaSize">0 bytes</span>
-            </div>
-            <div class="panel-content">
-              <div class="output-display empty" id="schemaOutput">
-                Schema will appear here after generation...
-              </div>
-            </div>
-            <div class="control-bar">
-              <button class="btn btn-secondary btn-small" onclick="copyToClipboard('schemaOutput')">
-                📋 Copy Schema
+          <!-- Main Actions Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-4 py-2">
+            <div class="flex flex-wrap gap-3">
+              <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow hover:-translate-y-0.5" onclick="generateSchema()">
+                ⚙️ Generate Schema from JSON
               </button>
-              <button class="btn btn-secondary btn-small" onclick="downloadSchema()">
-                ⬇️ Download Schema
+              <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-primary/15 dark:hover:bg-primary-dark/15 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="validateJSON()">
+                ✓ Validate JSON Against Schema
               </button>
-              <button class="btn btn-secondary btn-small" onclick="clearSchema()">
-                🗑️ Clear
+              <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="loadSample()">
+                📦 Load Sample
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Validation Results Container -->
-      <div id="validationResultContainer"></div>
-    </div>
-  </div>
-  
-  <!-- TOOL #1: TEXT DIFF CHECKER -->
-  <div id="tool-diff" class="tool-container" style="display:none;">
-    <div class="tool-header">
-      <h2 class="tool-title">🔍 Text Difference Checker</h2>
-      <p class="tool-description">Compare two text versions to identify changes line-by-line</p>
-    </div>
-    
-    <div class="diff-options">
-      <select id="diffMode" class="form-select">
-        <option value="line">Line-by-Line</option>
-        <option value="word">Word-by-Word</option>
-        <option value="char">Character-by-Character</option>
-      </select>
-      <label class="checkbox-label">
-        <input type="checkbox" id="caseSensitive" checked>
-        Case-sensitive
-      </label>
-      <label class="checkbox-label">
-        <input type="checkbox" id="ignoreWhitespace">
-        Ignore whitespace
-      </label>
-    </div>
-    
-    <div class="diff-panels">
-      <div class="diff-panel">
-        <div class="panel-header">
-          <h3>Original Text</h3>
-          <span class="char-count" id="originalCount">0 lines</span>
-        </div>
-        <textarea id="originalText" placeholder="Paste original text here..." oninput="updateLineCount('originalText', 'originalCount')"></textarea>
-      </div>
-      
-      <div class="diff-panel">
-        <div class="panel-header">
-          <h3>Modified Text</h3>
-          <span class="char-count" id="modifiedCount">0 lines</span>
-        </div>
-        <textarea id="modifiedText" placeholder="Paste modified text here..." oninput="updateLineCount('modifiedText', 'modifiedCount')"></textarea>
-      </div>
-    </div>
-    
-    <div class="action-bar">
-      <button class="btn btn-primary" onclick="compareDiff()">
-        🔍 Compare
-      </button>
-      <button class="btn btn-secondary" onclick="swapDiffTexts()">
-        ⇄ Swap
-      </button>
-      <button class="btn btn-secondary" onclick="clearDiff()">
-        Clear All
-      </button>
-      <button class="btn btn-secondary" onclick="copyDiffResults()">
-        📋 Copy Results
-      </button>
-    </div>
-    
-    <div class="diff-results" id="diffResults" style="display:none;">
-      <div class="panel-header">
-        <h3>Comparison Results</h3>
-        <div class="diff-stats" id="diffStats"></div>
-      </div>
-      <div class="diff-output" id="diffOutput"></div>
-    </div>
-  </div>
-  
-  <!-- TOOL #2: HTML ↔ MARKDOWN CONVERTER -->
-  <div id="tool-markdown" class="tool-container" style="display:none;">
-    <div class="tool-header">
-      <h2 class="tool-title">📝 HTML ↔ Markdown Converter</h2>
-      <p class="tool-description">Convert between HTML and Markdown formats</p>
-    </div>
-    
-    <div class="diff-options">
-      <select id="conversionMode" class="form-select" onchange="updateConversionLabels()">
-        <option value="html-to-md">HTML → Markdown</option>
-        <option value="md-to-html">Markdown → HTML</option>
-      </select>
-      <label class="checkbox-label">
-        <input type="checkbox" id="useGFM" checked>
-        GitHub Flavored Markdown
-      </label>
-    </div>
-    
-    <div class="converter-panels">
-      <div class="converter-panel">
-        <div class="panel-header">
-          <h3 id="inputLabel">HTML Input</h3>
-        </div>
-        <textarea id="converterInput" placeholder="Paste HTML here..."></textarea>
-      </div>
-      
-      <div class="converter-panel">
-        <div class="panel-header">
-          <h3 id="outputLabel">Markdown Output</h3>
-          <div class="panel-actions">
-            <button class="btn-icon" onclick="copyConverterOutput()" title="Copy">
-              📋
-            </button>
-            <button class="btn-icon" onclick="downloadConverterOutput()" title="Download">
-              ⬇️
+            <button class="flex items-center gap-2 text-xs font-bold uppercase tracking-[1.5px] text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark px-4 py-2 border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm" onclick="toggleHelp()" aria-label="Toggle help information" aria-expanded="false">
+              <span class="material-symbols-outlined text-sm">help</span>
+              <span>Help</span>
             </button>
           </div>
-        </div>
-        <textarea id="converterOutput" readonly></textarea>
-      </div>
-    </div>
-    
-    <div class="action-bar">
-      <button class="btn btn-primary" onclick="convertFormat()">
-        ⚡ Convert
-      </button>
-      <button class="btn btn-secondary" onclick="swapConversionDirection()">
-        ⇄ Swap Direction
-      </button>
-      <button class="btn btn-secondary" onclick="clearConverter()">
-        Clear All
-      </button>
-      <button class="btn btn-secondary" onclick="loadMarkdownSample()">
-        📄 Load Sample
-      </button>
-    </div>
-  </div>
-  
-  <!-- TOOL #3: SIP CALCULATOR -->
-  <div id="tool-sip" class="tool-container" style="display:none;">
-    <div class="tool-header">
-      <h2 class="tool-title">📊 SIP Calculator</h2>
-      <p class="tool-description">Calculate mutual fund SIP returns with year-wise breakdown</p>
-    </div>
-    
-    <div class="calculator-form">
-      <div class="form-group">
-        <label for="sipAmount">Monthly Investment Amount</label>
-        <div class="input-with-prefix">
-          <span class="prefix">₹</span>
-          <input type="number" id="sipAmount" value="5000" min="100" step="100">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="sipRate">Expected Annual Return Rate (%)</label>
-        <input type="number" id="sipRate" value="12" min="1" max="30" step="0.1">
-      </div>
-      
-      <div class="form-group">
-        <label for="sipDuration">Investment Period (Years)</label>
-        <input type="number" id="sipDuration" value="10" min="1" max="40">
-      </div>
-      
-      <button class="btn btn-primary btn-large" onclick="calculateSIP()">
-        📊 Calculate Returns
-      </button>
-    </div>
-    
-    <div class="calculator-results" id="sipResults" style="display:none;">
-      <div class="results-summary">
-        <div class="result-card">
-          <div class="card-label">Total Invested</div>
-          <div class="card-value" id="sipInvested">₹0</div>
-        </div>
-        <div class="result-card">
-          <div class="card-label">Wealth Gain</div>
-          <div class="card-value success" id="sipGain">₹0</div>
-        </div>
-        <div class="result-card">
-          <div class="card-label">Final Value</div>
-          <div class="card-value accent" id="sipFinalValue">₹0</div>
-        </div>
-      </div>
-      
-      <div class="results-table-container">
-        <h3>Year-wise Breakdown</h3>
-        <div style="overflow-x: auto;">
-          <table class="results-table" id="sipBreakdown">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Invested</th>
-                <th>Est. Value</th>
-                <th>Wealth Gain</th>
-              </tr>
-            </thead>
-            <tbody id="sipTableBody">
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <div class="action-bar">
-        <button class="btn btn-secondary" onclick="resetSIPCalculator()">
-          Reset
-        </button>
-        <button class="btn btn-secondary" onclick="exportSIPResults()">
-          📥 Export CSV
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- TOOL #4: EMI CALCULATOR -->
-  <div id="tool-emi" class="tool-container" style="display:none;">
-    <div class="tool-header">
-      <h2 class="tool-title">🏠 Home Loan EMI Calculator</h2>
-      <p class="tool-description">Calculate home loan EMI with detailed amortization schedule</p>
-    </div>
-    
-    <div class="calculator-form">
-      <div class="form-group">
-        <label for="loanAmount">Loan Amount</label>
-        <div class="input-with-prefix">
-          <span class="prefix">₹</span>
-          <input type="number" id="loanAmount" value="5000000" min="10000" step="10000">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="loanRate">Interest Rate (% per annum)</label>
-        <input type="number" id="loanRate" value="8.5" min="1" max="20" step="0.1">
-      </div>
-      
-      <div class="form-group">
-        <label for="loanTenure">Loan Tenure (Years)</label>
-        <input type="number" id="loanTenure" value="20" min="1" max="30">
-      </div>
-      
-      <button class="btn btn-primary btn-large" onclick="calculateEMI()">
-        📊 Calculate EMI
-      </button>
-    </div>
-    
-    <!-- Prepayment Section (Collapsible) -->
-    <div class="prepayment-section" id="prepaymentSection" style="display:none;">
-      <div class="section-header" onclick="togglePrepaymentSection()" role="button" tabindex="0" aria-expanded="false">
-        <h3>⚡ Advanced: Prepayment Planning</h3>
-        <button class="toggle-icon" id="prepaymentToggle" aria-label="Toggle prepayment section">▼</button>
-      </div>
-      
-      <div class="prepayment-form" id="prepaymentForm" style="display:none;">
-        <div class="form-group">
-          <label for="prepaymentType">Prepayment Type</label>
-          <select id="prepaymentType" class="form-select" onchange="updatePrepaymentForm()">
-            <option value="lump-sum">One-Time Lump Sum Payment</option>
-            <option value="monthly-extra">Monthly Extra Payment</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="prepaymentAmount">Prepayment Amount</label>
-          <div class="input-with-prefix">
-            <span class="prefix">₹</span>
-            <input type="number" id="prepaymentAmount" min="1000" step="1000" placeholder="50000">
+
+          <!-- Schema Source Option Panel (Validate Modal trigger) -->
+          <div class="bg-surface-light/60 dark:bg-surface-dark/60 border border-primary/20 dark:border-primary-dark/30 p-6 rounded-lg theme-border-radius shadow-lg" id="schemaSourcePanel" style="display:none;">
+            <h3 class="font-heading text-xl mb-4 text-text-light dark:text-text-dark font-normal">Select Schema Validation Source</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <label class="flex gap-3 p-4 bg-surface-light dark:bg-surface-dark rounded-lg border border-muted-light/20 dark:border-muted-dark/30 cursor-pointer select-none">
+                <input type="radio" name="schemaSource" value="generated" checked onchange="toggleSchemaInput()" class="mt-1 text-primary dark:text-primary-dark focus:ring-primary dark:focus:ring-primary-dark">
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm font-bold text-text-light dark:text-text-dark">Use Generated Schema</span>
+                  <span class="text-xs text-muted-light dark:text-muted-dark">Validate using the computed schema based on raw JSON</span>
+                </div>
+              </label>
+              
+              <label class="flex gap-3 p-4 bg-surface-light dark:bg-surface-dark rounded-lg border border-muted-light/20 dark:border-muted-dark/30 cursor-pointer select-none">
+                <input type="radio" name="schemaSource" value="custom" onchange="toggleSchemaInput()" class="mt-1 text-primary dark:text-primary-dark focus:ring-primary dark:focus:ring-primary-dark">
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm font-bold text-text-light dark:text-text-dark">Paste Custom Schema</span>
+                  <span class="text-xs text-muted-light dark:text-muted-dark">Input and validate against a custom schema layout</span>
+                </div>
+              </label>
+            </div>
+            
+            <div id="customSchemaInput" class="flex flex-col gap-2 mb-6" style="display:none;">
+              <label for="customSchema" class="text-xs font-bold uppercase tracking-wider text-text-light/80 dark:text-text-dark/80">Paste JSON Schema</label>
+              <textarea id="customSchema" placeholder="Paste custom JSON Schema structures here..." class="font-mono text-xs p-4 w-full h-48 bg-background-light dark:bg-background-dark border border-muted-light/30 dark:border-muted-dark/50 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark outline-none transition-shadow duration-200" spellcheck="false"></textarea>
+              <p class="text-[10px] text-muted-light dark:text-muted-dark">Supports JSON Schema drafts: draft-04, draft-06, draft-07, 2019-09, 2020-12</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm shadow-md transition-transform active:scale-95" onclick="runValidation()">
+                ✓ Validate Now
+              </button>
+              <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="closeSchemaPanel()">
+                Cancel
+              </button>
+            </div>
           </div>
+
+          <!-- Main Input/Output Textarea Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" id="mainJsonGrid">
+            <!-- Left Side: Input -->
+            <div class="lg:col-span-6 flex flex-col">
+              <div class="flex flex-col grow bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm flex-1">
+                <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between">
+                  <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark">JSON Input</h3>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark" id="jsonSize">0 bytes</span>
+                </div>
+                
+                <!-- Format Controls Toolbar -->
+                <div class="px-4 py-2 border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between gap-4 text-xs">
+                  <div class="flex items-center gap-2">
+                    <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-accent-dark/15 text-text-light dark:text-text-dark font-semibold rounded" onclick="beautifyJSON()" aria-label="Beautify JSON">
+                      🎨 Beautify
+                    </button>
+                    <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-accent-dark/15 text-text-light dark:text-text-dark font-semibold rounded" onclick="minifyJSON()" aria-label="Minify JSON">
+                      🗜️ Minify
+                    </button>
+                  </div>
+                  <span class="text-[10px] uppercase font-bold text-muted-light dark:text-muted-dark">Local formatting</span>
+                </div>
+
+                <div class="grow flex flex-col p-2">
+                  <textarea id="jsonInput" placeholder="Paste raw JSON content structure here..." class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" spellcheck="false"></textarea>
+                </div>
+
+                <div class="px-4 py-3 bg-surface-light/60 dark:bg-surface-dark/60 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="copyToClipboard('jsonInput')">
+                    📋 Copy JSON
+                  </button>
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="downloadJSON()">
+                    ⬇️ Download
+                  </button>
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors ml-auto" onclick="clearJSON()">
+                    🗑️ Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Progressive Reveal Schema Output -->
+            <div class="lg:col-span-6 flex flex-col" id="schemaOutputWrapper" style="display:none;" aria-live="polite">
+              <div class="flex flex-col grow bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm flex-1">
+                <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between gap-4 flex-wrap">
+                  <h2 id="schemaOutputHeading" tabindex="-1" class="font-heading text-lg font-normal text-text-light dark:text-text-dark">JSON Schema Output</h2>
+                  
+                  <div class="flex items-center gap-2">
+                    <label for="draftSelect" class="text-xs text-muted-light dark:text-muted-dark">Draft:</label>
+                    <select id="draftSelect" class="text-xs bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-2 py-1 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark cursor-pointer font-bold" onchange="updateSchemaDraft()" aria-label="Select JSON Schema draft version">
+                      <option value="http://json-schema.org/draft-04/schema#">Draft-04</option>
+                      <option value="http://json-schema.org/draft-06/schema#">Draft-06</option>
+                      <option value="http://json-schema.org/draft-07/schema#" selected>Draft-07 ⭐</option>
+                      <option value="https://json-schema.org/draft/2019-09/schema">Draft 2019-09</option>
+                      <option value="https://json-schema.org/2020-12/schema">Draft 2020-12</option>
+                    </select>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark ml-auto lg:ml-0" id="schemaSize">0 bytes</span>
+                </div>
+
+                <div class="grow flex flex-col p-2 bg-background-light/30 dark:bg-background-dark/30 min-h-[450px]">
+                  <div class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] text-text-light dark:text-text-dark overflow-y-auto resize-none bg-transparent rounded-lg" id="schemaOutput">
+                    Schema will appear here after generation...
+                  </div>
+                </div>
+
+                <div class="px-4 py-3 bg-surface-light/60 dark:bg-surface-dark/60 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="copyToClipboard('schemaOutput')">
+                    📋 Copy Schema
+                  </button>
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="downloadSchema()">
+                    ⬇️ Download
+                  </button>
+                  <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors ml-auto" onclick="clearSchema()">
+                    🗑️ Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output logs validation results -->
+          <div id="validationResultContainer" class="p-4 rounded-lg"></div>
         </div>
-        
-        <div class="form-group" id="startMonthGroup">
-          <label for="prepaymentStartMonth">Start From Month</label>
-          <input type="number" id="prepaymentStartMonth" min="1" max="360" value="1" placeholder="1">
-          <p class="helper-text">Month number from loan start (1 = first month)</p>
+      </div>
+
+      <!-- ========================================
+         TOOL #2: TEXT DIFF CHECKER
+         ======================================== -->
+      <div id="tool-diff" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🔍 Text Difference Checker</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Compare original and modified texts line-by-line, highlighting specific text changes.</p>
         </div>
-        
-        <div class="form-group">
-          <label>Prepayment Strategy</label>
-          <div class="radio-group" role="radiogroup">
-            <label class="radio-label">
-              <input type="radio" name="prepaymentStrategy" value="reduce-tenure" checked>
-              <span>
-                Reduce Loan Tenure
-                <span class="radio-description">Pay off loan faster, keep EMI same</span>
-              </span>
+
+        <div class="flex flex-col gap-6">
+          
+          <!-- Options Controls -->
+          <div class="flex flex-wrap items-center gap-6 bg-surface-light/40 dark:bg-surface-dark/40 p-4 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl">
+            <div class="flex items-center gap-2">
+              <label for="diffMode" class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark">Mode:</label>
+              <select id="diffMode" class="text-xs bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-3 py-2 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark cursor-pointer font-bold">
+                <option value="line">Line-by-Line</option>
+                <option value="word">Word-by-Word</option>
+                <option value="char">Character-by-Character</option>
+              </select>
+            </div>
+            
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-text-light/80 dark:text-text-dark/80 select-none">
+              <input type="checkbox" id="caseSensitive" checked class="text-primary dark:text-primary-dark focus:ring-primary dark:focus:ring-primary-dark rounded">
+              Case-sensitive
             </label>
-            <label class="radio-label">
-              <input type="radio" name="prepaymentStrategy" value="reduce-emi">
-              <span>
-                Reduce Monthly EMI
-                <span class="radio-description">Lower monthly payment, keep tenure same</span>
-              </span>
+            
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-text-light/80 dark:text-text-dark/80 select-none">
+              <input type="checkbox" id="ignoreWhitespace" class="text-primary dark:text-primary-dark focus:ring-primary dark:focus:ring-primary-dark rounded">
+              Ignore whitespace
             </label>
           </div>
+
+          <!-- Input Panels -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Panel Left: Original -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark">Original Text</h3>
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark" id="originalCount">0 lines</span>
+              </div>
+              <div class="p-2 grow">
+                <textarea id="originalText" placeholder="Paste original text string here..." class="font-mono text-sm leading-relaxed p-4 w-full h-80 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" oninput="updateLineCount('originalText', 'originalCount')" spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <!-- Panel Right: Modified -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark">Modified Text</h3>
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark" id="modifiedCount">0 lines</span>
+              </div>
+              <div class="p-2 grow">
+                <textarea id="modifiedText" placeholder="Paste modified text string here..." class="font-mono text-sm leading-relaxed p-4 w-full h-80 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" oninput="updateLineCount('modifiedText', 'modifiedCount')" spellcheck="false"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diff Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow active:scale-95" onclick="compareDiff()">
+              🔍 Compare Difference
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="swapDiffTexts()">
+              ⇄ Swap Texts
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="copyDiffResults()">
+              📋 Copy Results
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all ml-auto" onclick="clearDiff()">
+              Clear All
+            </button>
+          </div>
+
+          <!-- Comparison Output Results -->
+          <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-primary/25 dark:border-primary-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-md" id="diffResults" style="display:none;">
+            <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-primary/20 dark:border-primary-dark/20 flex items-center justify-between gap-4 flex-wrap">
+              <h3 class="font-heading text-xl text-text-light dark:text-text-dark font-normal">Comparison Analysis</h3>
+              <div class="text-xs font-bold font-display uppercase tracking-wider text-muted-light dark:text-muted-dark" id="diffStats"></div>
+            </div>
+            <!-- Diff formatting content goes here -->
+            <div class="p-6 bg-background-light/75 dark:bg-background-dark/75 font-mono text-sm leading-relaxed overflow-x-auto select-text whitespace-pre-wrap" id="diffOutput"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ========================================
+         TOOL #3: HTML ↔ MARKDOWN CONVERTER
+         ======================================== -->
+      <div id="tool-markdown" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📝 HTML ↔ Markdown Converter</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Bidirectional converter between semantic HTML layout structure and simplified Markdown code syntax.</p>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <!-- Control Parameters Options -->
+          <div class="flex flex-wrap items-center gap-6 bg-surface-light/40 dark:bg-surface-dark/40 p-4 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl">
+            <div class="flex items-center gap-2">
+              <label for="conversionMode" class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark">Conversion Direction:</label>
+              <select id="conversionMode" class="text-xs bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-3 py-2 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark cursor-pointer font-bold" onchange="updateConversionLabels()">
+                <option value="html-to-md">HTML → Markdown</option>
+                <option value="md-to-html">Markdown → HTML</option>
+              </select>
+            </div>
+            
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-text-light/80 dark:text-text-dark/80 select-none">
+              <input type="checkbox" id="useGFM" checked class="text-primary dark:text-primary-dark focus:ring-primary dark:focus:ring-primary-dark rounded">
+              GitHub Flavored Markdown
+            </label>
+          </div>
+
+          <!-- Dual Textareas Input/Output Preview Panel -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Side: Source Input -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark" id="inputLabel">HTML Source Code</h3>
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark" id="markdownInputSize">0 bytes</span>
+              </div>
+              <div class="p-2 grow">
+                <textarea id="markdownInput" placeholder="Paste input content text here..." class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" oninput="updateMarkdownInputSize()" spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <!-- Right Side: Conversion Destination Output/Preview -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20 flex items-center justify-between gap-4 flex-wrap">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark" id="outputLabel">Markdown Output</h3>
+                
+                <div class="flex items-center gap-2 ml-auto">
+                  <button class="px-3 py-1 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" id="btnPreviewToggle" onclick="toggleMarkdownPreview(true)">Preview</button>
+                  <button class="px-3 py-1 bg-primary/15 text-primary border border-primary/20 dark:bg-primary-dark/15 dark:text-primary-dark dark:border-primary-dark/30 text-xs font-semibold rounded transition-colors" id="btnCodeToggle" onclick="toggleMarkdownPreview(false)">Code</button>
+                </div>
+              </div>
+              
+              <div class="p-2 grow relative min-h-[384px]">
+                <!-- Output Textarea Code -->
+                <textarea id="markdownOutput" readonly class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent rounded-lg absolute inset-2" spellcheck="false"></textarea>
+                
+                <!-- Output Preview container -->
+                <div id="markdownPreview" class="prose max-w-none text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark overflow-y-auto rounded-lg absolute inset-2 select-text" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom controls bar -->
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow active:scale-95" onclick="convertMarkdown()">
+              ⚙️ Convert Content
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="copyMarkdownOutput()">
+              📋 Copy Output
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="downloadMarkdownOutput()">
+              ⬇️ Download Output
+            </button>
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all ml-auto" onclick="clearMarkdown()">
+              Clear All
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ========================================
+         TOOL #4: SIP CALCULATOR
+         ======================================== -->
+      <div id="tool-sip" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📊 SIP Calculator</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Estimate systemic investment plan returns, total wealth gain, and mature fund values offline.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left side input panel -->
+          <div class="lg:col-span-5 flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl theme-border-radius shadow-sm">
+            <h3 class="font-heading text-xl mb-6 text-text-light dark:text-text-dark font-normal border-b border-muted-light/10 dark:border-muted-dark/20 pb-2">SIP Parameters</h3>
+            
+            <div class="flex flex-col gap-5">
+              <div class="flex flex-col gap-2">
+                <label for="sipAmount" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Monthly Investment Amount (₹)</label>
+                <input type="number" id="sipAmount" value="5000" min="100" step="100" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="sipRate" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Expected Annual Return Rate (%)</label>
+                <input type="number" id="sipRate" value="12" min="1" max="30" step="0.1" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="sipDuration" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Investment Period (Years)</label>
+                <input type="number" id="sipDuration" value="10" min="1" max="40" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+              
+              <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow hover:-translate-y-0.5 mt-2" onclick="calculateSIP()">
+                📊 Calculate Future Returns
+              </button>
+            </div>
+          </div>
+
+          <!-- Right side output panel -->
+          <div class="lg:col-span-7 flex flex-col gap-6" id="sipResults" style="display:none;">
+            <!-- Typographic wealth cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Card: Invested -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-5 rounded-lg text-center flex flex-col justify-center">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-muted-light dark:text-muted-dark mb-1">Total Invested</span>
+                <span class="font-heading text-xl md:text-2xl text-text-light dark:text-text-dark font-normal" id="sipInvested">₹0</span>
+              </div>
+              <!-- Card: Wealth Gain -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-primary/20 dark:border-primary-dark/30 p-5 rounded-lg text-center flex flex-col justify-center shadow-sm">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-muted-light dark:text-muted-dark mb-1">Wealth Gain</span>
+                <span class="font-heading text-xl md:text-2xl text-primary dark:text-primary-dark font-normal" id="sipGain">₹0</span>
+              </div>
+              <!-- Card: Maturity Value -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-accent-light/35 dark:border-accent-dark/30 p-5 rounded-lg text-center flex flex-col justify-center shadow-md dark:shadow-cyan-glow">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-muted-light dark:text-muted-dark mb-1">Maturity Value</span>
+                <span class="font-heading text-xl md:text-2xl text-accent-light dark:text-accent-dark font-normal" id="sipFinalValue">₹0</span>
+              </div>
+            </div>
+
+            <!-- Breakdown schedule table -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark">Year-wise Growth Breakdown</h3>
+              </div>
+              
+              <div class="overflow-x-auto">
+                <table class="w-full results-table text-left border-collapse text-xs md:text-sm font-display select-text" id="sipBreakdown">
+                  <thead>
+                    <tr class="bg-surface-light/60 dark:bg-surface-dark/60 text-muted-light dark:text-muted-dark font-bold uppercase tracking-wider border-b border-muted-light/10 dark:border-muted-dark/20">
+                      <th class="p-3 md:p-4 text-center">Year</th>
+                      <th class="p-3 md:p-4">Invested Amount</th>
+                      <th class="p-3 md:p-4">Wealth Gain</th>
+                      <th class="p-3 md:p-4">Estimated Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sipTableBody" class="divide-y divide-muted-light/10 dark:divide-muted-dark/20">
+                    <!-- Dynamic entries appended in JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Export / Reset Button -->
+              <div class="px-4 py-3 bg-surface-light/50 dark:bg-surface-dark/50 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
+                <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="exportSIPResults()">
+                  ⬇️ Export CSV Report
+                </button>
+                <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors ml-auto" onclick="resetSIPCalculator()">
+                  Reset Calculator
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+         TOOL #5: EMI CALCULATOR
+         ======================================== -->
+      <div id="tool-emi" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🏠 EMI Loan Calculator</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Calculate Equated Monthly Installments, complete amortization tables, and estimate prepayments savings.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Left side parameters form -->
+          <div class="lg:col-span-5 flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl theme-border-radius shadow-sm">
+            <h3 class="font-heading text-xl mb-6 text-text-light dark:text-text-dark font-normal border-b border-muted-light/10 dark:border-muted-dark/20 pb-2">Loan Parameters</h3>
+            
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <label for="emiAmount" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Loan Principal Amount (₹)</label>
+                <input type="number" id="emiAmount" value="3000000" min="10000" step="50000" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="emiRate" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Interest Rate (Annual %)</label>
+                <input type="number" id="emiRate" value="8.5" min="1" max="25" step="0.05" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="emiDuration" class="text-xs font-bold uppercase tracking-wider text-text-light dark:text-text-dark/95">Loan Tenure (Years)</label>
+                <input type="number" id="emiDuration" value="20" min="1" max="35" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm px-4 py-3 text-sm focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none transition-shadow text-text-light dark:text-text-dark">
+              </div>
+
+              <!-- Prepayments configurations -->
+              <div class="border-t border-muted-light/10 dark:border-muted-dark/20 pt-4 mt-2 flex flex-col gap-3">
+                <h4 class="text-xs font-bold uppercase tracking-[1.5px] text-text-light dark:text-text-dark">Prepayment Scenarios (Optional)</h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-1.5">
+                    <label for="emiPrepay" class="text-[10px] font-bold uppercase tracking-wide text-muted-light dark:text-muted-dark">One-Time Prepay (₹)</label>
+                    <input type="number" id="emiPrepay" value="0" min="0" step="5000" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-3 py-2 text-xs focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none text-text-light dark:text-text-dark">
+                  </div>
+                  
+                  <div class="flex flex-col gap-1.5">
+                    <label for="emiPrepayMonth" class="text-[10px] font-bold uppercase tracking-wide text-muted-light dark:text-muted-dark">Prepayment Month</label>
+                    <input type="number" id="emiPrepayMonth" value="12" min="1" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-3 py-2 text-xs focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none text-text-light dark:text-text-dark">
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5 mt-1">
+                  <label for="emiRecurringPrepay" class="text-[10px] font-bold uppercase tracking-wide text-muted-light dark:text-muted-dark">Monthly Recurring Prepayment (₹)</label>
+                  <input type="number" id="emiRecurringPrepay" value="0" min="0" step="500" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-3 py-2 text-xs focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark outline-none text-text-light dark:text-text-dark">
+                </div>
+              </div>
+              
+              <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow hover:-translate-y-0.5 mt-2" onclick="calculateEMI()">
+                🏠 Calculate Loan Amortization
+              </button>
+            </div>
+          </div>
+
+          <!-- Right side results panels -->
+          <div class="lg:col-span-7 flex flex-col gap-6" id="emiResults" style="display:none;">
+            <!-- Comparison layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="emiComparisonLayout">
+              
+              <!-- Standard Amortization results card -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm">
+                <h4 class="font-heading text-lg font-normal mb-4 border-b border-muted-light/10 dark:border-muted-dark/20 pb-2 text-text-light dark:text-text-dark">Standard Loan Results</h4>
+                <div class="flex flex-col gap-4">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Monthly EMI</span>
+                    <span class="font-heading text-lg text-text-light dark:text-text-dark" id="emiMonthly">₹0</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Total Interest</span>
+                    <span class="font-heading text-lg text-primary dark:text-primary-dark" id="emiInterest">₹0</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Total Cost</span>
+                    <span class="font-heading text-lg text-text-light dark:text-text-dark" id="emiTotalValue">₹0</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Standard Period</span>
+                    <span class="font-bold text-text-light dark:text-text-dark" id="emiPeriod">240 months</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Prepayments comparison results card -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-accent-light/35 dark:border-accent-dark/30 p-6 rounded-xl shadow-md dark:shadow-cyan-glow">
+                <h4 class="font-heading text-lg font-normal mb-4 border-b border-muted-light/10 dark:border-muted-dark/20 pb-2 text-accent-light dark:text-accent-dark">Prepayment Savings</h4>
+                <div class="flex flex-col gap-4">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Revised Total Interest</span>
+                    <span class="font-heading text-lg text-text-light dark:text-text-dark" id="emiPrepayInterest">₹0</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Interest Savings</span>
+                    <span class="font-heading text-lg text-green-500 font-bold" id="emiInterestSavings">₹0</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Revised Tenure</span>
+                    <span class="font-bold text-text-light dark:text-text-dark" id="emiPrepayPeriod">240 months</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-muted-light dark:text-muted-dark uppercase tracking-wider font-bold">Months Saved</span>
+                    <span class="font-bold text-green-500" id="emiMonthsSaved">0 months</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Complete amortization table breakdown -->
+            <div class="flex flex-col bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl overflow-hidden theme-border-radius shadow-sm">
+              <div class="px-4 py-3 bg-surface-light dark:bg-surface-dark border-b border-muted-light/10 dark:border-muted-dark/20">
+                <h3 class="font-heading text-lg font-normal text-text-light dark:text-text-dark">Amortization Table schedule</h3>
+              </div>
+              
+              <div class="overflow-y-auto max-h-[300px] text-xs font-display">
+                <table class="w-full results-table text-left border-collapse select-text" id="emiBreakdown">
+                  <thead class="sticky top-0 z-20">
+                    <tr class="bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur text-muted-light dark:text-muted-dark font-bold uppercase tracking-wider border-b border-muted-light/10 dark:border-muted-dark/20 text-[10px]">
+                      <th class="p-3 text-center">Month</th>
+                      <th class="p-3">Opening Bal</th>
+                      <th class="p-3">EMI Paid</th>
+                      <th class="p-3">Principal</th>
+                      <th class="p-3">Interest</th>
+                      <th class="p-3">Prepayment</th>
+                      <th class="p-3">Ending Bal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="emiTableBody" class="divide-y divide-muted-light/5 dark:divide-muted-dark/15">
+                    <!-- Dynamic rows appended in JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Reset controls bar -->
+              <div class="px-4 py-3 bg-surface-light/50 dark:bg-surface-dark/50 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
+                <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="exportEMIResults()">
+                  ⬇️ Export CSV Report
+                </button>
+                <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors ml-auto" onclick="resetEMICalculator()">
+                  Reset Calculator
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-surface-light/40 dark:bg-surface-dark/40 border-t border-muted-light/10 dark:border-muted-dark/20 py-6" role="contentinfo">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark">
+        <span>© 2026 DevToolbox platform</span>
+        <span>Ancient wisdom &amp; modern code</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================
+     GLOBAL MODAL: SEARCH TOOLS
+     ======================================== -->
+  <div id="searchModal" class="fixed inset-0 z-[2000] hidden overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalSearchTitle">
+    <!-- Backdrop overlay -->
+    <div class="fixed inset-0 bg-background-dark/80 backdrop-blur-sm" onclick="closeSearch()"></div>
+    
+    <div class="flex min-h-screen items-center justify-center p-4">
+      <div class="relative w-full max-w-[600px] bg-surface-light dark:bg-surface-dark rounded-xl border border-muted-light/30 dark:border-muted-dark/50 shadow-2xl p-6 overflow-hidden theme-border-radius relative z-10 transition-colors duration-300">
+        <div class="flex items-center gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-4">
+          <span class="material-symbols-outlined text-primary dark:text-accent-dark text-2xl">search</span>
+          <input type="text" id="searchInput" placeholder="Search developer tools... (type key, e.g. json, emi)" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-4 py-2.5 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark text-sm transition-shadow font-semibold" onkeyup="filterTools()">
+          <button class="text-xs font-bold uppercase tracking-wider text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark" onclick="closeSearch()">ESC</button>
         </div>
         
-        <button class="btn btn-primary btn-large" onclick="calculateEMIWithPrepaymentUI()">
-          📊 Recalculate with Prepayment
-        </button>
-      </div>
-    </div>
-    
-    <!-- Prepayment Comparison Results -->
-    <div class="prepayment-comparison" id="prepaymentComparison" style="display:none;">
-      <h3>💰 Impact Analysis</h3>
-      
-      <div class="comparison-cards">
-        <div class="comparison-card">
-          <div class="card-header">Without Prepayment</div>
-          <div class="card-metric">
-            <span class="metric-label">Total Interest:</span>
-            <span class="metric-value" id="originalInterest">₹0</span>
-          </div>
-          <div class="card-metric">
-            <span class="metric-label">Loan Tenure:</span>
-            <span class="metric-value" id="originalTenure">0 years</span>
-          </div>
-          <div class="card-metric">
-            <span class="metric-label">Total Payment:</span>
-            <span class="metric-value" id="originalTotal">₹0</span>
-          </div>
+        <div class="flex flex-col gap-2 max-h-[300px] overflow-y-auto" id="searchResults">
+          <!-- Populated inside JS search -->
         </div>
-        
-        <div class="comparison-card highlight">
-          <div class="card-header success">✓ With Prepayment</div>
-          <div class="card-metric">
-            <span class="metric-label">Total Interest:</span>
-            <span class="metric-value success" id="prepaymentInterest">₹0</span>
-          </div>
-          <div class="card-metric">
-            <span class="metric-label">Loan Tenure:</span>
-            <span class="metric-value success" id="prepaymentTenure">0 years</span>
-          </div>
-          <div class="card-metric">
-            <span class="metric-label">Total Payment:</span>
-            <span class="metric-value success" id="prepaymentTotal">₹0</span>
-          </div>
-          <div class="savings-banner">
-            <strong>💰 Total Savings: </strong>
-            <span id="totalSavings">₹0</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="calculator-results" id="emiResults" style="display:none;">
-      <div class="results-summary">
-        <div class="result-card">
-          <div class="card-label">Monthly EMI</div>
-          <div class="card-value accent" id="monthlyEMI">₹0</div>
-        </div>
-        <div class="result-card">
-          <div class="card-label">Total Interest</div>
-          <div class="card-value" id="totalInterest">₹0</div>
-        </div>
-        <div class="result-card">
-          <div class="card-label">Total Payment</div>
-          <div class="card-value" id="totalPayment">₹0</div>
-        </div>
-      </div>
-      
-      <div class="results-table-container">
-        <h3>Amortization Schedule (Year-wise)</h3>
-        <div style="overflow-x: auto;">
-          <table class="results-table" id="emiBreakdown">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Principal</th>
-                <th>Interest</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody id="emiTableBody">
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <div class="action-bar">
-        <button class="btn btn-secondary" onclick="resetEMICalculator()">
-          Reset
-        </button>
-        <button class="btn btn-secondary" onclick="exportEMIResults()">
-          📥 Export CSV
-        </button>
       </div>
     </div>
   </div>
-  
-  <!-- SEARCH MODAL -->
-  <div class="search-modal" id="searchModal" onclick="closeSearchModal(event)">
-    <div class="search-modal-content" onclick="event.stopPropagation()">
-      <div class="search-input-container">
-        <input type="text" class="search-input" id="searchInput" placeholder="Search tools..." oninput="handleSearchInput()" onkeydown="handleSearchKeydown(event)">
-      </div>
-      <div class="search-results" id="searchResults">
-        <!-- Search results will be populated here -->
-      </div>
-    </div>
-  </div>
-  
-  <!-- JavaScript -->
+
+<!-- JavaScript -->
   <script>
     // ========================================
     // CONFIGURATION
@@ -2704,6 +1214,13 @@
       try {
         localStorage.setItem(THEME_KEY, theme);
         document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+        }
         updateThemeIcon(theme);
       } catch (e) {
         console.error('Failed to save theme:', e);
