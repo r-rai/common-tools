@@ -30,8 +30,8 @@
             "surface-dark": "#12131C",
             "text-light": "#2D2A26",
             "text-dark": "#E8E9F3",
-            "muted-light": "#9C9283",
-            "muted-dark": "#5B5F77",
+            "muted-light": "#605A54",
+            "muted-dark": "#A5AABF",
             "muted-dark-bright": "#B0B3C8",
             "accent-light": "#E3A857",   // Gold
             "accent-dark": "#00F0FF"     // Cyber Cyan
@@ -170,7 +170,7 @@
       display: none;
     }
     #searchModal.active {
-      display: flex;
+      display: block;
     }
 
     /* Enhanced visibility for all inputs/textareas in dark mode */
@@ -433,7 +433,7 @@
          ======================================== -->
       <div id="tool-json" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📋 JSON Schema Generator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">schema</span>JSON Schema Generator & Validator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Generate standard drafts, validate inputs, minify and format your JSON files.</p>
         </div>
 
@@ -516,12 +516,7 @@
                 </div>
               </label>
             </div>
-            
-            <div id="customSchemaInput" class="flex flex-col gap-2 mb-6" style="display:none;">
-              <label for="customSchema" class="text-xs font-bold uppercase tracking-wider text-text-light/80 dark:text-text-dark/80">Paste JSON Schema</label>
-              <textarea id="customSchema" placeholder="Paste custom JSON Schema structures here..." class="font-mono text-xs p-4 w-full h-48 bg-background-light dark:bg-background-dark border border-muted-light/30 dark:border-muted-dark/50 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark outline-none transition-shadow duration-200" spellcheck="false"></textarea>
-              <p class="text-[10px] text-muted-light dark:text-muted-dark">Supports JSON Schema drafts: draft-04, draft-06, draft-07, 2019-09, 2020-12</p>
-            </div>
+
             
             <div class="flex items-center gap-3">
               <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm shadow-md transition-transform active:scale-95" onclick="runValidation()">
@@ -594,9 +589,7 @@
                 </div>
 
                 <div class="grow flex flex-col p-2 bg-background-light/30 dark:bg-background-dark/30 min-h-[450px]">
-                  <div class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] text-text-light dark:text-text-dark overflow-y-auto resize-none bg-transparent rounded-lg" id="schemaOutput">
-                    Schema will appear here after generation...
-                  </div>
+                  <textarea id="schemaOutput" readonly class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] text-text-light dark:text-text-dark bg-transparent rounded-lg outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 grow" placeholder="Schema will appear here after generation...">Schema will appear here after generation...</textarea>
                 </div>
 
                 <div class="px-4 py-3 bg-surface-light/60 dark:bg-surface-dark/60 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
@@ -624,7 +617,7 @@
          ======================================== -->
       <div id="tool-diff" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🔍 Text Difference Checker</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">balance</span>Text Difference Checker</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Compare original and modified texts line-by-line, highlighting specific text changes.</p>
         </div>
 
@@ -711,7 +704,7 @@
          ======================================== -->
       <div id="tool-markdown" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📝 HTML ↔ Markdown Converter</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">history_edu</span>HTML ↔ Markdown Converter</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Bidirectional converter between semantic HTML layout structure and simplified Markdown code syntax.</p>
         </div>
 
@@ -790,7 +783,7 @@
          ======================================== -->
       <div id="tool-sip" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📊 SIP Calculator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">trending_up</span>SIP Calculator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Estimate systemic investment plan returns, total wealth gain, and mature fund values offline.</p>
         </div>
 
@@ -894,7 +887,7 @@
          ======================================== -->
       <div id="tool-emi" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🏠 EMI Loan Calculator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">cottage</span>EMI Loan Calculator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Calculate Equated Monthly Installments, complete amortization tables, and estimate prepayments savings.</p>
         </div>
 
@@ -1025,11 +1018,22 @@
                 </table>
               </div>
 
-            <!-- Chart Container -->
-            <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm mt-6">
-              <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Loan Payment Breakdown</h4>
-              <div class="h-64 flex justify-center items-center">
-                <canvas id="emiChart" class="max-h-full"></canvas>
+            <!-- Charts Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <!-- Chart 1: Loan Payment Breakdown -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm">
+                <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Loan Payment Breakdown</h4>
+                <div class="h-64 flex justify-center items-center">
+                  <canvas id="emiChart" class="max-h-full"></canvas>
+                </div>
+              </div>
+
+              <!-- Chart 2: Amortization Schedule Chart -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm">
+                <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Amortization Schedule</h4>
+                <div class="h-64 flex justify-center items-center">
+                  <canvas id="emiScheduleChart" class="max-h-full"></canvas>
+                </div>
               </div>
             </div>
 
@@ -1093,11 +1097,11 @@
     const THEME_KEY = 'devtools-theme';
     
     const TOOLS = {
-      'json': { name: 'JSON Schema Generator', icon: '📋' },
-      'markdown': { name: 'Markdown Converter', icon: '📝' },
-      'diff': { name: 'Diff Checker', icon: '🔍' },
-      'sip': { name: 'SIP Calculator', icon: '📊' },
-      'emi': { name: 'EMI Calculator', icon: '🏠' }
+      'json': { name: 'JSON Schema Generator', icon: 'schema' },
+      'markdown': { name: 'Markdown Converter', icon: 'history_edu' },
+      'diff': { name: 'Diff Checker', icon: 'balance' },
+      'sip': { name: 'SIP Calculator', icon: 'trending_up' },
+      'emi': { name: 'EMI Calculator', icon: 'cottage' }
     };
     
     // ========================================
@@ -1149,7 +1153,7 @@
         
         return `
           <a href="#${toolId}" class="recent-app-chip ${isActive}" aria-label="${tool.name}">
-            <span class="recent-app-icon">${tool.icon}</span>
+            <span class="material-symbols-outlined text-[16px] align-middle mr-1.5 text-primary dark:text-accent-dark">${tool.icon}</span>
             <span class="recent-app-name">${tool.name}</span>
           </a>
         `;
@@ -1308,6 +1312,17 @@
           window.myEmiChart.options.plugins.legend.labels.color = isDark ? '#E8E9F3' : '#2D2A26';
           window.myEmiChart.update();
         }
+        if (window.myEmiScheduleChart) {
+          const isDark = (theme === 'dark');
+          window.myEmiScheduleChart.data.datasets[1].backgroundColor = isDark ? 'rgba(255, 107, 53, 0.7)' : 'rgba(227, 168, 87, 0.7)';
+          window.myEmiScheduleChart.data.datasets[1].borderColor = isDark ? '#FF6B35' : '#E3A857';
+          window.myEmiScheduleChart.data.datasets[2].backgroundColor = isDark ? 'rgba(255, 107, 53, 0.3)' : 'rgba(200, 75, 49, 0.4)';
+          window.myEmiScheduleChart.data.datasets[2].borderColor = isDark ? '#FF6B35' : '#C84B31';
+          window.myEmiScheduleChart.options.plugins.legend.labels.color = isDark ? '#E8E9F3' : '#2D2A26';
+          window.myEmiScheduleChart.options.scales.x.ticks.color = isDark ? '#A5AABF' : '#605A54';
+          window.myEmiScheduleChart.options.scales.y.ticks.color = isDark ? '#A5AABF' : '#605A54';
+          window.myEmiScheduleChart.update();
+        }
       } catch (e) {
         console.error('Failed to save theme:', e);
       }
@@ -1402,11 +1417,11 @@
       const searchQuery = query.toLowerCase();
       
       const toolsList = [
-        { id: 'json', name: 'JSON Schema Generator', icon: '📋', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
-        { id: 'markdown', name: 'Markdown Converter', icon: '📝', description: 'Convert between HTML and Markdown formats' },
-        { id: 'diff', name: 'Text Diff Checker', icon: '🔍', description: 'Compare texts to identify changes line-by-line' },
-        { id: 'sip', name: 'SIP Calculator', icon: '📊', description: 'Calculate mutual fund SIP returns' },
-        { id: 'emi', name: 'EMI Calculator', icon: '🏠', description: 'Calculate home loan EMI' }
+        { id: 'json', name: 'JSON Schema Generator', icon: 'schema', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
+        { id: 'markdown', name: 'Markdown Converter', icon: 'history_edu', description: 'Convert between HTML and Markdown formats' },
+        { id: 'diff', name: 'Text Diff Checker', icon: 'balance', description: 'Compare texts to identify changes line-by-line' },
+        { id: 'sip', name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
+        { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' }
       ];
       
       const filtered = toolsList.filter(tool => {
@@ -1422,7 +1437,9 @@
       
       resultsContainer.innerHTML = filtered.map((tool, index) => `
         <div class="search-result-item ${index === 0 ? 'selected' : ''}" onclick="launchToolFromSearch('${tool.id}')">
-          <div class="search-result-icon">${tool.icon}</div>
+          <div class="search-result-icon">
+            <span class="material-symbols-outlined text-lg align-middle text-primary dark:text-accent-dark">${tool.icon}</span>
+          </div>
           <div class="search-result-info">
             <div class="search-result-title">${tool.name}</div>
             <div class="search-result-description">${tool.description}</div>
@@ -1654,7 +1671,7 @@
         // Show the schema output panel
         showSchemaOutput();
         
-        document.getElementById('schemaOutput').textContent = schemaJSON;
+        document.getElementById('schemaOutput').value = schemaJSON;
         document.getElementById('schemaOutput').classList.remove('empty');
         updateSizeIndicator('schemaSize', schemaJSON.length);
         
@@ -1792,12 +1809,34 @@
      */
     function toggleSchemaInput() {
       const schemaSource = document.querySelector('input[name="schemaSource"]:checked').value;
-      const customInput = document.getElementById('customSchemaInput');
+      const rightWrapper = document.getElementById('schemaOutputWrapper');
+      const rightHeading = document.getElementById('schemaOutputHeading');
+      const rightTextarea = document.getElementById('schemaOutput');
       
       if (schemaSource === 'custom') {
-        customInput.style.display = 'block';
+        // Show right wrapper as custom input
+        rightWrapper.style.display = 'flex';
+        rightHeading.textContent = 'Custom JSON Schema Input';
+        rightTextarea.readOnly = false;
+        rightTextarea.placeholder = 'Paste custom JSON Schema here for validation...';
+        // Clear placeholder text if it matches default
+        if (rightTextarea.value.includes('Schema will appear here after generation')) {
+          rightTextarea.value = '';
+          rightTextarea.classList.add('empty');
+        }
       } else {
-        customInput.style.display = 'none';
+        // Use generated schema mode
+        rightHeading.textContent = 'JSON Schema Output';
+        rightTextarea.readOnly = true;
+        rightTextarea.placeholder = 'Schema will appear here after generation...';
+        if (currentSchema) {
+          rightTextarea.value = JSON.stringify(currentSchema, null, 2);
+          rightTextarea.classList.remove('empty');
+        } else {
+          rightTextarea.value = 'Schema will appear here after generation...';
+          rightTextarea.classList.add('empty');
+          rightWrapper.style.display = 'none';
+        }
       }
     }
     
@@ -1837,11 +1876,11 @@
           schemaToUse = currentSchema;
           schemaSourceName = 'Generated Schema';
         } else {
-          // Custom schema
-          const customSchemaText = document.getElementById('customSchema').value.trim();
+          // Custom schema - read directly from the spacious right-hand textarea!
+          const customSchemaText = document.getElementById('schemaOutput').value.trim();
           
-          if (!customSchemaText) {
-            showToast('Please paste a JSON Schema', 'error');
+          if (!customSchemaText || customSchemaText === 'Schema will appear here after generation...') {
+            showToast('Please paste your JSON Schema in the right-hand input panel first', 'error');
             return;
           }
           
@@ -2149,7 +2188,7 @@
     }
     
     function downloadSchema() {
-      const schema = document.getElementById('schemaOutput').textContent;
+      const schema = document.getElementById('schemaOutput').value;
       if (schema === 'Schema will appear here after generation...') {
         showToast('No schema to download', 'error');
         return;
@@ -2188,7 +2227,7 @@
       if (confirm('Clear schema output?')) {
         currentSchema = null;
         const schemaOutput = document.getElementById('schemaOutput');
-        schemaOutput.textContent = 'Schema will appear here after generation...';
+        schemaOutput.value = 'Schema will appear here after generation...';
         schemaOutput.classList.add('empty');
         updateSizeIndicator('schemaSize', 0);
       }
@@ -2886,6 +2925,51 @@ function hello() {
       const tbody = document.getElementById('emiTableBody');
       tbody.innerHTML = '';
       
+      // Collectors for the Amortization Schedule Chart
+      const yearsLabels = [];
+      const balanceData = [];
+      const principalPaidData = [];
+      const interestPaidData = [];
+      
+      let balanceSim = principal;
+      let accumInterestSim = 0;
+      let accumPrincipalSim = 0;
+      
+      for (let y = 1; y <= years; y++) {
+        yearsLabels.push('Yr ' + y);
+        
+        const startMonth = (y - 1) * 12 + 1;
+        const endMonth = y * 12;
+        
+        for (let m = startMonth; m <= endMonth && m <= months; m++) {
+          if (balanceSim <= 0) break;
+          
+          let interestPaid = balanceSim * monthlyRate;
+          let principalPaid = emi - interestPaid;
+          if (principalPaid > balanceSim) {
+            principalPaid = balanceSim;
+          }
+          
+          let prepaymentPaid = 0;
+          if (prepayAmount > 0 && m === prepayMonth) {
+            prepaymentPaid += Math.min(prepayAmount, balanceSim - principalPaid);
+          }
+          if (recurringPrepay > 0) {
+            prepaymentPaid += Math.min(recurringPrepay, balanceSim - principalPaid - prepaymentPaid);
+          }
+          
+          accumInterestSim += interestPaid;
+          accumPrincipalSim += (principalPaid + prepaymentPaid);
+          balanceSim = Math.max(0, balanceSim - (principalPaid + prepaymentPaid));
+        }
+        
+        balanceData.push(Math.round(balanceSim));
+        principalPaidData.push(Math.round(accumPrincipalSim));
+        interestPaidData.push(Math.round(accumInterestSim));
+      }
+      
+      // Build actual scheduling table rows
+      balance = principal;
       for (let m = 1; m <= months; m++) {
         if (balance <= 0) break;
         
@@ -2893,17 +2977,14 @@ function hello() {
         let interestPaid = balance * monthlyRate;
         let principalPaid = emi - interestPaid;
         
-        // Handle last payment adjustments
         if (principalPaid > balance) {
           principalPaid = balance;
         }
         
         let prepaymentPaid = 0;
-        // Apply lump-sum prepayment in specific month
         if (prepayAmount > 0 && m === prepayMonth) {
           prepaymentPaid += Math.min(prepayAmount, balance - principalPaid);
         }
-        // Apply monthly recurring prepayment
         if (recurringPrepay > 0) {
           prepaymentPaid += Math.min(recurringPrepay, balance - principalPaid - prepaymentPaid);
         }
@@ -2916,7 +2997,6 @@ function hello() {
         accumPrepay += prepaymentPaid;
         actualMonths = m;
         
-        // Append row to the 7-column table: Month | Opening Bal | EMI Paid | Principal | Interest | Prepayment | Ending Bal
         const row = document.createElement('tr');
         row.className = "hover:bg-surface-light/20 dark:hover:bg-surface-dark/25 transition-colors border-b border-muted-light/5 dark:border-muted-dark/10";
         row.innerHTML = `
@@ -2947,7 +3027,7 @@ function hello() {
       // Display the Results container
       document.getElementById('emiResults').style.display = 'block';
       
-      // Draw or update the dynamic doughnut chart
+      // Draw Chart 1: EMI Doughnut chart
       try {
         if (window.myEmiChart) {
           window.myEmiChart.destroy();
@@ -2986,14 +3066,118 @@ function hello() {
         console.error("EMI chart creation failed:", e);
       }
       
+      // Draw Chart 2: Amortization Schedule mixed chart
+      try {
+        if (window.myEmiScheduleChart) {
+          window.myEmiScheduleChart.destroy();
+        }
+        const ctxSchedule = document.getElementById('emiScheduleChart').getContext('2d');
+        const isDark = document.documentElement.classList.contains('dark');
+        window.myEmiScheduleChart = new Chart(ctxSchedule, {
+          type: 'line',
+          data: {
+            labels: yearsLabels,
+            datasets: [
+              {
+                label: 'Outstanding Balance',
+                data: balanceData,
+                borderColor: '#00F0FF',
+                backgroundColor: 'rgba(0, 240, 255, 0.08)',
+                borderWidth: 2,
+                pointRadius: 3,
+                type: 'line',
+                fill: true,
+                yAxisID: 'y'
+              },
+              {
+                label: 'Cumulative Principal Paid',
+                data: principalPaidData,
+                backgroundColor: isDark ? 'rgba(255, 107, 53, 0.7)' : 'rgba(227, 168, 87, 0.7)',
+                borderColor: isDark ? '#FF6B35' : '#E3A857',
+                borderWidth: 1,
+                type: 'bar',
+                stack: 'combined',
+                yAxisID: 'y'
+              },
+              {
+                label: 'Cumulative Interest Paid',
+                data: interestPaidData,
+                backgroundColor: isDark ? 'rgba(255, 107, 53, 0.3)' : 'rgba(200, 75, 49, 0.4)',
+                borderColor: isDark ? '#FF6B35' : '#C84B31',
+                borderWidth: 1,
+                type: 'bar',
+                stack: 'combined',
+                yAxisID: 'y'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: 'index',
+              intersect: false
+            },
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  color: isDark ? '#E8E9F3' : '#2D2A26',
+                  font: {
+                    family: 'Plus Jakarta Sans',
+                    size: 10
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  color: isDark ? 'rgba(232, 233, 243, 0.05)' : 'rgba(45, 42, 38, 0.05)'
+                },
+                ticks: {
+                  color: isDark ? '#A5AABF' : '#605A54',
+                  font: { family: 'Plus Jakarta Sans', size: 9 }
+                }
+              },
+              y: {
+                grid: {
+                  color: isDark ? 'rgba(232, 233, 243, 0.05)' : 'rgba(45, 42, 38, 0.05)'
+                },
+                ticks: {
+                  color: isDark ? '#A5AABF' : '#605A54',
+                  font: { family: 'Plus Jakarta Sans', size: 9 },
+                  callback: function(value) {
+                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                  }
+                }
+              }
+            }
+          }
+        });
+      } catch(e) {
+        console.error("EMI Amortization Schedule chart failed:", e);
+      }
+      
       showToast('Calculation complete!', 'success');
     }
     
     function resetEMICalculator() {
       document.getElementById('emiResults').style.display = 'none';
-      document.getElementById('emiAmount').value = '5000000';
+      document.getElementById('emiAmount').value = '3000000';
       document.getElementById('emiRate').value = '8.5';
       document.getElementById('emiDuration').value = '20';
+      document.getElementById('emiPrepay').value = '0';
+      document.getElementById('emiPrepayMonth').value = '12';
+      document.getElementById('emiRecurringPrepay').value = '0';
+      if (window.myEmiChart) {
+        window.myEmiChart.destroy();
+        window.myEmiChart = null;
+      }
+      if (window.myEmiScheduleChart) {
+        window.myEmiScheduleChart.destroy();
+        window.myEmiScheduleChart = null;
+      }
     }
     
     function exportEMIResults() {
