@@ -30,8 +30,8 @@
             "surface-dark": "#12131C",
             "text-light": "#2D2A26",
             "text-dark": "#E8E9F3",
-            "muted-light": "#9C9283",
-            "muted-dark": "#5B5F77",
+            "muted-light": "#605A54",
+            "muted-dark": "#A5AABF",
             "muted-dark-bright": "#B0B3C8",
             "accent-light": "#E3A857",   // Gold
             "accent-dark": "#00F0FF"     // Cyber Cyan
@@ -164,6 +164,57 @@
       border-radius: 4px;
       border: 1px solid rgba(255, 107, 53, 0.2);
     }
+
+    /* Search Modal Display Controls */
+    #searchModal {
+      display: none;
+    }
+    #searchModal.active {
+      display: block;
+    }
+
+    /* Enhanced visibility for all inputs/textareas in dark mode */
+    .dark input, 
+    .dark textarea, 
+    .dark select {
+      background-color: #12131C !important;
+      border: 1px solid rgba(0, 240, 255, 0.25) !important;
+      color: #E8E9F3 !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .dark input:focus, 
+    .dark textarea:focus,
+    .dark select:focus {
+      border-color: #00F0FF !important; /* Cyber Cyan focus border */
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5) !important;
+      outline: none !important;
+    }
+    
+    /* Light Mode Input Focus Glow */
+    .light input, 
+    .light textarea, 
+    .light select {
+      background-color: #FCFAFA !important;
+      border: 1px solid rgba(200, 75, 49, 0.15) !important;
+      color: #2D2A26 !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .light input:focus, 
+    .light textarea:focus,
+    .light select:focus {
+      border-color: #C84B31 !important; /* Terracotta focus border */
+      box-shadow: 0 0 12px rgba(200, 75, 49, 0.25) !important;
+      outline: none !important;
+    }
+    
+    /* Fix table rows styling */
+    .results-table tbody tr:hover {
+      background-color: rgba(200, 75, 49, 0.05);
+    }
+    .dark .results-table tbody tr:hover {
+      background-color: rgba(0, 240, 255, 0.05);
+    }
+
   </style>
 
   <!-- Prevent light mode flash script -->
@@ -180,6 +231,7 @@
       }
     })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
@@ -212,8 +264,9 @@
           <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="openSearch()" aria-label="Search tools (Ctrl+K)">
             <span class="material-symbols-outlined text-xl">search</span>
           </button>
-          <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-primary-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggleBtn">
-            <span class="material-symbols-outlined text-xl" id="themeIcon">light_mode</span>
+          <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-primary-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20 relative" onclick="toggleTheme()" aria-label="Toggle theme" id="themeToggleBtn">
+            <span class="material-symbols-outlined absolute transition-all duration-300 transform dark:rotate-90 dark:scale-0 text-xl" id="themeIconMoon">dark_mode</span>
+            <span class="material-symbols-outlined absolute transition-all duration-300 transform scale-0 -rotate-90 dark:rotate-0 dark:scale-100 text-xl text-accent-dark" id="themeIconSun">light_mode</span>
           </button>
         </div>
       </div>
@@ -380,7 +433,7 @@
          ======================================== -->
       <div id="tool-json" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📋 JSON Schema Generator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">schema</span>JSON Schema Generator & Validator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Generate standard drafts, validate inputs, minify and format your JSON files.</p>
         </div>
 
@@ -463,12 +516,7 @@
                 </div>
               </label>
             </div>
-            
-            <div id="customSchemaInput" class="flex flex-col gap-2 mb-6" style="display:none;">
-              <label for="customSchema" class="text-xs font-bold uppercase tracking-wider text-text-light/80 dark:text-text-dark/80">Paste JSON Schema</label>
-              <textarea id="customSchema" placeholder="Paste custom JSON Schema structures here..." class="font-mono text-xs p-4 w-full h-48 bg-background-light dark:bg-background-dark border border-muted-light/30 dark:border-muted-dark/50 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark outline-none transition-shadow duration-200" spellcheck="false"></textarea>
-              <p class="text-[10px] text-muted-light dark:text-muted-dark">Supports JSON Schema drafts: draft-04, draft-06, draft-07, 2019-09, 2020-12</p>
-            </div>
+
             
             <div class="flex items-center gap-3">
               <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm shadow-md transition-transform active:scale-95" onclick="runValidation()">
@@ -541,9 +589,7 @@
                 </div>
 
                 <div class="grow flex flex-col p-2 bg-background-light/30 dark:bg-background-dark/30 min-h-[450px]">
-                  <div class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] text-text-light dark:text-text-dark overflow-y-auto resize-none bg-transparent rounded-lg" id="schemaOutput">
-                    Schema will appear here after generation...
-                  </div>
+                  <textarea id="schemaOutput" readonly class="font-mono text-sm leading-relaxed p-4 w-full h-[450px] text-text-light dark:text-text-dark bg-transparent rounded-lg outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 grow" placeholder="Schema will appear here after generation...">Schema will appear here after generation...</textarea>
                 </div>
 
                 <div class="px-4 py-3 bg-surface-light/60 dark:bg-surface-dark/60 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
@@ -571,7 +617,7 @@
          ======================================== -->
       <div id="tool-diff" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🔍 Text Difference Checker</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">balance</span>Text Difference Checker</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Compare original and modified texts line-by-line, highlighting specific text changes.</p>
         </div>
 
@@ -658,7 +704,7 @@
          ======================================== -->
       <div id="tool-markdown" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📝 HTML ↔ Markdown Converter</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">history_edu</span>HTML ↔ Markdown Converter</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Bidirectional converter between semantic HTML layout structure and simplified Markdown code syntax.</p>
         </div>
 
@@ -737,7 +783,7 @@
          ======================================== -->
       <div id="tool-sip" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">📊 SIP Calculator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">trending_up</span>SIP Calculator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Estimate systemic investment plan returns, total wealth gain, and mature fund values offline.</p>
         </div>
 
@@ -812,6 +858,15 @@
                 </table>
               </div>
 
+            <!-- Chart Container -->
+            <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm mt-6">
+              <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Investment Breakdown</h4>
+              <div class="h-64 flex justify-center items-center">
+                <canvas id="sipChart" class="max-h-full"></canvas>
+              </div>
+            </div>
+
+
               <!-- Export / Reset Button -->
               <div class="px-4 py-3 bg-surface-light/50 dark:bg-surface-dark/50 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
                 <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="exportSIPResults()">
@@ -832,7 +887,7 @@
          ======================================== -->
       <div id="tool-emi" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
         <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
-          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal">🏠 EMI Loan Calculator</h2>
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">cottage</span>EMI Loan Calculator</h2>
           <p class="text-sm text-muted-light dark:text-muted-dark">Calculate Equated Monthly Installments, complete amortization tables, and estimate prepayments savings.</p>
         </div>
 
@@ -963,6 +1018,26 @@
                 </table>
               </div>
 
+            <!-- Charts Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <!-- Chart 1: Loan Payment Breakdown -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm">
+                <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Loan Payment Breakdown</h4>
+                <div class="h-64 flex justify-center items-center">
+                  <canvas id="emiChart" class="max-h-full"></canvas>
+                </div>
+              </div>
+
+              <!-- Chart 2: Amortization Schedule Chart -->
+              <div class="bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 p-6 rounded-xl shadow-sm">
+                <h4 class="font-heading text-lg font-normal mb-4 text-text-light dark:text-text-dark">Amortization Schedule</h4>
+                <div class="h-64 flex justify-center items-center">
+                  <canvas id="emiScheduleChart" class="max-h-full"></canvas>
+                </div>
+              </div>
+            </div>
+
+
               <!-- Reset controls bar -->
               <div class="px-4 py-3 bg-surface-light/50 dark:bg-surface-dark/50 border-t border-muted-light/10 dark:border-muted-dark/20 flex items-center gap-2">
                 <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="exportEMIResults()">
@@ -993,7 +1068,7 @@
   <!-- ========================================
      GLOBAL MODAL: SEARCH TOOLS
      ======================================== -->
-  <div id="searchModal" class="fixed inset-0 z-[2000] hidden overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalSearchTitle">
+  <div id="searchModal" class="fixed inset-0 z-[2000] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalSearchTitle">
     <!-- Backdrop overlay -->
     <div class="fixed inset-0 bg-background-dark/80 backdrop-blur-sm" onclick="closeSearch()"></div>
     
@@ -1001,7 +1076,7 @@
       <div class="relative w-full max-w-[600px] bg-surface-light dark:bg-surface-dark rounded-xl border border-muted-light/30 dark:border-muted-dark/50 shadow-2xl p-6 overflow-hidden theme-border-radius relative z-10 transition-colors duration-300">
         <div class="flex items-center gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-4">
           <span class="material-symbols-outlined text-primary dark:text-accent-dark text-2xl">search</span>
-          <input type="text" id="searchInput" placeholder="Search developer tools... (type key, e.g. json, emi)" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-4 py-2.5 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark text-sm transition-shadow font-semibold" onkeyup="filterTools()">
+          <input type="text" id="searchInput" placeholder="Search developer tools... (type key, e.g. json, emi)" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-4 py-2.5 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark text-sm transition-shadow font-semibold" oninput="handleSearchInput()" onkeydown="handleSearchKeydown(event)">
           <button class="text-xs font-bold uppercase tracking-wider text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark" onclick="closeSearch()">ESC</button>
         </div>
         
@@ -1022,11 +1097,11 @@
     const THEME_KEY = 'devtools-theme';
     
     const TOOLS = {
-      'json': { name: 'JSON Schema Generator', icon: '📋' },
-      'markdown': { name: 'Markdown Converter', icon: '📝' },
-      'diff': { name: 'Diff Checker', icon: '🔍' },
-      'sip': { name: 'SIP Calculator', icon: '📊' },
-      'emi': { name: 'EMI Calculator', icon: '🏠' }
+      'json': { name: 'JSON Schema Generator', icon: 'schema' },
+      'markdown': { name: 'Markdown Converter', icon: 'history_edu' },
+      'diff': { name: 'Diff Checker', icon: 'balance' },
+      'sip': { name: 'SIP Calculator', icon: 'trending_up' },
+      'emi': { name: 'EMI Calculator', icon: 'cottage' }
     };
     
     // ========================================
@@ -1078,7 +1153,7 @@
         
         return `
           <a href="#${toolId}" class="recent-app-chip ${isActive}" aria-label="${tool.name}">
-            <span class="recent-app-icon">${tool.icon}</span>
+            <span class="material-symbols-outlined text-[16px] align-middle mr-1.5 text-primary dark:text-accent-dark">${tool.icon}</span>
             <span class="recent-app-name">${tool.name}</span>
           </a>
         `;
@@ -1221,7 +1296,33 @@
           document.documentElement.classList.add('light');
           document.documentElement.classList.remove('dark');
         }
-        updateThemeIcon(theme);
+        
+        // Dynamically update Chart colors on theme change
+        if (window.mySipChart) {
+          const isDark = (theme === 'dark');
+          window.mySipChart.data.datasets[0].backgroundColor = isDark ? ['#5B5F77', '#FF6B35'] : ['#F4EFE6', '#C84B31'];
+          window.mySipChart.data.datasets[0].borderColor = isDark ? '#12131C' : '#FFFFFF';
+          window.mySipChart.options.plugins.legend.labels.color = isDark ? '#E8E9F3' : '#2D2A26';
+          window.mySipChart.update();
+        }
+        if (window.myEmiChart) {
+          const isDark = (theme === 'dark');
+          window.myEmiChart.data.datasets[0].backgroundColor = isDark ? ['#00F0FF', '#FF6B35'] : ['#E3A857', '#C84B31'];
+          window.myEmiChart.data.datasets[0].borderColor = isDark ? '#12131C' : '#FFFFFF';
+          window.myEmiChart.options.plugins.legend.labels.color = isDark ? '#E8E9F3' : '#2D2A26';
+          window.myEmiChart.update();
+        }
+        if (window.myEmiScheduleChart) {
+          const isDark = (theme === 'dark');
+          window.myEmiScheduleChart.data.datasets[1].backgroundColor = isDark ? 'rgba(255, 107, 53, 0.7)' : 'rgba(227, 168, 87, 0.7)';
+          window.myEmiScheduleChart.data.datasets[1].borderColor = isDark ? '#FF6B35' : '#E3A857';
+          window.myEmiScheduleChart.data.datasets[2].backgroundColor = isDark ? 'rgba(255, 107, 53, 0.3)' : 'rgba(200, 75, 49, 0.4)';
+          window.myEmiScheduleChart.data.datasets[2].borderColor = isDark ? '#FF6B35' : '#C84B31';
+          window.myEmiScheduleChart.options.plugins.legend.labels.color = isDark ? '#E8E9F3' : '#2D2A26';
+          window.myEmiScheduleChart.options.scales.x.ticks.color = isDark ? '#A5AABF' : '#605A54';
+          window.myEmiScheduleChart.options.scales.y.ticks.color = isDark ? '#A5AABF' : '#605A54';
+          window.myEmiScheduleChart.update();
+        }
       } catch (e) {
         console.error('Failed to save theme:', e);
       }
@@ -1234,10 +1335,7 @@
     }
     
     function updateThemeIcon(theme) {
-      const icon = document.getElementById('themeIcon');
-      if (icon) {
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-      }
+      // Transition is handled automatically by CSS on themeIconMoon and themeIconSun!
     }
     
     // ========================================
@@ -1256,7 +1354,7 @@
       }
     }
     
-    function closeSearchModal(event) {
+    function closeSearch() {
       const modal = document.getElementById('searchModal');
       if (modal) {
         modal.classList.remove('active');
@@ -1273,7 +1371,7 @@
       const selected = document.querySelector('.search-result-item.selected');
       
       if (event.key === 'Escape') {
-        closeSearchModal();
+        closeSearch();
       } else if (event.key === 'ArrowDown') {
         event.preventDefault();
         if (!selected && results.length > 0) {
@@ -1319,11 +1417,11 @@
       const searchQuery = query.toLowerCase();
       
       const toolsList = [
-        { id: 'json', name: 'JSON Schema Generator', icon: '📋', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
-        { id: 'markdown', name: 'Markdown Converter', icon: '📝', description: 'Convert between HTML and Markdown formats' },
-        { id: 'diff', name: 'Text Diff Checker', icon: '🔍', description: 'Compare texts to identify changes line-by-line' },
-        { id: 'sip', name: 'SIP Calculator', icon: '📊', description: 'Calculate mutual fund SIP returns' },
-        { id: 'emi', name: 'EMI Calculator', icon: '🏠', description: 'Calculate home loan EMI' }
+        { id: 'json', name: 'JSON Schema Generator', icon: 'schema', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
+        { id: 'markdown', name: 'Markdown Converter', icon: 'history_edu', description: 'Convert between HTML and Markdown formats' },
+        { id: 'diff', name: 'Text Diff Checker', icon: 'balance', description: 'Compare texts to identify changes line-by-line' },
+        { id: 'sip', name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
+        { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' }
       ];
       
       const filtered = toolsList.filter(tool => {
@@ -1339,7 +1437,9 @@
       
       resultsContainer.innerHTML = filtered.map((tool, index) => `
         <div class="search-result-item ${index === 0 ? 'selected' : ''}" onclick="launchToolFromSearch('${tool.id}')">
-          <div class="search-result-icon">${tool.icon}</div>
+          <div class="search-result-icon">
+            <span class="material-symbols-outlined text-lg align-middle text-primary dark:text-accent-dark">${tool.icon}</span>
+          </div>
           <div class="search-result-info">
             <div class="search-result-title">${tool.name}</div>
             <div class="search-result-description">${tool.description}</div>
@@ -1349,7 +1449,7 @@
     }
     
     function launchToolFromSearch(toolId) {
-      closeSearchModal();
+      closeSearch();
       launchTool(toolId);
     }
     
@@ -1571,7 +1671,7 @@
         // Show the schema output panel
         showSchemaOutput();
         
-        document.getElementById('schemaOutput').textContent = schemaJSON;
+        document.getElementById('schemaOutput').value = schemaJSON;
         document.getElementById('schemaOutput').classList.remove('empty');
         updateSizeIndicator('schemaSize', schemaJSON.length);
         
@@ -1709,12 +1809,34 @@
      */
     function toggleSchemaInput() {
       const schemaSource = document.querySelector('input[name="schemaSource"]:checked').value;
-      const customInput = document.getElementById('customSchemaInput');
+      const rightWrapper = document.getElementById('schemaOutputWrapper');
+      const rightHeading = document.getElementById('schemaOutputHeading');
+      const rightTextarea = document.getElementById('schemaOutput');
       
       if (schemaSource === 'custom') {
-        customInput.style.display = 'block';
+        // Show right wrapper as custom input
+        rightWrapper.style.display = 'flex';
+        rightHeading.textContent = 'Custom JSON Schema Input';
+        rightTextarea.readOnly = false;
+        rightTextarea.placeholder = 'Paste custom JSON Schema here for validation...';
+        // Clear placeholder text if it matches default
+        if (rightTextarea.value.includes('Schema will appear here after generation')) {
+          rightTextarea.value = '';
+          rightTextarea.classList.add('empty');
+        }
       } else {
-        customInput.style.display = 'none';
+        // Use generated schema mode
+        rightHeading.textContent = 'JSON Schema Output';
+        rightTextarea.readOnly = true;
+        rightTextarea.placeholder = 'Schema will appear here after generation...';
+        if (currentSchema) {
+          rightTextarea.value = JSON.stringify(currentSchema, null, 2);
+          rightTextarea.classList.remove('empty');
+        } else {
+          rightTextarea.value = 'Schema will appear here after generation...';
+          rightTextarea.classList.add('empty');
+          rightWrapper.style.display = 'none';
+        }
       }
     }
     
@@ -1754,11 +1876,11 @@
           schemaToUse = currentSchema;
           schemaSourceName = 'Generated Schema';
         } else {
-          // Custom schema
-          const customSchemaText = document.getElementById('customSchema').value.trim();
+          // Custom schema - read directly from the spacious right-hand textarea!
+          const customSchemaText = document.getElementById('schemaOutput').value.trim();
           
-          if (!customSchemaText) {
-            showToast('Please paste a JSON Schema', 'error');
+          if (!customSchemaText || customSchemaText === 'Schema will appear here after generation...') {
+            showToast('Please paste your JSON Schema in the right-hand input panel first', 'error');
             return;
           }
           
@@ -2066,7 +2188,7 @@
     }
     
     function downloadSchema() {
-      const schema = document.getElementById('schemaOutput').textContent;
+      const schema = document.getElementById('schemaOutput').value;
       if (schema === 'Schema will appear here after generation...') {
         showToast('No schema to download', 'error');
         return;
@@ -2105,7 +2227,7 @@
       if (confirm('Clear schema output?')) {
         currentSchema = null;
         const schemaOutput = document.getElementById('schemaOutput');
-        schemaOutput.textContent = 'Schema will appear here after generation...';
+        schemaOutput.value = 'Schema will appear here after generation...';
         schemaOutput.classList.add('empty');
         updateSizeIndicator('schemaSize', 0);
       }
@@ -2649,7 +2771,48 @@ function hello() {
       // Generate year-wise breakdown
       generateYearWiseBreakdown(monthlyAmount, monthlyRate, years);
       
+      
       document.getElementById('sipResults').style.display = 'block';
+
+      // Draw SIP doughnut chart
+      try {
+        if (window.mySipChart) {
+          window.mySipChart.destroy();
+        }
+        const ctx = document.getElementById('sipChart').getContext('2d');
+        const isDark = document.documentElement.classList.contains('dark');
+        window.mySipChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Total Invested', 'Est. Returns'],
+            datasets: [{
+              data: [totalInvested, wealthGain],
+              backgroundColor: isDark ? ['#5B5F77', '#FF6B35'] : ['#F4EFE6', '#C84B31'],
+              borderColor: isDark ? '#12131C' : '#FFFFFF',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  color: isDark ? '#E8E9F3' : '#2D2A26',
+                  font: {
+                    family: 'Plus Jakarta Sans',
+                    size: 11
+                  }
+                }
+              }
+            }
+          }
+        });
+      } catch(e) {
+        console.error("SIP chart creation failed:", e);
+      }
+
       showToast('Calculation complete!', 'success');
     }
     
@@ -2716,9 +2879,9 @@ function hello() {
     // EMI CALCULATOR FUNCTIONS
     // ========================================
     function calculateEMI() {
-      const principal = parseFloat(document.getElementById('loanAmount').value);
-      const annualRate = parseFloat(document.getElementById('loanRate').value);
-      const years = parseInt(document.getElementById('loanTenure').value);
+      const principal = parseFloat(document.getElementById('emiAmount').value);
+      const annualRate = parseFloat(document.getElementById('emiRate').value);
+      const years = parseInt(document.getElementById('emiDuration').value);
       
       if (!principal || !annualRate || !years) {
         showToast('Please fill all fields', 'warning');
@@ -2733,7 +2896,7 @@ function hello() {
       const monthlyRate = annualRate / 12 / 100;
       const months = years * 12;
       
-      // Calculate EMI using formula
+      // Calculate standard EMI using formula
       const emi = principal * monthlyRate * 
         Math.pow(1 + monthlyRate, months) / 
         (Math.pow(1 + monthlyRate, months) - 1);
@@ -2741,69 +2904,286 @@ function hello() {
       const totalPayment = emi * months;
       const totalInterest = totalPayment - principal;
       
-      // Display summary
-      document.getElementById('monthlyEMI').textContent = formatCurrency(emi);
-      document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
-      document.getElementById('totalPayment').textContent = formatCurrency(totalPayment);
+      // Display standard summary results
+      document.getElementById('emiMonthly').textContent = formatCurrency(emi);
+      document.getElementById('emiInterest').textContent = formatCurrency(totalInterest);
+      document.getElementById('emiTotalValue').textContent = formatCurrency(totalPayment);
+      document.getElementById('emiPeriod').textContent = months + ' months';
       
-      // Generate amortization schedule
-      generateAmortizationSchedule(principal, monthlyRate, months, emi, years);
+      // Optional prepayment parameters
+      const prepayAmount = parseFloat(document.getElementById('emiPrepay').value) || 0;
+      const prepayMonth = parseInt(document.getElementById('emiPrepayMonth').value) || 12;
+      const recurringPrepay = parseFloat(document.getElementById('emiRecurringPrepay').value) || 0;
       
+      // We will simulate month-by-month to apply prepayments and build the amortization schedule!
+      let balance = principal;
+      let accumInterest = 0;
+      let accumPrincipal = 0;
+      let accumPrepay = 0;
+      let actualMonths = 0;
+      
+      const tbody = document.getElementById('emiTableBody');
+      tbody.innerHTML = '';
+      
+      // Collectors for the Amortization Schedule Chart
+      const yearsLabels = [];
+      const balanceData = [];
+      const principalPaidData = [];
+      const interestPaidData = [];
+      
+      let balanceSim = principal;
+      let accumInterestSim = 0;
+      let accumPrincipalSim = 0;
+      
+      for (let y = 1; y <= years; y++) {
+        yearsLabels.push('Yr ' + y);
+        
+        const startMonth = (y - 1) * 12 + 1;
+        const endMonth = y * 12;
+        
+        for (let m = startMonth; m <= endMonth && m <= months; m++) {
+          if (balanceSim <= 0) break;
+          
+          let interestPaid = balanceSim * monthlyRate;
+          let principalPaid = emi - interestPaid;
+          if (principalPaid > balanceSim) {
+            principalPaid = balanceSim;
+          }
+          
+          let prepaymentPaid = 0;
+          if (prepayAmount > 0 && m === prepayMonth) {
+            prepaymentPaid += Math.min(prepayAmount, balanceSim - principalPaid);
+          }
+          if (recurringPrepay > 0) {
+            prepaymentPaid += Math.min(recurringPrepay, balanceSim - principalPaid - prepaymentPaid);
+          }
+          
+          accumInterestSim += interestPaid;
+          accumPrincipalSim += (principalPaid + prepaymentPaid);
+          balanceSim = Math.max(0, balanceSim - (principalPaid + prepaymentPaid));
+        }
+        
+        balanceData.push(Math.round(balanceSim));
+        principalPaidData.push(Math.round(accumPrincipalSim));
+        interestPaidData.push(Math.round(accumInterestSim));
+      }
+      
+      // Build actual scheduling table rows
+      balance = principal;
+      for (let m = 1; m <= months; m++) {
+        if (balance <= 0) break;
+        
+        const openingBal = balance;
+        let interestPaid = balance * monthlyRate;
+        let principalPaid = emi - interestPaid;
+        
+        if (principalPaid > balance) {
+          principalPaid = balance;
+        }
+        
+        let prepaymentPaid = 0;
+        if (prepayAmount > 0 && m === prepayMonth) {
+          prepaymentPaid += Math.min(prepayAmount, balance - principalPaid);
+        }
+        if (recurringPrepay > 0) {
+          prepaymentPaid += Math.min(recurringPrepay, balance - principalPaid - prepaymentPaid);
+        }
+        
+        const totalPrincipalThisMonth = principalPaid + prepaymentPaid;
+        const endingBal = Math.max(0, openingBal - totalPrincipalThisMonth);
+        
+        accumInterest += interestPaid;
+        accumPrincipal += principalPaid;
+        accumPrepay += prepaymentPaid;
+        actualMonths = m;
+        
+        const row = document.createElement('tr');
+        row.className = "hover:bg-surface-light/20 dark:hover:bg-surface-dark/25 transition-colors border-b border-muted-light/5 dark:border-muted-dark/10";
+        row.innerHTML = `
+          <td class="p-3 text-center font-bold text-muted-light dark:text-muted-dark">${m}</td>
+          <td class="p-3">${formatCurrency(openingBal)}</td>
+          <td class="p-3 font-semibold">${formatCurrency(emi)}</td>
+          <td class="p-3 text-green-500">${formatCurrency(principalPaid)}</td>
+          <td class="p-3 text-red-500">${formatCurrency(interestPaid)}</td>
+          <td class="p-3 text-accent-light dark:text-accent-dark font-bold">${prepaymentPaid > 0 ? formatCurrency(prepaymentPaid) : '—'}</td>
+          <td class="p-3 font-bold">${formatCurrency(endingBal)}</td>
+        `;
+        tbody.appendChild(row);
+        
+        balance = endingBal;
+        if (balance <= 0) break;
+      }
+      
+      // Calculate and update Prepayment Savings Card results
+      const revisedTotalInterest = accumInterest;
+      const interestSavings = totalInterest - revisedTotalInterest;
+      const monthsSaved = months - actualMonths;
+      
+      document.getElementById('emiPrepayInterest').textContent = formatCurrency(revisedTotalInterest);
+      document.getElementById('emiInterestSavings').textContent = formatCurrency(Math.max(0, interestSavings));
+      document.getElementById('emiPrepayPeriod').textContent = actualMonths + ' months';
+      document.getElementById('emiMonthsSaved').textContent = Math.max(0, monthsSaved) + ' months';
+      
+      // Display the Results container
       document.getElementById('emiResults').style.display = 'block';
       
-      // Show prepayment section after first calculation
-      document.getElementById('prepaymentSection').style.display = 'block';
+      // Draw Chart 1: EMI Doughnut chart
+      try {
+        if (window.myEmiChart) {
+          window.myEmiChart.destroy();
+        }
+        const ctx = document.getElementById('emiChart').getContext('2d');
+        const isDark = document.documentElement.classList.contains('dark');
+        window.myEmiChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Principal Amount', 'Total Interest'],
+            datasets: [{
+              data: [principal, revisedTotalInterest],
+              backgroundColor: isDark ? ['#00F0FF', '#FF6B35'] : ['#E3A857', '#C84B31'],
+              borderColor: isDark ? '#12131C' : '#FFFFFF',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  color: isDark ? '#E8E9F3' : '#2D2A26',
+                  font: {
+                    family: 'Plus Jakarta Sans',
+                    size: 11
+                  }
+                }
+              }
+            }
+          }
+        });
+      } catch(e) {
+        console.error("EMI chart creation failed:", e);
+      }
       
-      // Hide prepayment comparison (will show after prepayment calculation)
-      document.getElementById('prepaymentComparison').style.display = 'none';
+      // Draw Chart 2: Amortization Schedule mixed chart
+      try {
+        if (window.myEmiScheduleChart) {
+          window.myEmiScheduleChart.destroy();
+        }
+        const ctxSchedule = document.getElementById('emiScheduleChart').getContext('2d');
+        const isDark = document.documentElement.classList.contains('dark');
+        window.myEmiScheduleChart = new Chart(ctxSchedule, {
+          type: 'line',
+          data: {
+            labels: yearsLabels,
+            datasets: [
+              {
+                label: 'Outstanding Balance',
+                data: balanceData,
+                borderColor: '#00F0FF',
+                backgroundColor: 'rgba(0, 240, 255, 0.08)',
+                borderWidth: 2,
+                pointRadius: 3,
+                type: 'line',
+                fill: true,
+                yAxisID: 'y'
+              },
+              {
+                label: 'Cumulative Principal Paid',
+                data: principalPaidData,
+                backgroundColor: isDark ? 'rgba(255, 107, 53, 0.7)' : 'rgba(227, 168, 87, 0.7)',
+                borderColor: isDark ? '#FF6B35' : '#E3A857',
+                borderWidth: 1,
+                type: 'bar',
+                stack: 'combined',
+                yAxisID: 'y'
+              },
+              {
+                label: 'Cumulative Interest Paid',
+                data: interestPaidData,
+                backgroundColor: isDark ? 'rgba(255, 107, 53, 0.3)' : 'rgba(200, 75, 49, 0.4)',
+                borderColor: isDark ? '#FF6B35' : '#C84B31',
+                borderWidth: 1,
+                type: 'bar',
+                stack: 'combined',
+                yAxisID: 'y'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: 'index',
+              intersect: false
+            },
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  color: isDark ? '#E8E9F3' : '#2D2A26',
+                  font: {
+                    family: 'Plus Jakarta Sans',
+                    size: 10
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  color: isDark ? 'rgba(232, 233, 243, 0.05)' : 'rgba(45, 42, 38, 0.05)'
+                },
+                ticks: {
+                  color: isDark ? '#A5AABF' : '#605A54',
+                  font: { family: 'Plus Jakarta Sans', size: 9 }
+                }
+              },
+              y: {
+                grid: {
+                  color: isDark ? 'rgba(232, 233, 243, 0.05)' : 'rgba(45, 42, 38, 0.05)'
+                },
+                ticks: {
+                  color: isDark ? '#A5AABF' : '#605A54',
+                  font: { family: 'Plus Jakarta Sans', size: 9 },
+                  callback: function(value) {
+                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                  }
+                }
+              }
+            }
+          }
+        });
+      } catch(e) {
+        console.error("EMI Amortization Schedule chart failed:", e);
+      }
       
       showToast('Calculation complete!', 'success');
     }
     
-    function generateAmortizationSchedule(principal, monthlyRate, months, emi, years) {
-      const tbody = document.getElementById('emiTableBody');
-      tbody.innerHTML = '';
-      
-      let balance = principal;
-      
-      for (let year = 1; year <= years; year++) {
-        let yearlyPrincipal = 0;
-        let yearlyInterest = 0;
-        
-        const startMonth = (year - 1) * 12 + 1;
-        const endMonth = year * 12;
-        
-        for (let month = startMonth; month <= endMonth && month <= months; month++) {
-          const interest = balance * monthlyRate;
-          const principalPaid = emi - interest;
-          
-          yearlyPrincipal += principalPaid;
-          yearlyInterest += interest;
-          balance -= principalPaid;
-        }
-        
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${year}</td>
-          <td>${formatCurrency(yearlyPrincipal)}</td>
-          <td>${formatCurrency(yearlyInterest)}</td>
-          <td>${formatCurrency(Math.max(0, balance))}</td>
-        `;
-        tbody.appendChild(row);
+    function resetEMICalculator() {
+      document.getElementById('emiResults').style.display = 'none';
+      document.getElementById('emiAmount').value = '3000000';
+      document.getElementById('emiRate').value = '8.5';
+      document.getElementById('emiDuration').value = '20';
+      document.getElementById('emiPrepay').value = '0';
+      document.getElementById('emiPrepayMonth').value = '12';
+      document.getElementById('emiRecurringPrepay').value = '0';
+      if (window.myEmiChart) {
+        window.myEmiChart.destroy();
+        window.myEmiChart = null;
+      }
+      if (window.myEmiScheduleChart) {
+        window.myEmiScheduleChart.destroy();
+        window.myEmiScheduleChart = null;
       }
     }
     
-    function resetEMICalculator() {
-      document.getElementById('emiResults').style.display = 'none';
-      document.getElementById('loanAmount').value = '5000000';
-      document.getElementById('loanRate').value = '8.5';
-      document.getElementById('loanTenure').value = '20';
-    }
-    
     function exportEMIResults() {
-      const amount = document.getElementById('loanAmount').value;
-      const rate = document.getElementById('loanRate').value;
-      const tenure = document.getElementById('loanTenure').value;
+      const amount = document.getElementById('emiAmount').value;
+      const rate = document.getElementById('emiRate').value;
+      const tenure = document.getElementById('emiDuration').value;
       
       let csv = 'EMI Calculator Results\\n\\n';
       csv += `Loan Amount,₹${amount}\\n`;
@@ -2818,208 +3198,6 @@ function hello() {
       });
       
       downloadFile(csv, 'emi-calculation.csv', 'text/csv');
-    }
-    
-    // ========================================
-    // EMI PREPAYMENT CALCULATOR FUNCTIONS
-    // ========================================
-    
-    /**
-     * Toggles prepayment section expand/collapse
-     */
-    function togglePrepaymentSection() {
-      const form = document.getElementById('prepaymentForm');
-      const toggle = document.getElementById('prepaymentToggle');
-      const header = document.querySelector('.section-header');
-      
-      if (form.style.display === 'none') {
-        form.style.display = 'block';
-        toggle.textContent = '▲';
-        toggle.classList.add('expanded');
-        header.setAttribute('aria-expanded', 'true');
-      } else {
-        form.style.display = 'none';
-        toggle.textContent = '▼';
-        toggle.classList.remove('expanded');
-        header.setAttribute('aria-expanded', 'false');
-      }
-    }
-    
-    /**
-     * Updates prepayment form based on prepayment type selection
-     */
-    function updatePrepaymentForm() {
-      const type = document.getElementById('prepaymentType').value;
-      const startMonthGroup = document.getElementById('startMonthGroup');
-      
-      // For monthly extra, start month is always relevant
-      // For lump sum, also relevant to choose when to make payment
-      startMonthGroup.style.display = 'block';
-    }
-    
-    /**
-     * UI handler for prepayment calculation
-     */
-    function calculateEMIWithPrepaymentUI() {
-      const principal = parseFloat(document.getElementById('loanAmount').value);
-      const annualRate = parseFloat(document.getElementById('loanRate').value);
-      const tenureYears = parseInt(document.getElementById('loanTenure').value);
-      const prepaymentAmount = parseFloat(document.getElementById('prepaymentAmount').value);
-      const startMonth = parseInt(document.getElementById('prepaymentStartMonth').value);
-      
-      // Validation
-      if (!prepaymentAmount) {
-        showToast('Please enter prepayment amount', 'warning');
-        return;
-      }
-      
-      if (prepaymentAmount < 1000) {
-        showToast('Minimum prepayment amount is ₹1,000', 'warning');
-        return;
-      }
-      
-      if (startMonth < 1 || startMonth > tenureYears * 12) {
-        showToast('Start month must be between 1 and ' + (tenureYears * 12), 'warning');
-        return;
-      }
-      
-      const prepayment = {
-        type: document.getElementById('prepaymentType').value,
-        amount: prepaymentAmount,
-        startMonth: startMonth,
-        strategy: document.querySelector('input[name=\"prepaymentStrategy\"]:checked').value
-      };
-      
-      // Calculate original EMI for comparison
-      const monthlyRate = annualRate / 12 / 100;
-      const months = tenureYears * 12;
-      const emi = principal * monthlyRate * 
-        Math.pow(1 + monthlyRate, months) / 
-        (Math.pow(1 + monthlyRate, months) - 1);
-      const originalTotalPayment = emi * months;
-      const originalTotalInterest = originalTotalPayment - principal;
-      
-      // Calculate with prepayment
-      const result = calculateEMIWithPrepayment(principal, annualRate, tenureYears, prepayment);
-      
-      // Display comparison
-      displayPrepaymentComparison({
-        original: {
-          interest: originalTotalInterest,
-          tenure: tenureYears,
-          total: originalTotalPayment
-        },
-        prepayment: result
-      });
-      
-      showToast('Prepayment impact calculated!', 'success');
-    }
-    
-    /**
-     * Calculates EMI with prepayment applied
-     * @param {number} principal - Loan amount
-     * @param {number} annualRate - Interest rate (annual %)
-     * @param {number} tenureYears - Loan tenure in years
-     * @param {Object} prepayment - Prepayment configuration
-     * @returns {Object} - Calculation results
-     */
-    function calculateEMIWithPrepayment(principal, annualRate, tenureYears, prepayment) {
-      const monthlyRate = annualRate / 12 / 100;
-      const originalMonths = tenureYears * 12;
-      
-      // Calculate original EMI
-      const originalEMI = principal * monthlyRate * 
-        Math.pow(1 + monthlyRate, originalMonths) / 
-        (Math.pow(1 + monthlyRate, originalMonths) - 1);
-      
-      let balance = principal;
-      let totalInterest = 0;
-      let totalPrepayment = 0;
-      let actualMonths = 0;
-      let newEMI = originalEMI;
-      
-      for (let month = 1; month <= originalMonths; month++) {
-        if (balance <= 0) break;
-        
-        const interest = balance * monthlyRate;
-        let principalPayment = newEMI - interest;
-        
-        // Apply prepayment
-        let prepaymentThisMonth = 0;
-        
-        if (prepayment.type === 'lump-sum' && month === prepayment.startMonth) {
-          // One-time lump sum prepayment
-          prepaymentThisMonth = Math.min(prepayment.amount, balance);
-          totalPrepayment += prepaymentThisMonth;
-          
-        } else if (prepayment.type === 'monthly-extra' && month >= prepayment.startMonth) {
-          // Monthly extra payment
-          prepaymentThisMonth = Math.min(prepayment.amount, balance);
-          totalPrepayment += prepaymentThisMonth;
-        }
-        
-        // Update balance
-        balance -= (principalPayment + prepaymentThisMonth);
-        totalInterest += interest;
-        actualMonths = month;
-        
-        // For reduce-EMI strategy, recalculate EMI after prepayment
-        if (prepaymentThisMonth > 0 && prepayment.strategy === 'reduce-emi') {
-          const remainingMonths = originalMonths - month;
-          if (remainingMonths > 0 && balance > 0) {
-            newEMI = balance * monthlyRate * 
-              Math.pow(1 + monthlyRate, remainingMonths) / 
-              (Math.pow(1 + monthlyRate, remainingMonths) - 1);
-          }
-        }
-        
-        // Prevent infinite loop
-        if (balance < 1) {
-          balance = 0;
-          break;
-        }
-      }
-      
-      const actualTenure = actualMonths / 12;
-      const totalPayment = (newEMI * actualMonths) + totalPrepayment;
-      
-      return {
-        interest: totalInterest,
-        tenure: actualTenure,
-        total: totalPayment,
-        actualMonths: actualMonths,
-        prepaymentAmount: totalPrepayment
-      };
-    }
-    
-    /**
-     * Displays prepayment comparison results
-     */
-    function displayPrepaymentComparison(data) {
-      // Update original values
-      document.getElementById('originalInterest').textContent = formatCurrency(data.original.interest);
-      document.getElementById('originalTenure').textContent = data.original.tenure.toFixed(1) + ' years';
-      document.getElementById('originalTotal').textContent = formatCurrency(data.original.total);
-      
-      // Update prepayment values
-      document.getElementById('prepaymentInterest').textContent = formatCurrency(data.prepayment.interest);
-      document.getElementById('prepaymentTenure').textContent = data.prepayment.tenure.toFixed(1) + ' years';
-      document.getElementById('prepaymentTotal').textContent = formatCurrency(data.prepayment.total);
-      
-      // Calculate and display savings
-      const interestSaved = data.original.interest - data.prepayment.interest;
-      const tenureSaved = data.original.tenure - data.prepayment.tenure;
-      const totalSaved = data.original.total - data.prepayment.total;
-      
-      document.getElementById('totalSavings').textContent = 
-        formatCurrency(totalSaved) + ' (' + 
-        tenureSaved.toFixed(1) + ' years saved)';
-      
-      // Show comparison section
-      document.getElementById('prepaymentComparison').style.display = 'block';
-      
-      // Scroll to results
-      document.getElementById('prepaymentComparison').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     
     // ========================================
