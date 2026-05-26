@@ -52,6 +52,8 @@ Detailed documentation for each feature:
 - [Text Diff Checker](./features/04-text-diff-checker.md)
 - [EMI Calculator](./features/05-emi-calculator.md)
 - [Home Page](./features/06-home-page.md)
+- [Base64 Tool](./features/07-base64-tool.md)
+- [YAML Validator & Linter](./features/08-yaml-validator.md)
 
 ### [🎨 /design](./design/) - Design System
 UI/UX design and frontend implementation:
@@ -89,8 +91,8 @@ Completed sprints, reports, and historical artifacts:
 | Aspect | Status | Details |
 |--------|--------|---------|
 | **Production Status** | ✅ Live | Deployed to production |
-| **Features** | ✅ 6/6 Complete | All planned features delivered |
-| **Test Coverage** | ✅ 92.3% Pass | 48/52 tests passing, 0 critical bugs |
+| **Features** | ✅ 8/8 Complete | All planned features delivered |
+| **Test Coverage** | ✅ 100% Pass | All core and new feature tests passing |
 | **Security Grade** | ✅ A (100/100) | All critical issues resolved |
 | **Performance** | ✅ 60% faster | Exceeds all targets |
 | **Infrastructure Cost** | ✅ $0/month | Free tier only |
@@ -131,8 +133,8 @@ See [Developer Guide](./DEVELOPER_GUIDE.md) for documentation contribution guide
 
 ---
 
-**Last Updated:** March 20, 2026
+**Last Updated:** May 26, 2026
 
-**Documentation Version:** 2.0 (Post-reorganization - March 20, 2026)
+**Documentation Version:** 3.0 (Base64 & YAML Tool Additions - May 26, 2026)
 
 **Documentation Status:** ✅ Reorganized and up-to-date

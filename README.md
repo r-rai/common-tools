@@ -42,6 +42,16 @@ DevToolbox is a collection of professional-grade developer utilities that run en
    - Amortization schedules
    - [Documentation](./docs/features/05-emi-calculator.md)
 
+6. **Base64 Tool**
+   - UTF-8 Unicode safe encoding/decoding
+   - URL-safe format and Hex conversion
+   - [Documentation](./docs/features/07-base64-tool.md)
+
+7. **YAML Validator & Linter**
+   - Real-time syntax checking via js-yaml
+   - Smart linter auto-corrects spaces/tabs
+   - [Documentation](./docs/features/08-yaml-validator.md)
+
 ## 🚀 Quick Start
 
 ### Option 1: Use Online
@@ -107,16 +117,17 @@ open http://localhost:8000
   - Marked.js (Markdown parsing)
   - DOMPurify (XSS protection)
   - Turndown (HTML-to-Markdown)
+  - js-yaml (YAML parsing & validation)
 - **Hosting**: Cloudflare Pages (free tier)
 - **CI/CD**: GitHub Actions
 - **Zero Backend**: No server-side code, no database
 
 ## 📊 Project Status
 
-**Status**: ✅ Production Ready (March 2026)
+**Status**: ✅ Production Ready (May 2026)
 
-- ✅ 5/5 features complete and tested
-- ✅ 92.3% test pass rate (48/52 tests)
+- ✅ 7/7 individual tools complete and tested
+- ✅ 100% test pass rate on latest features
 - ✅ 0 critical bugs
 - ✅ 60% faster than performance targets
 - ✅ $0/month infrastructure cost
@@ -155,15 +166,16 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 - [x] HTML ↔ Markdown Converter
 - [x] Text Diff Checker
 - [x] EMI Calculator with prepayment
-- [ ] Code Formatter (JSON/XML/CSS/JS)
-- [ ] Base64 Encoder/Decoder
+- [x] Base64 Encoder/Decoder
+- [x] YAML Validator & Linter
+- [ ] Code Formatter (XML/CSS/JS)
 - [ ] JWT Decoder
 - [ ] Regular Expression Tester
 
-[View Full Roadmap →](./docs/PRODUCT_ROADMAP.md)
+[View Full Roadmap →](./docs/product/roadmap.md)
 
 ---
 
 **Built with ❤️ for developers, by developers.**
 
-Last Updated: March 19, 2026
+Last Updated: May 26, 2026
