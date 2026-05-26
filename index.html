@@ -231,7 +231,10 @@
       }
     })();
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/lib/chart.umd.min.js" integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g" crossorigin="anonymous"></script>
+  <script src="/lib/purify.min.js" integrity="sha384-cwS6YdhLI7XS60eoDiC+egV0qHp8zI+Cms46R0nbn8JrmoAzV9uFL60etMZhAnSu" crossorigin="anonymous"></script>
+  <script src="/lib/diff.min.js" integrity="sha384-kfJm1UHujU89hXr0VHT0u0t4lqavqaoomP6wix8D9fhzTeFvC9DYyaT36//Qd144" crossorigin="anonymous"></script>
+  <script src="/lib/js-yaml.min.js" integrity="sha384-+pxiN6T7yvpryuJmE1gM9PX7yQit15auDb+ZwwvJOd/4be2Cie5/IuVXgQb/S9du" crossorigin="anonymous"></script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
@@ -308,7 +311,7 @@
           <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('json')" tabindex="0" onkeypress="handleCardKeypress(event, 'json')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
-              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">code_blocks</span>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">schema</span>
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
@@ -329,7 +332,7 @@
           <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('markdown')" tabindex="0" onkeypress="handleCardKeypress(event, 'markdown')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
-              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">menu_book</span>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">history_edu</span>
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
@@ -350,7 +353,7 @@
           <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('diff')" tabindex="0" onkeypress="handleCardKeypress(event, 'diff')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
-              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">difference</span>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">balance</span>
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
@@ -371,7 +374,7 @@
           <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('sip')" tabindex="0" onkeypress="handleCardKeypress(event, 'sip')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
-              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">finance</span>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">trending_up</span>
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
@@ -392,7 +395,7 @@
           <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('emi')" tabindex="0" onkeypress="handleCardKeypress(event, 'emi')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
-              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">home_app_lite</span>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">cottage</span>
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
@@ -405,6 +408,48 @@
               <div class="flex flex-wrap gap-2 mt-2">
                 <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">EMI</span>
                 <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Prepayment</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Base64 Tool -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('base64')" tabindex="0" onkeypress="handleCardKeypress(event, 'base64')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">key</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Base64 Tool</h3>
+                <span class="dark:text-accent-dark text-[10px] font-bold tracking-widest text-primary uppercase font-display">NEW</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Encode and decode Base64 strings safely with full UTF-8 Unicode, Base64Url, and Hex format support.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Unicode UTF-8</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Hex / URL</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: YAML Validator -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('yaml')" tabindex="0" onkeypress="handleCardKeypress(event, 'yaml')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
+              <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">description</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">YAML Validator</h3>
+                <span class="dark:text-accent-dark text-[10px] font-bold tracking-widest text-primary uppercase font-display">NEW</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Validate YAML syntax with real-time error line pointing, tab-to-space correction, and lint fixing.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Validator</span>
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Linter / Auto-Fix</span>
               </div>
             </div>
           </article>
@@ -1053,6 +1098,108 @@
         </div>
       </div>
 
+      <!-- ========================================
+         TOOL #6: BASE64 TOOL
+         ======================================== -->
+      <div id="tool-base64" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">key</span>Base64 Tool</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Encode and decode text safely client-side. Seamlessly supports UTF-8 Unicode characters, Base64Url format, and Hex output encoding.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 items-center mb-6 bg-surface-light dark:bg-surface-dark p-4 rounded-lg border border-muted-light/20 dark:border-muted-dark/40 shadow-sm">
+          <div class="flex flex-col gap-1.5 w-full md:w-80">
+            <label for="base64-mode" class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display">Conversion Mode</label>
+            <select id="base64-mode" onchange="runBase64Conversion()" class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded px-3 py-2 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark font-semibold">
+              <option value="text-to-b64">Text ➔ Base64</option>
+              <option value="b64-to-text">Base64 ➔ Text</option>
+              <option value="text-to-b64url">Text ➔ Base64Url</option>
+              <option value="b64url-to-text">Base64Url ➔ Text</option>
+              <option value="hex-to-b64">Hex ➔ Base64</option>
+              <option value="b64-to-hex">Base64 ➔ Hex</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-3 ml-0 md:ml-auto">
+            <span class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display">Fast Controls:</span>
+            <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="loadBase64Sample()">Load Sample</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Input Pane -->
+          <div class="flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display" id="base64-input-label">Input Text</span>
+              <span class="text-[10px] font-bold text-muted-light dark:text-muted-dark font-display" id="base64-input-counter">0 chars</span>
+            </div>
+            <textarea id="base64-input" oninput="runBase64Conversion()" placeholder="Enter your input here..." class="w-full h-80 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
+            <div class="flex gap-2">
+              <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="clearBase64Input()">Clear</button>
+              <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="pasteBase64Input()">Paste</button>
+            </div>
+          </div>
+          <!-- Output Pane -->
+          <div class="flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display" id="base64-output-label">Base64 Output</span>
+              <span class="text-[10px] font-bold text-muted-light dark:text-muted-dark font-display" id="base64-output-counter">0 chars</span>
+            </div>
+            <textarea id="base64-output" readonly placeholder="Output will appear here..." class="w-full h-80 bg-surface-light/50 dark:bg-surface-dark/50 text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/20 dark:border-muted-dark/50 rounded-lg p-4 outline-none transition-all shadow-sm leading-relaxed cursor-text" spellcheck="false"></textarea>
+            <div class="flex gap-2">
+              <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="copyBase64Output()">Copy Output</button>
+              <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="downloadBase64Output()">Download</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================
+         TOOL #7: YAML VALIDATOR & LINTER
+         ======================================== -->
+      <div id="tool-yaml" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">description</span>YAML Validator &amp; Linter</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Validate YAML syntax instantly client-side. Use the Smart Linter to automatically clean common formatting bugs, convert tabulations to double spaces, and correct spacing anomalies.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3 items-center justify-between mb-6 bg-surface-light dark:bg-surface-dark p-4 rounded-lg border border-muted-light/20 dark:border-muted-dark/40 shadow-sm">
+          <div class="flex flex-wrap gap-2">
+            <button class="px-4 py-2 bg-primary hover:bg-primary/95 dark:bg-primary-dark dark:hover:bg-primary-dark/95 text-white dark:text-background-dark text-xs font-bold uppercase tracking-wider rounded transition-colors shadow" onclick="triggerYAMLValidation()">
+              Verify Syntax
+            </button>
+            <button class="px-4 py-2 bg-surface-light dark:bg-surface-dark border border-primary/30 dark:border-primary-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-primary dark:text-primary-dark text-xs font-bold uppercase tracking-wider rounded transition-colors" onclick="triggerYAMLAutoCorrect()">
+              ✨ Auto-Correct / Lint
+            </button>
+            <button class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="loadYAMLDocumentSample()">
+              Load Sample
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="copyYAMLContent()">
+              Copy
+            </button>
+            <button class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="downloadYAMLContent()">
+              Download
+            </button>
+            <button class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="clearYAMLContent()">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div id="yaml-status-card" class="hidden mb-6 p-4 rounded-lg border font-semibold flex items-start gap-3 transition-all duration-300">
+          <!-- Dynamic status banner -->
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display">YAML Editor</span>
+            <span class="text-[10px] font-bold text-muted-light dark:text-muted-dark font-display" id="yaml-char-counter">0 chars | 0 lines</span>
+          </div>
+          <textarea id="yaml-input" oninput="updateYAMLStats()" placeholder="Paste or type your YAML document here..." class="w-full h-96 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
+        </div>
+      </div>
+
     </main>
 
     <!-- Footer -->
@@ -1101,7 +1248,9 @@
       'markdown': { name: 'Markdown Converter', icon: 'history_edu' },
       'diff': { name: 'Diff Checker', icon: 'balance' },
       'sip': { name: 'SIP Calculator', icon: 'trending_up' },
-      'emi': { name: 'EMI Calculator', icon: 'cottage' }
+      'emi': { name: 'EMI Calculator', icon: 'cottage' },
+      'base64': { name: 'Base64 Tool', icon: 'key' },
+      'yaml': { name: 'YAML Validator', icon: 'description' }
     };
     
     // ========================================
@@ -1225,6 +1374,8 @@
       const markdownTool = document.getElementById('tool-markdown');
       const sipTool = document.getElementById('tool-sip');
       const emiTool = document.getElementById('tool-emi');
+      const base64Tool = document.getElementById('tool-base64');
+      const yamlTool = document.getElementById('tool-yaml');
       
       // Hide all
       if (homePage) homePage.style.display = 'none';
@@ -1233,6 +1384,8 @@
       if (markdownTool) markdownTool.style.display = 'none';
       if (sipTool) sipTool.style.display = 'none';
       if (emiTool) emiTool.style.display = 'none';
+      if (base64Tool) base64Tool.style.display = 'none';
+      if (yamlTool) yamlTool.style.display = 'none';
       
       if (!hash || hash === 'home') {
         if (homePage) homePage.style.display = 'block';
@@ -1260,6 +1413,14 @@
         if (emiTool) emiTool.style.display = 'block';
         updateBreadcrumb('EMI Calculator');
         addToRecentApps('emi');
+      } else if (hash === 'base64') {
+        if (base64Tool) base64Tool.style.display = 'block';
+        updateBreadcrumb('Base64 Tool');
+        addToRecentApps('base64');
+      } else if (hash === 'yaml') {
+        if (yamlTool) yamlTool.style.display = 'block';
+        updateBreadcrumb('YAML Validator & Linter');
+        addToRecentApps('yaml');
       }
     }
     
@@ -1421,7 +1582,9 @@
         { id: 'markdown', name: 'Markdown Converter', icon: 'history_edu', description: 'Convert between HTML and Markdown formats' },
         { id: 'diff', name: 'Text Diff Checker', icon: 'balance', description: 'Compare texts to identify changes line-by-line' },
         { id: 'sip', name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
-        { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' }
+        { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' },
+        { id: 'base64', name: 'Base64 Tool', icon: 'key', description: 'Secure client-side Unicode Base64 and Hex encoder/decoder' },
+        { id: 'yaml', name: 'YAML Validator & Linter', icon: 'description', description: 'Validate YAML syntax and automatically correct formatting and linting errors' }
       ];
       
       const filtered = toolsList.filter(tool => {
@@ -2333,7 +2496,7 @@
       const original = document.getElementById('originalText').value;
       const modified = document.getElementById('modifiedText').value;
       const mode = document.getElementById('diffMode').value;
-       const caseSensitive = document.getElementById('caseSensitive').checked;
+      const caseSensitive = document.getElementById('caseSensitive').checked;
       const ignoreWhitespace = document.getElementById('ignoreWhitespace').checked;
       
       if (!original && !modified) {
@@ -2341,113 +2504,91 @@
         return;
       }
       
-      let originalLines = original.split('\n');
-      let modifiedLines = modified.split('\n');
-      
-      // Apply options
-      const originalProcessed = originalLines.map(line => {
-        let processed = line;
-        if (ignoreWhitespace) processed = processed.trim();
-        if (!caseSensitive) processed = processed.toLowerCase();
-        return processed;
-      });
-      
-      const modifiedProcessed = modifiedLines.map(line => {
-        let processed = line;
-        if (ignoreWhitespace) processed = processed.trim();
-        if (!caseSensitive) processed = processed.toLowerCase();
-        return processed;
-      });
-      
-      // Compute diff
-      const diff = computeLineDiff(originalProcessed, modifiedProcessed, originalLines, modifiedLines);
-      
-      // Display results
-      displayDiffResults(diff);
-    }
-    
-    function computeLineDiff(originalProcessed, modifiedProcessed, originalLines, modifiedLines) {
-      const lcs = longestCommonSubsequence(originalProcessed, modifiedProcessed);
-      const diff = [];
-      
-      let i = 0, j = 0, k = 0;
-      
-      while (i < originalProcessed.length || j < modifiedProcessed.length) {
-        if (k < lcs.length && originalProcessed[i] === lcs[k] && modifiedProcessed[j] === lcs[k]) {
-          diff.push({ type: 'unchanged', line: originalLines[i] });
-          i++; j++; k++;
-        } else if (i < originalProcessed.length && (k >= lcs.length || originalProcessed[i] !== lcs[k])) {
-          diff.push({ type: 'removed', line: originalLines[i] });
-          i++;
-        } else if (j < modifiedProcessed.length && (k >= lcs.length || modifiedProcessed[j] !== lcs[k])) {
-          diff.push({ type: 'added', line: modifiedLines[j] });
-          j++;
-        }
+      // Prevent browser lockups on extremely large inputs
+      const originalLines = original.split('\n');
+      const modifiedLines = modified.split('\n');
+      if (originalLines.length > 1000 || modifiedLines.length > 1000 || original.length > 150000 || modified.length > 150000) {
+        showToast('Text too large. Diff Checker is limited to 1,000 lines or 150k characters to prevent browser freezes.', 'warning');
+        return;
       }
       
-      return diff;
-    }
-    
-    function longestCommonSubsequence(arr1, arr2) {
-      const m = arr1.length, n = arr2.length;
-      const dp = Array(m + 1).fill(0).map(() => Array(n + 1).fill(0));
-      
-      for (let i = 1; i <= m; i++) {
-        for (let j = 1; j <= n; j++) {
-          if (arr1[i - 1] === arr2[j - 1]) {
-            dp[i][j] = dp[i - 1][j - 1] + 1;
-          } else {
-            dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-          }
-        }
+      // Ensure jsdiff library is loaded
+      if (!window.Diff) {
+        showToast('Diff library not loaded. Please refresh the page.', 'error');
+        return;
       }
       
-      // Reconstruct LCS
-      const lcs = [];
-      let i = m, j = n;
-      while (i > 0 && j > 0) {
-        if (arr1[i - 1] === arr2[j - 1]) {
-          lcs.unshift(arr1[i - 1]);
-          i--; j--;
-        } else if (dp[i - 1][j] > dp[i][j - 1]) {
-          i--;
-        } else {
-          j--;
-        }
+      const options = {
+        caseInsensitive: !caseSensitive,
+        ignoreWhitespace: ignoreWhitespace
+      };
+      
+      let diffResult;
+      if (mode === 'char') {
+        diffResult = window.Diff.diffChars(original, modified, options);
+      } else if (mode === 'word') {
+        diffResult = window.Diff.diffWords(original, modified, options);
+      } else {
+        diffResult = window.Diff.diffLines(original, modified, options);
       }
       
-      return lcs;
+      displayDiffResults(diffResult, mode);
     }
     
-    function displayDiffResults(diff) {
+    function displayDiffResults(diffResult, mode) {
       const resultsDiv = document.getElementById('diffResults');
       const outputDiv = document.getElementById('diffOutput');
       const statsDiv = document.getElementById('diffStats');
       
-      // Calculate stats
-      const added = diff.filter(d => d.type === 'added').length;
-      const removed = diff.filter(d => d.type === 'removed').length;
-      const unchanged = diff.filter(d => d.type === 'unchanged').length;
+      let addedCount = 0;
+      let removedCount = 0;
+      let unchangedCount = 0;
+      
+      diffResult.forEach(part => {
+        if (part.added) addedCount += part.count || 1;
+        else if (part.removed) removedCount += part.count || 1;
+        else unchangedCount += part.count || 1;
+      });
       
       statsDiv.innerHTML = `
-        <span class="stat-item stat-added">+${added} added</span>
-        <span class="stat-item stat-removed">-${removed} removed</span>
-        <span class="stat-item">=${unchanged} unchanged</span>
+        <span class="stat-item stat-added">+${addedCount} added</span>
+        <span class="stat-item stat-removed">-${removedCount} removed</span>
+        <span class="stat-item">=${unchangedCount} unchanged</span>
       `;
       
-      // Render diff
-      let html = '<div class="diff-lines">';
-      diff.forEach((item) => {
-        const safeText = escapeHtml(item.line);
-        if (item.type === 'added') {
-          html += `<div class="diff-line diff-added">+ ${safeText}</div>`;
-        } else if (item.type === 'removed') {
-          html += `<div class="diff-line diff-removed">- ${safeText}</div>`;
-        } else {
-          html += `<div class="diff-line diff-unchanged">  ${safeText}</div>`;
-        }
-      });
-      html += '</div>';
+      let html = '';
+      if (mode === 'line') {
+        html = '<div class="diff-lines">';
+        diffResult.forEach(part => {
+          const lines = part.value.split('\n');
+          lines.forEach((line, index) => {
+            if (index === lines.length - 1 && line === '') return;
+            const safeText = escapeHtml(line);
+            if (part.added) {
+              html += `<div class="diff-line diff-added">+ ${safeText}</div>`;
+            } else if (part.removed) {
+              html += `<div class="diff-line diff-removed">- ${safeText}</div>`;
+            } else {
+              html += `<div class="diff-line diff-unchanged">  ${safeText}</div>`;
+            }
+          });
+        });
+        html += '</div>';
+      } else {
+        // Word or Character level inline diff view with premium indicator styling
+        html = '<div class="diff-inline-view p-4 leading-relaxed whitespace-pre-wrap text-left bg-background-light dark:bg-surface-dark/40 rounded-lg theme-border">';
+        diffResult.forEach(part => {
+          const safeText = escapeHtml(part.value);
+          if (part.added) {
+            html += `<ins class="bg-green-500/20 text-green-400 border border-green-500/30 px-1 py-0.5 rounded no-underline font-bold">${safeText}</ins>`;
+          } else if (part.removed) {
+            html += `<del class="bg-red-500/20 text-red-400 border border-red-500/30 px-1 py-0.5 rounded line-through font-bold">${safeText}</del>`;
+          } else {
+            html += `<span>${safeText}</span>`;
+          }
+        });
+        html += '</div>';
+      }
       
       outputDiv.innerHTML = html;
       resultsDiv.style.display = 'block';
@@ -2510,6 +2651,67 @@
       }
     }
     
+    function toggleMarkdownPreview(showPreview) {
+      const output = document.getElementById('converterOutput');
+      const preview = document.getElementById('markdownPreview');
+      const btnPreview = document.getElementById('btnPreviewToggle');
+      const btnCode = document.getElementById('btnCodeToggle');
+      
+      if (!output || !preview || !btnPreview || !btnCode) return;
+      
+      if (showPreview) {
+        // Show preview
+        preview.style.display = 'block';
+        output.style.display = 'none';
+        
+        btnPreview.classList.add('bg-primary/15', 'text-primary', 'dark:bg-primary-dark/15', 'dark:text-primary-dark');
+        btnPreview.classList.remove('bg-surface-light', 'dark:bg-surface-dark');
+        btnCode.classList.remove('bg-primary/15', 'text-primary', 'dark:bg-primary-dark/15', 'dark:text-primary-dark');
+        btnCode.classList.add('bg-surface-light', 'dark:bg-surface-dark');
+        
+        // Convert and sanitize HTML
+        const input = document.getElementById('converterInput').value;
+        const useGFM = document.getElementById('useGFM').checked;
+        const mode = document.getElementById('conversionMode').value;
+        
+        let html = '';
+        if (mode === 'md-to-html') {
+          html = markdownToHtml(input, useGFM);
+        } else {
+          html = input; // HTML input, show directly
+        }
+        
+        // Sanitize with DOMPurify!
+        if (window.DOMPurify) {
+          preview.innerHTML = window.DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: [
+              'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+              'p', 'br', 'hr',
+              'strong', 'em', 'u', 's', 'del',
+              'a', 'img',
+              'ul', 'ol', 'li',
+              'blockquote', 'code', 'pre',
+              'table', 'thead', 'tbody', 'tr', 'th', 'td',
+              'div', 'span'
+            ],
+            ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class'],
+            ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|ftp):)/i
+          });
+        } else {
+          preview.textContent = html;
+        }
+      } else {
+        // Show raw code
+        preview.style.display = 'none';
+        output.style.display = 'block';
+        
+        btnCode.classList.add('bg-primary/15', 'text-primary', 'dark:bg-primary-dark/15', 'dark:text-primary-dark');
+        btnCode.classList.remove('bg-surface-light', 'dark:bg-surface-dark');
+        btnPreview.classList.remove('bg-primary/15', 'text-primary', 'dark:bg-primary-dark/15', 'dark:text-primary-dark');
+        btnPreview.classList.add('bg-surface-light', 'dark:bg-surface-dark');
+      }
+    }
+    
     function convertFormat() {
       const input = document.getElementById('converterInput').value;
       const mode = document.getElementById('conversionMode').value;
@@ -2518,6 +2720,11 @@
       
       if (!input.trim()) {
         showToast('Please enter text to convert', 'warning');
+        return;
+      }
+      
+      if (input.length > 2000000) {
+        showToast('Input too large (max 2,000,000 characters)', 'error');
         return;
       }
       
@@ -2751,6 +2958,18 @@ function hello() {
         showToast('Minimum investment is ₹100', 'warning');
         return;
       }
+      if (monthlyAmount > 1000000) {
+        showToast('Maximum investment is ₹1,000,000 per month', 'warning');
+        return;
+      }
+      if (years > 50) {
+        showToast('Maximum duration is 50 years to prevent performance freezes', 'warning');
+        return;
+      }
+      if (annualRate > 30) {
+        showToast('Maximum interest rate is 30%', 'warning');
+        return;
+      }
       
       const monthlyRate = annualRate / 12 / 100;
       const months = years * 12;
@@ -2890,6 +3109,18 @@ function hello() {
       
       if (principal < 10000) {
         showToast('Minimum loan amount is ₹10,000', 'warning');
+        return;
+      }
+      if (principal > 100000000) {
+        showToast('Maximum loan amount is ₹100,000,000 (10 Crore)', 'warning');
+        return;
+      }
+      if (years > 50) {
+        showToast('Maximum loan tenure is 50 years to prevent performance freezes', 'warning');
+        return;
+      }
+      if (annualRate > 40) {
+        showToast('Maximum interest rate is 40%', 'warning');
         return;
       }
       
@@ -3200,6 +3431,345 @@ function hello() {
       downloadFile(csv, 'emi-calculation.csv', 'text/csv');
     }
     
+    // ========================================
+    // BASE64 TOOL IMPLEMENTATION
+    // ========================================
+    function utf8ToBase64(str) {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    function base64ToUtf8(str) {
+      try {
+        return decodeURIComponent(escape(atob(str)));
+      } catch (e) {
+        throw new Error("Invalid Base64 format: " + e.message);
+      }
+    }
+
+    function utf8ToBase64Url(str) {
+      let b64 = utf8ToBase64(str);
+      return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function base64UrlToUtf8(str) {
+      let b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) {
+        b64 += '=';
+      }
+      return base64ToUtf8(b64);
+    }
+
+    function hexToBase64(hex) {
+      let cleanHex = hex.replace(/[^0-9a-fA-F]/g, '');
+      if (cleanHex.length % 2 !== 0) {
+        throw new Error("Invalid Hex string: odd number of characters");
+      }
+      let binary = "";
+      for (let i = 0; i < cleanHex.length; i += 2) {
+        let code = parseInt(cleanHex.substr(i, 2), 16);
+        binary += String.fromCharCode(code);
+      }
+      return btoa(binary);
+    }
+
+    function base64ToHex(b64) {
+      try {
+        let binary = atob(b64);
+        let hex = "";
+        for (let i = 0; i < binary.length; i++) {
+          let h = binary.charCodeAt(i).toString(16);
+          if (h.length === 1) h = "0" + h;
+          hex += h;
+        }
+        return hex;
+      } catch (e) {
+        throw new Error("Invalid Base64 format: " + e.message);
+      }
+    }
+
+    function runBase64Conversion() {
+      const mode = document.getElementById('base64-mode').value;
+      const input = document.getElementById('base64-input').value;
+      const outputArea = document.getElementById('base64-output');
+      const inputLabel = document.getElementById('base64-input-label');
+      const outputLabel = document.getElementById('base64-output-label');
+      
+      // Update counters
+      document.getElementById('base64-input-counter').textContent = input.length + ' chars';
+      
+      if (!input) {
+        outputArea.value = '';
+        document.getElementById('base64-output-counter').textContent = '0 chars';
+        return;
+      }
+      
+      // Update labels based on mode
+      if (mode.startsWith('text-')) {
+        inputLabel.textContent = 'Input Text';
+      } else if (mode.startsWith('b64')) {
+        inputLabel.textContent = 'Input Base64 / Base64Url';
+      } else if (mode.startsWith('hex')) {
+        inputLabel.textContent = 'Input Hexadecimal';
+      }
+      
+      if (mode.endsWith('-b64') || mode.endsWith('-b64url')) {
+        outputLabel.textContent = 'Base64 Output';
+      } else if (mode.endsWith('-text')) {
+        outputLabel.textContent = 'Text Output';
+      } else if (mode.endsWith('-hex')) {
+        outputLabel.textContent = 'Hexadecimal Output';
+      }
+      
+      try {
+        let result = '';
+        if (mode === 'text-to-b64') {
+          result = utf8ToBase64(input);
+        } else if (mode === 'b64-to-text') {
+          result = base64ToUtf8(input.trim());
+        } else if (mode === 'text-to-b64url') {
+          result = utf8ToBase64Url(input);
+        } else if (mode === 'b64url-to-text') {
+          result = base64UrlToUtf8(input.trim());
+        } else if (mode === 'hex-to-b64') {
+          result = hexToBase64(input);
+        } else if (mode === 'b64-to-hex') {
+          result = base64ToHex(input.trim());
+        }
+        outputArea.value = result;
+        document.getElementById('base64-output-counter').textContent = result.length + ' chars';
+      } catch (e) {
+        outputArea.value = 'ERROR: ' + e.message;
+        document.getElementById('base64-output-counter').textContent = 'Error';
+      }
+    }
+
+    function loadBase64Sample() {
+      const mode = document.getElementById('base64-mode').value;
+      let sample = '';
+      if (mode === 'b64-to-text' || mode === 'b64-to-hex') {
+        sample = 'RGV2VG9vbGJveDogQW5jaWVudCBXaXNkb20gJiBNb2Rlcm4gQ29kZSDwnZSM77iP4pyo';
+      } else if (mode === 'b64url-to-text') {
+        sample = 'RGV2VG9vbGJveDogQW5jaWVudCBXaXNkb20gJiBNb2Rlcm4gQ29kZSDwnZSM77iP4pyo';
+      } else if (mode === 'hex-to-b64') {
+        sample = '446576546f6f6c626f783a20416e6369656e7420576973646f6d2026204d6f6465726e20436f646520f09d548ceee3a2a8';
+      } else {
+        sample = 'DevToolbox: Ancient Wisdom & Modern Code 🕉️✨';
+      }
+      document.getElementById('base64-input').value = sample;
+      runBase64Conversion();
+      showToast('Loaded sample input!', 'success');
+    }
+
+    function clearBase64Input() {
+      document.getElementById('base64-input').value = '';
+      runBase64Conversion();
+      showToast('Cleared input!', 'success');
+    }
+
+    function pasteBase64Input() {
+      navigator.clipboard.readText()
+        .then(text => {
+          document.getElementById('base64-input').value = text;
+          runBase64Conversion();
+          showToast('Pasted from clipboard!', 'success');
+        })
+        .catch(() => {
+          showToast('Could not read clipboard. Please paste manually.', 'error');
+        });
+    }
+
+    function copyBase64Output() {
+      const output = document.getElementById('base64-output').value;
+      if (!output || output.startsWith('ERROR:')) {
+        showToast('No valid output to copy!', 'error');
+        return;
+      }
+      copyToClipboardText(output, 'Copied conversion output!');
+    }
+
+    function downloadBase64Output() {
+      const output = document.getElementById('base64-output').value;
+      if (!output || output.startsWith('ERROR:')) {
+        showToast('No valid output to download!', 'error');
+        return;
+      }
+      const mode = document.getElementById('base64-mode').value;
+      let filename = 'base64-output.txt';
+      if (mode.endsWith('-hex')) {
+        filename = 'base64-output.hex';
+      }
+      downloadFile(output, filename, 'text/plain');
+    }
+
+    // ========================================
+    // YAML VALIDATOR & LINTER IMPLEMENTATION
+    // ========================================
+    function validateYAML() {
+      const input = document.getElementById('yaml-input').value;
+      const statusCard = document.getElementById('yaml-status-card');
+      
+      if (!input.trim()) {
+        statusCard.className = 'hidden';
+        return false;
+      }
+      
+      try {
+        const doc = jsyaml.load(input);
+        
+        statusCard.className = 'mb-6 p-4 rounded-lg border font-semibold flex items-start gap-3 transition-all duration-300 bg-green-500/10 border-green-500/30 text-green-700 dark:text-green-300';
+        statusCard.innerHTML = `
+          <span class="material-symbols-outlined text-green-600 dark:text-green-400 mt-0.5">check_circle</span>
+          <div>
+            <div class="font-bold text-sm">Valid YAML Document</div>
+            <div class="text-xs mt-1 font-medium opacity-90">Parser loaded the structure successfully. Ready for deployment.</div>
+          </div>
+        `;
+        return true;
+      } catch (e) {
+        statusCard.className = 'mb-6 p-4 rounded-lg border font-semibold flex items-start gap-3 transition-all duration-300 bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300';
+        
+        let errorMsg = e.reason || e.message;
+        let lineInfo = '';
+        let snippetMarkup = '';
+        
+        if (e.mark) {
+          lineInfo = ` at line ${e.mark.line + 1}, column ${e.mark.column + 1}`;
+          if (e.mark.snippet) {
+            snippetMarkup = `
+              <pre class="mt-2.5 p-3 bg-red-950/10 dark:bg-red-950/20 text-red-800 dark:text-red-200 rounded font-mono text-xs overflow-x-auto leading-relaxed border border-red-500/10">${sanitizeText(e.mark.snippet)}</pre>
+            `;
+          }
+        }
+        
+        statusCard.innerHTML = `
+          <span class="material-symbols-outlined text-red-600 dark:text-red-400 mt-0.5">error</span>
+          <div class="w-full">
+            <div class="font-bold text-sm">YAML Syntax Error${lineInfo}</div>
+            <div class="text-xs mt-1 font-medium opacity-90">${sanitizeText(errorMsg)}</div>
+            ${snippetMarkup}
+          </div>
+        `;
+        return false;
+      }
+    }
+
+    function autoCorrectYAML(yamlText) {
+      let lines = yamlText.split('\n');
+      let correctedLines = lines.map(line => {
+        // 1. Convert tab characters to 2 spaces
+        line = line.replace(/\t/g, '  ');
+        
+        // 2. Fix space after list hyphen (e.g., " -apple" -> " - apple")
+        line = line.replace(/^(\s*)-([^\s\-].*)$/g, '$1- $2');
+        
+        // 3. Fix key-value spaces without breaking URLs
+        let colonIdx = line.indexOf(':');
+        if (colonIdx !== -1) {
+          let key = line.substring(0, colonIdx);
+          let value = line.substring(colonIdx + 1);
+          
+          if (!key.trim().startsWith('#') && !key.trim().startsWith('---') && !key.trim().startsWith('...')) {
+            if (!value.trim().startsWith('//') && value.trim().length > 0) {
+              let trimmedValue = value.trim();
+              if (!value.startsWith(' ') || value.match(/^\s{2,}/)) {
+                line = key + ': ' + trimmedValue;
+              }
+            }
+          }
+        }
+        
+        // 4. Strip trailing whitespace
+        line = line.replace(/\s+$/g, '');
+        
+        return line;
+      });
+      return correctedLines.join('\n');
+    }
+
+    function triggerYAMLValidation() {
+      const isValid = validateYAML();
+      if (isValid) {
+        showToast('YAML document is valid!', 'success');
+      } else {
+        showToast('YAML validation failed. Please check errors.', 'error');
+      }
+    }
+
+    function triggerYAMLAutoCorrect() {
+      const inputArea = document.getElementById('yaml-input');
+      const original = inputArea.value;
+      if (!original.trim()) {
+        showToast('Please enter a YAML document to lint.', 'warning');
+        return;
+      }
+      const corrected = autoCorrectYAML(original);
+      if (corrected === original) {
+        showToast('YAML syntax is already clean!', 'info');
+      } else {
+        inputArea.value = corrected;
+        updateYAMLStats();
+        validateYAML();
+        showToast('Auto-corrected YAML formatting!', 'success');
+      }
+    }
+
+    function loadYAMLDocumentSample() {
+      const sample = `# DevToolbox Platform Sample Configuration\n` +
+        `# Ancient Precision & Modern Code\n\n` +
+        `metadata:\n` +
+        `  name: "DevToolbox Platform"\n` +
+        `  version: 4.1.0\n` +
+        `  creator: Ravi\n` +
+        `  technologies:\n` +
+        `    - html\n` +
+        `    - css\n` +
+        `    - javascript\n` +
+        `    - js-yaml\n` +
+        `features:\n` +
+        `  base64_converter: true\n` +
+        `  yaml_validator: true\n` +
+        `  security: "hardened"\n` +
+        `  offline_compatible: true\n` +
+        `endpoints:\n` +
+        `  production_url: "https://github.com/r-rai/common-tools"\n`;
+      document.getElementById('yaml-input').value = sample;
+      updateYAMLStats();
+      validateYAML();
+      showToast('Loaded sample YAML document!', 'success');
+    }
+
+    function updateYAMLStats() {
+      const input = document.getElementById('yaml-input').value;
+      const charCount = input.length;
+      const lineCount = input.split('\n').length;
+      document.getElementById('yaml-char-counter').textContent = `${charCount} chars | ${lineCount} lines`;
+    }
+
+    function copyYAMLContent() {
+      const input = document.getElementById('yaml-input').value;
+      if (!input.trim()) {
+        showToast('Nothing to copy!', 'error');
+        return;
+      }
+      copyToClipboardText(input, 'Copied YAML content to clipboard!');
+    }
+
+    function downloadYAMLContent() {
+      const input = document.getElementById('yaml-input').value;
+      if (!input.trim()) {
+        showToast('Nothing to download!', 'error');
+        return;
+      }
+      downloadFile(input, 'config.yaml', 'text/yaml');
+    }
+
+    function clearYAMLContent() {
+      document.getElementById('yaml-input').value = '';
+      document.getElementById('yaml-status-card').className = 'hidden';
+      updateYAMLStats();
+      showToast('Cleared editor!', 'success');
+    }
+
     // ========================================
     // UTILITY FUNCTIONS
     // ========================================

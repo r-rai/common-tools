@@ -362,6 +362,9 @@
         <button class="btn btn-secondary" id="run-feature6-btn">
           Test Feature 6
         </button>
+        <button class="btn btn-secondary" id="run-feature7-btn">
+          Test Feature 7
+        </button>
         <button class="btn btn-secondary" id="run-integration-btn">
           Test Integration
         </button>
@@ -467,7 +470,31 @@
           <!-- Test cases will be inserted here -->
         </div>
       </div>
-      
+
+      <!-- Feature 7: Base64 & YAML Tools -->
+      <div class="test-section" id="feature7-section">
+        <div class="section-header">
+          <div class="section-title">🔑 Feature 7: Base64 &amp; YAML Tools</div>
+          <div class="section-stats">
+            <div class="stat">
+              <span>Total:</span>
+              <strong id="f7-total">0</strong>
+            </div>
+            <div class="stat">
+              <span>Passed:</span>
+              <strong id="f7-passed" style="color: #28a745;">0</strong>
+            </div>
+            <div class="stat">
+              <span>Failed:</span>
+              <strong id="f7-failed" style="color: #dc3545;">0</strong>
+            </div>
+          </div>
+        </div>
+        <div class="section-body" id="feature7-tests">
+          <!-- Test cases will be inserted here -->
+        </div>
+      </div>
+
       <!-- Integration Testing -->
       <div class="test-section" id="integration-section">
         <div class="section-header">
@@ -511,6 +538,7 @@
           feature4: [],
           feature5: [],
           feature6: [],
+          feature7: [],
           integration: []
         };
         
@@ -530,6 +558,7 @@
         document.getElementById('run-feature4-btn').addEventListener('click', () => this.runFeature4Tests());
         document.getElementById('run-feature5-btn').addEventListener('click', () => this.runFeature5Tests());
         document.getElementById('run-feature6-btn').addEventListener('click', () => this.runFeature6Tests());
+        document.getElementById('run-feature7-btn').addEventListener('click', () => this.runFeature7Tests());
         document.getElementById('run-integration-btn').addEventListener('click', () => this.runIntegrationTests());
         document.getElementById('generate-report-btn').addEventListener('click', () => this.generateFinalReport());
       }
@@ -542,6 +571,7 @@
         await this.runFeature4Tests();
         await this.runFeature6Tests();
         await this.runFeature5Tests();
+        await this.runFeature7Tests();
         await this.runIntegrationTests();
         
         document.getElementById('generate-report-btn').style.display = 'inline-block';
@@ -691,6 +721,44 @@
         ];
         
         await this.runTestGroup('feature5', tests, 'feature5-tests');
+      }
+      
+      /**
+       * Feature 7: Base64 & YAML Validator Tests
+       */
+      async runFeature7Tests() {
+        const tests = [
+          {
+            name: 'F7-1: Base64 UTF-8 Safe Encoding',
+            test: () => this.testBase64UTF8SafeEncoding()
+          },
+          {
+            name: 'F7-2: Base64 Decoding',
+            test: () => this.testBase64Decoding()
+          },
+          {
+            name: 'F7-3: Base64Url Format',
+            test: () => this.testBase64Url()
+          },
+          {
+            name: 'F7-4: Hex Support',
+            test: () => this.testBase64Hex()
+          },
+          {
+            name: 'F7-5: YAML Parsing and Validation',
+            test: () => this.testYAMLValidation()
+          },
+          {
+            name: 'F7-6: YAML Invalid Tabs Detection',
+            test: () => this.testYAMLTabsError()
+          },
+          {
+            name: 'F7-7: YAML Smart Auto-Correct',
+            test: () => this.testYAMLAutoCorrect()
+          }
+        ];
+        
+        await this.runTestGroup('feature7', tests, 'feature7-tests');
       }
       
       /**
@@ -869,7 +937,7 @@
        */
       resetStats() {
         this.stats = { total: 0, passed: 0, failed: 0, running: 0 };
-        this.results = { feature4: [], feature5: [], feature6: [], integration: [] };
+        this.results = { feature4: [], feature5: [], feature6: [], feature7: [], integration: [] };
         this.updateStats();
         document.getElementById('final-report').style.display = 'none';
         document.getElementById('generate-report-btn').style.display = 'none';
@@ -1888,7 +1956,219 @@
         
         return { pass: allFunctional, details: details.trim() };
       }
+
+      /* ========================================
+       * FEATURE 7: BASE64 & YAML VALIDATOR TESTS
+       * ======================================== */
       
+      async testBase64UTF8SafeEncoding() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#base64';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('base64-input');
+        const outputArea = doc.getElementById('base64-output');
+        const modeSelect = doc.getElementById('base64-mode');
+        
+        if (!inputArea || !outputArea || !modeSelect) {
+          return { pass: false, error: 'Base64 Tool DOM elements not found' };
+        }
+        
+        modeSelect.value = 'text-to-b64';
+        inputArea.value = 'Ravi 🕉️';
+        
+        // Trigger conversion
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value === 'UmF2aSA5oJSM') {
+          return { pass: true, details: `Unicode text 'Ravi 🕉️' encoded safely to: ${outputArea.value}` };
+        } else {
+          return { pass: false, error: `Encoding mismatch. Expected 'UmF2aSA5oJSM', got '${outputArea.value}'` };
+        }
+      }
+
+      async testBase64Decoding() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#base64';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('base64-input');
+        const outputArea = doc.getElementById('base64-output');
+        const modeSelect = doc.getElementById('base64-mode');
+        
+        modeSelect.value = 'b64-to-text';
+        inputArea.value = 'UmF2aSA5oJSM';
+        
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value === 'Ravi 🕉️') {
+          return { pass: true, details: `Base64 decoded safely to Unicode text: ${outputArea.value}` };
+        } else {
+          return { pass: false, error: `Decoding mismatch. Expected 'Ravi 🕉️', got '${outputArea.value}'` };
+        }
+      }
+
+      async testBase64Url() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#base64';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('base64-input');
+        const outputArea = doc.getElementById('base64-output');
+        const modeSelect = doc.getElementById('base64-mode');
+        
+        // Test Encoding to Base64Url
+        modeSelect.value = 'text-to-b64url';
+        inputArea.value = 'a?+/';
+        
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value !== 'YT8rLw') {
+          return { pass: false, error: `Base64Url encoding mismatch. Expected 'YT8rLw', got '${outputArea.value}'` };
+        }
+        
+        // Test Decoding from Base64Url
+        modeSelect.value = 'b64url-to-text';
+        inputArea.value = 'YT8rLw';
+        
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value === 'a?+/') {
+          return { pass: true, details: `Base64Url encoded/decoded correctly (stripped padding/slash/plus replaces)` };
+        } else {
+          return { pass: false, error: `Base64Url decoding mismatch. Expected 'a?+/', got '${outputArea.value}'` };
+        }
+      }
+
+      async testBase64Hex() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#base64';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('base64-input');
+        const outputArea = doc.getElementById('base64-output');
+        const modeSelect = doc.getElementById('base64-mode');
+        
+        // Hex to Base64
+        modeSelect.value = 'hex-to-b64';
+        inputArea.value = '48656c6c6f'; // Hex for Hello
+        
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value !== 'SGVsbG8=') {
+          return { pass: false, error: `Hex to Base64 mismatch. Expected 'SGVsbG8=', got '${outputArea.value}'` };
+        }
+        
+        // Base64 to Hex
+        modeSelect.value = 'b64-to-hex';
+        inputArea.value = 'SGVsbG8=';
+        
+        win.runBase64Conversion();
+        await this.sleep(100);
+        
+        if (outputArea.value === '48656c6c6f') {
+          return { pass: true, details: `Hex format support successfully verified (Hex ➔ Base64 and Base64 ➔ Hex)` };
+        } else {
+          return { pass: false, error: `Base64 to Hex mismatch. Expected '48656c6c6f', got '${outputArea.value}'` };
+        }
+      }
+
+      async testYAMLValidation() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#yaml';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('yaml-input');
+        const statusCard = doc.getElementById('yaml-status-card');
+        
+        if (!inputArea || !statusCard) {
+          return { pass: false, error: 'YAML Tool DOM elements not found' };
+        }
+        
+        inputArea.value = `metadata:\n  name: "DevToolbox"\n  version: 4.1.0\nfeatures:\n  - base64\n  - yaml`;
+        win.triggerYAMLValidation();
+        await this.sleep(100);
+        
+        if (statusCard.classList.contains('bg-green-500/10') && statusCard.innerHTML.includes('Valid YAML Document')) {
+          return { pass: true, details: `Valid YAML document successfully parsed by js-yaml engine` };
+        } else {
+          return { pass: false, error: 'YAML Validation banner not showing green success' };
+        }
+      }
+
+      async testYAMLTabsError() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#yaml';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('yaml-input');
+        const statusCard = doc.getElementById('yaml-status-card');
+        
+        // YAML syntax error: using tabs
+        inputArea.value = `metadata:\n\tname: "DevToolbox"`;
+        win.triggerYAMLValidation();
+        await this.sleep(100);
+        
+        if (statusCard.classList.contains('bg-red-500/10') && statusCard.innerHTML.includes('YAML Syntax Error')) {
+          return { pass: true, details: `Tab characters properly caught as syntax error: ${statusCard.querySelector('.text-xs').textContent}` };
+        } else {
+          return { pass: false, error: 'YAML Tab validation failed to display red syntax error card' };
+        }
+      }
+
+      async testYAMLAutoCorrect() {
+        const iframe = await this.loadToolInIframe('/');
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        
+        win.location.hash = '#yaml';
+        await this.sleep(500);
+        
+        const inputArea = doc.getElementById('yaml-input');
+        const statusCard = doc.getElementById('yaml-status-card');
+        
+        // Tabulation and colon spacing error document
+        inputArea.value = `metadata:\n\tname:DevToolbox\n\tcreator:  Ravi\n\turl:https://github.com/r-rai/common-tools\n\tfeatures:\n\t-base64`;
+        
+        win.triggerYAMLAutoCorrect();
+        await this.sleep(100);
+        
+        const expectedResult = `metadata:\n  name: DevToolbox\n  creator: Ravi\n  url: https://github.com/r-rai/common-tools\n  features:\n  - base64`;
+        
+        if (inputArea.value.trim() === expectedResult.trim()) {
+          if (statusCard.classList.contains('bg-green-500/10')) {
+            return { pass: true, details: `Smart Linter corrected illegal tabulations, missing colon spaces (leaving URLs intact!), and list spacing, rendering a fully valid YAML structure!` };
+          } else {
+            return { pass: false, error: 'YAML Auto-corrected but validation card did not turn green' };
+          }
+        } else {
+          return { pass: false, error: `Smart Linter output mismatch.\nExpected:\n${expectedResult}\n\nGot:\n${inputArea.value}` };
+        }
+      }
+
       /* ========================================
        * UTILITY METHODS
        * ======================================== */
@@ -1909,7 +2189,7 @@
           };
           
           document.body.appendChild(iframe);
-          iframe.src = `http://localhost:8080${path}`;
+          iframe.src = (window.location.origin && window.location.origin !== 'null' && !window.location.origin.startsWith('file://')) ? window.location.origin + path : `http://localhost:8080${path}`;
           
           // Timeout after 5 seconds
           setTimeout(() => {
@@ -2027,6 +2307,7 @@
           ...this.results.feature4,
           ...this.results.feature5,
           ...this.results.feature6,
+          ...this.results.feature7,
           ...this.results.integration
         ];
         
