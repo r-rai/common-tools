@@ -267,6 +267,9 @@
 
         <!-- Quick actions menu -->
         <div class="flex items-center gap-3">
+          <a href="https://ravirai.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" aria-label="Visit Portfolio (ravirai.in)" style="text-decoration: none;">
+            <span class="material-symbols-outlined text-xl">language</span>
+          </a>
           <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="openSearch()" aria-label="Search tools (Ctrl+K)">
             <span class="material-symbols-outlined text-xl">search</span>
           </button>
@@ -3796,5 +3799,15 @@ function hello() {
       }
     }
   </script>
+
+  <!-- Floating website redirect badge -->
+  <a href="https://ravirai.in" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border border-primary/20 dark:border-primary-dark/30 text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-dark px-4 py-2.5 rounded-full font-bold text-xs uppercase tracking-[1.5px] shadow-lg hover:shadow-primary/20 dark:hover:shadow-primary-dark/30 hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 select-none group" style="text-decoration: none;">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary dark:bg-primary-dark opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-primary dark:bg-primary-dark"></span>
+    </span>
+    <span class="material-symbols-outlined text-base transition-transform group-hover:rotate-12">language</span>
+    <span>Portfolio</span>
+  </a>
 </body>
 </html>
