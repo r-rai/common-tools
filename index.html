@@ -6,6 +6,7 @@
   <meta name="description" content="DevToolbox - Developer tools for everyday tasks. Fast, private, and open source.">
   <meta name="keywords" content="developer tools, JSON validator, SIP calculator, EMI calculator, text diff, markdown converter">
   <title>DevToolbox - Developer Tools Platform</title>
+  <link rel="canonical" href="https://json-schema-converter.pages.dev/">
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
@@ -90,8 +91,11 @@
     .light .theme-shadow-hover:hover { box-shadow: 0 12px 40px rgba(200, 75, 49, 0.15); }
     
     /* Background grid textures */
+    .jali-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15-15-15zM0 30l15 15-15 15L-15 45zM60 30l15 15-15 15-15-15zM30 60l15 15-15 15-15-15z' fill='%23C84B31' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
     .dark .jali-overlay {
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF6B35' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15-15-15zM0 30l15 15-15 15L-15 45zM60 30l15 15-15 15-15-15zM30 60l15 15-15 15-15-15z' fill='%23FF6B35' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
     }
     
     /* Backward compatibility tokens mapped to Tailwind themes */
@@ -231,10 +235,10 @@
       }
     })();
   </script>
-  <script src="/lib/chart.umd.min.js" integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g" crossorigin="anonymous"></script>
-  <script src="/lib/purify.min.js" integrity="sha384-cwS6YdhLI7XS60eoDiC+egV0qHp8zI+Cms46R0nbn8JrmoAzV9uFL60etMZhAnSu" crossorigin="anonymous"></script>
-  <script src="/lib/diff.min.js" integrity="sha384-kfJm1UHujU89hXr0VHT0u0t4lqavqaoomP6wix8D9fhzTeFvC9DYyaT36//Qd144" crossorigin="anonymous"></script>
-  <script src="/lib/js-yaml.min.js" integrity="sha384-+pxiN6T7yvpryuJmE1gM9PX7yQit15auDb+ZwwvJOd/4be2Cie5/IuVXgQb/S9du" crossorigin="anonymous"></script>
+  <script src="/lib/chart.umd.min.js" defer></script>
+  <script src="/lib/purify.min.js" defer></script>
+  <script src="/lib/diff.min.js" defer></script>
+  <script src="/lib/js-yaml.min.js" defer></script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
@@ -264,6 +268,9 @@
 
         <!-- Quick actions menu -->
         <div class="flex items-center gap-3">
+          <a href="https://ravirai.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" aria-label="Visit Portfolio (ravirai.in)" style="text-decoration: none;">
+            <span class="material-symbols-outlined text-xl">language</span>
+          </a>
           <button class="flex items-center justify-center rounded-full h-10 w-10 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark hover:text-primary dark:hover:text-accent-dark transition-all shadow-sm hover:scale-105 active:scale-95 border border-text-light/5 dark:border-muted-dark/20" onclick="openSearch()" aria-label="Search tools (Ctrl+K)">
             <span class="material-symbols-outlined text-xl">search</span>
           </button>
@@ -315,7 +322,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">JSON Generator</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">JSON Generator</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">LOCAL</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -336,7 +343,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Markdown Converter</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Markdown Converter</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">HTML</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -357,7 +364,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Diff Checker</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Diff Checker</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">UTILITY</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -378,7 +385,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">SIP Calculator</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">SIP Calculator</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">INVESTMENT</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -399,7 +406,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">EMI Calculator</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">EMI Calculator</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">LOAN</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -420,7 +427,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Base64 Tool</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">Base64 Tool</h2>
                 <span class="dark:text-accent-dark text-[10px] font-bold tracking-widest text-primary uppercase font-display">NEW</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -441,7 +448,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">YAML Validator</h3>
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">YAML Validator</h2>
                 <span class="dark:text-accent-dark text-[10px] font-bold tracking-widest text-primary uppercase font-display">NEW</span>
               </div>
               <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
@@ -461,7 +468,7 @@
             </div>
             <div class="flex flex-col gap-2 px-1">
               <div class="flex justify-between items-baseline">
-                <h3 class="font-heading text-2xl text-text-light/70 dark:text-text-dark/70 font-normal">More Tools</h3>
+                <h2 class="font-heading text-2xl text-text-light/70 dark:text-text-dark/70 font-normal">More Tools</h2>
                 <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">SOON</span>
               </div>
               <p class="text-text-light/60 dark:text-text-dark/60 text-sm leading-relaxed line-clamp-2 font-display">
@@ -1341,7 +1348,7 @@
         breadcrumb.innerHTML = '<span class="breadcrumb-item">Tools Dashboard</span>';
       } else {
         breadcrumb.innerHTML = `
-          <a href="#" class="breadcrumb-item" onclick="navigateHome();return false;">Home</a>
+          <a href="/" class="breadcrumb-item" onclick="navigateHome();return false;">Home</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-item active">${toolName}</span>
         `;
@@ -3787,5 +3794,15 @@ function hello() {
       }
     }
   </script>
+
+  <!-- Floating website redirect badge -->
+  <a href="https://ravirai.in" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border border-primary/20 dark:border-primary-dark/30 text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-dark px-4 py-2.5 rounded-full font-bold text-xs uppercase tracking-[1.5px] shadow-lg hover:shadow-primary/20 dark:hover:shadow-primary-dark/30 hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 select-none group" style="text-decoration: none;">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary dark:bg-primary-dark opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-primary dark:bg-primary-dark"></span>
+    </span>
+    <span class="material-symbols-outlined text-base transition-transform group-hover:rotate-12">language</span>
+    <span>Portfolio</span>
+  </a>
 </body>
 </html>
