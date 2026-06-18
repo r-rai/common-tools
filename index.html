@@ -284,7 +284,7 @@
     </header>
 
     <!-- Recent Apps Bar -->
-    <aside class="w-full bg-surface-light/40 dark:bg-surface-dark/40 border-b border-muted-light/10 dark:border-muted-dark/20 py-2 px-4 md:px-8 flex items-center justify-between gap-4 overflow-x-auto" id="recentAppsBar" style="display:none;" aria-label="Recently used tools">
+    <aside class="w-full bg-surface-light/40 dark:bg-surface-dark/40 border-b border-muted-light/10 dark:border-muted-dark/20 py-2 px-4 md:px-8 flex items-center justify-between gap-4 overflow-x-auto" id="recentAppsBar" aria-label="Recently used tools" style="display:none;">
       <div class="flex items-center gap-3 overflow-x-auto">
         <span class="text-[10px] font-extrabold uppercase tracking-widest text-muted-light dark:text-muted-dark whitespace-nowrap">Recent:</span>
         <div class="flex items-center gap-2 overflow-x-auto" id="recentAppsList"></div>
@@ -806,7 +806,7 @@
                 <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-primary/10 text-primary dark:bg-accent-dark/10 dark:text-accent-dark" id="markdownInputSize">0 bytes</span>
               </div>
               <div class="p-2 grow">
-                <textarea id="markdownInput" placeholder="Paste input content text here..." class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" oninput="updateMarkdownInputSize()" spellcheck="false"></textarea>
+                <textarea id="converterInput" placeholder="Paste input content text here..." class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent focus:border-primary/20 dark:focus:border-primary-dark/20 rounded-lg grow" oninput="updateConverterInputSize()" spellcheck="false"></textarea>
               </div>
             </div>
 
@@ -823,7 +823,7 @@
               
               <div class="p-2 grow relative min-h-[384px]">
                 <!-- Output Textarea Code -->
-                <textarea id="markdownOutput" readonly class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent rounded-lg absolute inset-2" spellcheck="false"></textarea>
+                <textarea id="converterOutput" readonly class="font-mono text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark outline-none resize-none border border-transparent rounded-lg absolute inset-2" spellcheck="false"></textarea>
                 
                 <!-- Output Preview container -->
                 <div id="markdownPreview" class="prose max-w-none text-sm leading-relaxed p-4 w-full h-96 bg-background-light/50 dark:bg-background-dark/50 text-text-light dark:text-text-dark overflow-y-auto rounded-lg absolute inset-2 select-text" style="display:none;"></div>
@@ -833,13 +833,13 @@
 
           <!-- Bottom controls bar -->
           <div class="flex flex-wrap items-center gap-3">
-            <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow active:scale-95" onclick="convertMarkdown()">
+            <button class="bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] px-6 py-3.5 rounded-full dark:rounded-sm transition-all shadow-md theme-shadow active:scale-95" onclick="convertFormat()">
               ⚙️ Convert Content
             </button>
-            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="copyMarkdownOutput()">
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="copyConverterOutput()">
               📋 Copy Output
             </button>
-            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="downloadMarkdownOutput()">
+            <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-text-light/5 dark:hover:bg-surface-dark/75 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all" onclick="downloadConverterOutput()">
               ⬇️ Download Output
             </button>
             <button class="bg-surface-light dark:bg-surface-dark border border-text-light/10 dark:border-muted-dark/40 hover:bg-red-500/10 hover:text-red-500 text-text-light dark:text-text-dark font-bold text-xs uppercase tracking-[1.5px] px-5 py-3 rounded-full dark:rounded-sm transition-all ml-auto" onclick="clearMarkdown()">
@@ -1159,7 +1159,7 @@
               <span class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display" id="base64-input-label">Input Text</span>
               <span class="text-[10px] font-bold text-muted-light dark:text-muted-dark font-display" id="base64-input-counter">0 chars</span>
             </div>
-            <textarea id="base64-input" oninput="runBase64Conversion()" placeholder="Enter your input here..." class="w-full h-80 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
+            <textarea id="base64-input" oninput="debounce(runBase64Conversion, 200)()" placeholder="Enter your input here..." class="w-full h-80 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
             <div class="flex gap-2">
               <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="clearBase64Input()">Clear</button>
               <button class="px-3 py-1.5 bg-surface-light dark:bg-surface-dark border border-text-light/5 dark:border-muted-dark/40 hover:bg-primary/10 dark:hover:bg-primary-dark/20 text-text-light dark:text-text-dark text-xs font-semibold rounded transition-colors" onclick="pasteBase64Input()">Paste</button>
@@ -1237,7 +1237,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="flex flex-col gap-4">
             <label class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display">Enter Data for QR Code</label>
-            <textarea id="qr-input" oninput="generateQRCode()" placeholder="Enter URL or text..." class="w-full h-48 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
+            <textarea id="qr-input" oninput="debounce(generateQRCode, 400)()" placeholder="Enter URL or text..." class="w-full h-48 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
           </div>
           <div class="flex flex-col gap-4 items-center justify-center bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl p-8">
             <div id="qrcode-display" class="bg-white p-4 rounded-xl shadow-sm min-h-[200px] w-[288px] flex items-center justify-center">
@@ -1338,10 +1338,11 @@
       if (!bar || !list) return;
       
       if (recent.length === 0) {
-        bar.classList.add('empty');
+        bar.style.display = 'none';
         return;
       }
       
+      bar.style.display = 'flex';
       bar.classList.remove('empty');
       const currentTool = getCurrentTool();
       
@@ -1787,7 +1788,7 @@
         updateSizeIndicator('jsonSize', textarea.value.length);
         showToast('JSON beautified ✓', 'success');
       } catch (e) {
-        showToast(sanitizeText('Invalid JSON: ' + e.message), 'error');
+        showToast('Invalid JSON: ' + e.message, 'error');
       }
     }
     
@@ -1809,7 +1810,7 @@
         updateSizeIndicator('jsonSize', textarea.value.length);
         showToast('JSON minified ✓', 'success');
       } catch (e) {
-        showToast(sanitizeText('Invalid JSON: ' + e.message), 'error');
+        showToast('Invalid JSON: ' + e.message, 'error');
       }
     }
     
@@ -1864,7 +1865,7 @@
       
       if (inputSize > MAX_INPUT_SIZE) {
         const sizeMB = (inputSize / (1024 * 1024)).toFixed(2);
-        showToast(sanitizeText(`Input too large: ${sizeMB} MB (max 5 MB)`), 'error');
+        showToast(`Input too large: ${sizeMB} MB (max 5 MB)`, 'error');
         return;
       }
       
@@ -2081,7 +2082,7 @@
       
       if (inputSize > MAX_INPUT_SIZE) {
         const sizeMB = (inputSize / (1024 * 1024)).toFixed(2);
-        showToast(sanitizeText(`Input too large: ${sizeMB} MB (max 5 MB)`), 'error');
+        showToast(`Input too large: ${sizeMB} MB (max 5 MB)`, 'error');
         return;
       }
       
@@ -2115,7 +2116,7 @@
             
             schemaSourceName = 'Custom Schema';
           } catch (e) {
-            showToast(sanitizeText('Invalid JSON Schema: ' + e.message), 'error');
+            showToast('Invalid JSON Schema: ' + e.message, 'error');
             return;
           }
         }
@@ -2362,7 +2363,7 @@
     }
     
     // Legacy clipboard copy fallback using execCommand
-    function copyUsingExecCommand(text) {
+    function copyUsingExecCommand(text, message) {
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.style.position = 'fixed';
@@ -2376,7 +2377,7 @@
         const successful = document.execCommand('copy');
         
         if (successful) {
-          showToast('Copied to clipboard!', 'success');
+          showToast(message || 'Copied to clipboard!', 'success');
         } else {
           selectTextForManualCopy(textarea);
         }
@@ -2404,7 +2405,7 @@
         JSON.parse(json);
         downloadFile(json, 'data.json', 'application/json');
       } catch (error) {
-        showToast(sanitizeText('Cannot download: Invalid JSON - ' + error.message), 'error');
+        showToast('Cannot download: Invalid JSON - ' + error.message, 'error');
       }
     }
     
@@ -2419,7 +2420,7 @@
         JSON.parse(schema);
         downloadFile(schema, 'schema.json', 'application/json');
       } catch (error) {
-        showToast(sanitizeText('Cannot download: Invalid schema - ' + error.message), 'error');
+        showToast('Cannot download: Invalid schema - ' + error.message, 'error');
       }
     }
     
@@ -2479,6 +2480,16 @@
       }
     }
     
+    // Debounce utility — prevents rapid repeated calls (used by Base64, QR)
+    const _debounceTimers = {};
+    function debounce(fn, delay) {
+      const key = fn.name || fn.toString().slice(0, 30);
+      return function(...args) {
+        clearTimeout(_debounceTimers[key]);
+        _debounceTimers[key] = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+
     // Sanitize text to prevent HTML injection
     function sanitizeText(text) {
       return String(text)
@@ -2698,6 +2709,14 @@
     // ========================================
     // MARKDOWN CONVERTER FUNCTIONS
     // ========================================
+    function updateConverterInputSize() {
+      const input = document.getElementById('converterInput');
+      const counter = document.getElementById('markdownInputSize');
+      if (input && counter) {
+        const bytes = new TextEncoder().encode(input.value).length;
+        counter.textContent = bytes < 1024 ? bytes + ' bytes' : (bytes / 1024).toFixed(1) + ' KB';
+      }
+    }
     function updateConversionLabels() {
       const mode = document.getElementById('conversionMode').value;
       const inputLabel = document.getElementById('inputLabel');
@@ -3136,6 +3155,11 @@ function hello() {
       document.getElementById('sipAmount').value = '5000';
       document.getElementById('sipRate').value = '12';
       document.getElementById('sipDuration').value = '10';
+      // Destroy chart to free memory
+      if (window.mySipChart) {
+        window.mySipChart.destroy();
+        window.mySipChart = null;
+      }
     }
     
     function exportSIPResults() {
@@ -3143,16 +3167,16 @@ function hello() {
       const rate = document.getElementById('sipRate').value;
       const duration = document.getElementById('sipDuration').value;
       
-      let csv = 'SIP Calculator Results\\n\\n';
-      csv += `Monthly Investment,₹${amount}\\n`;
-      csv += `Annual Return Rate,${rate}%\\n`;
-      csv += `Investment Period,${duration} years\\n\\n`;
-      csv += 'Year,Invested,Estimated Value,Wealth Gain\\n';
+      let csv = 'SIP Calculator Results\n\n';
+      csv += `Monthly Investment,₹${amount}\n`;
+      csv += `Annual Return Rate,${rate}%\n`;
+      csv += `Investment Period,${duration} years\n\n`;
+      csv += 'Year,Invested,Estimated Value,Wealth Gain\n';
       
       const rows = document.querySelectorAll('#sipTableBody tr');
       rows.forEach(row => {
         const cells = row.querySelectorAll('td');
-        csv += Array.from(cells).map(cell => cell.textContent).join(',') + '\\n';
+        csv += Array.from(cells).map(cell => cell.textContent).join(',') + '\n';
       });
       
       downloadFile(csv, 'sip-calculation.csv', 'text/csv');
@@ -3480,16 +3504,16 @@ function hello() {
       const rate = document.getElementById('emiRate').value;
       const tenure = document.getElementById('emiDuration').value;
       
-      let csv = 'EMI Calculator Results\\n\\n';
-      csv += `Loan Amount,₹${amount}\\n`;
-      csv += `Interest Rate,${rate}%\\n`;
-      csv += `Loan Tenure,${tenure} years\\n\\n`;
-      csv += 'Year,Principal,Interest,Balance\\n';
+      let csv = 'EMI Calculator Results\n\n';
+      csv += `Loan Amount,₹${amount}\n`;
+      csv += `Interest Rate,${rate}%\n`;
+      csv += `Loan Tenure,${tenure} years\n\n`;
+      csv += 'Year,Principal,Interest,Balance\n';
       
       const rows = document.querySelectorAll('#emiTableBody tr');
       rows.forEach(row => {
         const cells = row.querySelectorAll('td');
-        csv += Array.from(cells).map(cell => cell.textContent).join(',') + '\\n';
+        csv += Array.from(cells).map(cell => cell.textContent).join(',') + '\n';
       });
       
       downloadFile(csv, 'emi-calculation.csv', 'text/csv');
@@ -3669,6 +3693,10 @@ function hello() {
     // YAML VALIDATOR & LINTER IMPLEMENTATION
     // ========================================
     function validateYAML() {
+      if (!window.jsyaml) {
+        showToast('YAML library not loaded. Please refresh the page.', 'error');
+        return false;
+      }
       const input = document.getElementById('yaml-input').value;
       const statusCard = document.getElementById('yaml-status-card');
       
@@ -3678,7 +3706,7 @@ function hello() {
       }
       
       try {
-        const doc = jsyaml.load(input);
+        const doc = jsyaml.load(input, { schema: jsyaml.JSON_SCHEMA });
         
         statusCard.className = 'mb-6 p-4 rounded-lg border font-semibold flex items-start gap-3 transition-all duration-300 bg-green-500/10 border-green-500/30 text-green-700 dark:text-green-300';
         statusCard.innerHTML = `
@@ -3859,6 +3887,10 @@ function hello() {
     // QR CODE GENERATOR IMPLEMENTATION
     // ========================================
     function generateQRCode() {
+      if (!window.QRCode) {
+        showToast('QR Code library not loaded. Please refresh the page.', 'error');
+        return;
+      }
       const input = document.getElementById('qr-input').value;
       const container = document.getElementById('qrcode-display');
       
