@@ -240,6 +240,8 @@
   <script src="/lib/diff.min.js" defer></script>
   <script src="/lib/js-yaml.min.js" defer></script>
   <script src="/lib/qrcode.min.js" defer></script>
+  <script src="/lib/marked.min.js" defer></script>
+  <script src="/lib/turndown.min.js" defer></script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
@@ -2831,6 +2833,18 @@
     }
     
     function htmlToMarkdown(html, useGFM) {
+      if (window.TurndownService) {
+        try {
+          const turndownService = new window.TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced'
+          });
+          return turndownService.turndown(html);
+        } catch (e) {
+          console.error('Turndown service failed, falling back to regex parser:', e);
+        }
+      }
+      
       let md = html;
       
       // Headers
@@ -2893,6 +2907,14 @@
     }
     
     function markdownToHtml(md, useGFM) {
+      if (window.marked) {
+        try {
+          return window.marked.parse(md);
+        } catch (e) {
+          console.error('Marked parsing failed, falling back to regex parser:', e);
+        }
+      }
+      
       // Normalize newlines
       let html = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
       
@@ -3119,7 +3141,8 @@ function hello() {
     
     function generateYearWiseBreakdown(monthlyAmount, monthlyRate, years) {
       const tbody = document.getElementById('sipTableBody');
-      tbody.innerHTML = '';
+      if (!tbody) return;
+      let rowsHtml = '';
       
       for (let year = 1; year <= years; year++) {
         const monthsElapsed = year * 12;
@@ -3132,15 +3155,16 @@ function hello() {
         
         const gain = cumulativeValue - cumulativeInvestment;
         
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${year}</td>
-          <td>${formatCurrency(cumulativeInvestment)}</td>
-          <td>${formatCurrency(cumulativeValue)}</td>
-          <td class="success">${formatCurrency(gain)}</td>
+        rowsHtml += `
+          <tr>
+            <td>${year}</td>
+            <td>${formatCurrency(cumulativeInvestment)}</td>
+            <td>${formatCurrency(cumulativeValue)}</td>
+            <td class="success">${formatCurrency(gain)}</td>
+          </tr>
         `;
-        tbody.appendChild(row);
       }
+      tbody.innerHTML = rowsHtml;
     }
     
     function formatCurrency(amount) {
