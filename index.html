@@ -239,6 +239,7 @@
   <script src="/lib/purify.min.js" defer></script>
   <script src="/lib/diff.min.js" defer></script>
   <script src="/lib/js-yaml.min.js" defer></script>
+  <script src="/lib/qrcode.min.js" defer></script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen flex flex-col font-display antialiased transition-colors duration-300 relative overflow-x-hidden selection:bg-primary/20 dark:selection:bg-primary-dark/20">
 
@@ -1207,6 +1208,29 @@
         </div>
       </div>
 
+      <!-- TOOL #8: QR CODE GENERATOR -->
+      <div id="tool-qr" class="max-w-[1400px] mx-auto px-4 md:px-8 py-8" style="display:none;">
+        <div class="flex flex-col gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-8">
+          <h2 class="font-heading text-3xl md:text-4xl text-text-light dark:text-text-dark font-normal"><span class="material-symbols-outlined text-4xl mr-2.5 align-middle text-primary dark:text-accent-dark">qr_code_2</span>QR Code Generator</h2>
+          <p class="text-sm text-muted-light dark:text-muted-dark">Generate scannable QR codes instantly for URLs, text, and data.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col gap-4">
+            <label class="text-xs font-bold uppercase tracking-wider text-muted-light dark:text-muted-dark font-display">Enter Data for QR Code</label>
+            <textarea id="qr-input" oninput="generateQRCode()" placeholder="Enter URL or text..." class="w-full h-48 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark font-mono text-sm border border-muted-light/30 dark:border-muted-dark/60 rounded-lg p-4 outline-none focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark transition-all shadow-sm leading-relaxed" spellcheck="false"></textarea>
+          </div>
+          <div class="flex flex-col gap-4 items-center justify-center bg-surface-light/40 dark:bg-surface-dark/40 border border-muted-light/20 dark:border-muted-dark/30 rounded-xl p-8">
+            <div id="qrcode-display" class="bg-white p-4 rounded-xl shadow-sm min-h-[200px] w-[288px] flex items-center justify-center">
+              <span class="text-muted-light">QR code will appear here</span>
+            </div>
+            <button class="px-6 py-2 bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white font-bold text-xs uppercase tracking-[1.5px] rounded-full dark:rounded-sm transition-all shadow-md theme-shadow active:scale-95 mt-4" onclick="downloadQRCode()">
+              Download QR Code
+            </button>
+          </div>
+        </div>
+      </div>
+
     </main>
 
     <!-- Footer -->
@@ -1257,7 +1281,8 @@
       'sip': { name: 'SIP Calculator', icon: 'trending_up' },
       'emi': { name: 'EMI Calculator', icon: 'cottage' },
       'base64': { name: 'Base64 Tool', icon: 'key' },
-      'yaml': { name: 'YAML Validator', icon: 'description' }
+      'yaml': { name: 'YAML Validator', icon: 'description' },
+      'qr': { name: 'QR Code Generator', icon: 'qr_code_2' }
     };
     
     // ========================================
@@ -1383,6 +1408,7 @@
       const emiTool = document.getElementById('tool-emi');
       const base64Tool = document.getElementById('tool-base64');
       const yamlTool = document.getElementById('tool-yaml');
+      const qrTool = document.getElementById('tool-qr');
       
       // Hide all
       if (homePage) homePage.style.display = 'none';
@@ -1393,6 +1419,7 @@
       if (emiTool) emiTool.style.display = 'none';
       if (base64Tool) base64Tool.style.display = 'none';
       if (yamlTool) yamlTool.style.display = 'none';
+      if (qrTool) qrTool.style.display = 'none';
       
       if (!hash || hash === 'home') {
         if (homePage) homePage.style.display = 'block';
@@ -1428,6 +1455,10 @@
         if (yamlTool) yamlTool.style.display = 'block';
         updateBreadcrumb('YAML Validator & Linter');
         addToRecentApps('yaml');
+      } else if (hash === 'qr') {
+        if (qrTool) qrTool.style.display = 'block';
+        updateBreadcrumb('QR Code Generator');
+        addToRecentApps('qr');
       }
     }
     
@@ -1591,7 +1622,8 @@
         { id: 'sip', name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
         { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' },
         { id: 'base64', name: 'Base64 Tool', icon: 'key', description: 'Secure client-side Unicode Base64 and Hex encoder/decoder' },
-        { id: 'yaml', name: 'YAML Validator & Linter', icon: 'description', description: 'Validate YAML syntax and automatically correct formatting and linting errors' }
+        { id: 'yaml', name: 'YAML Validator & Linter', icon: 'description', description: 'Validate YAML syntax and automatically correct formatting and linting errors' },
+        { id: 'qr', name: 'QR Code Generator', icon: 'qr_code_2', description: 'Generate scannable QR codes instantly from text or URLs' }
       ];
       
       const filtered = toolsList.filter(tool => {
@@ -2430,9 +2462,12 @@
     
     // Sanitize text to prevent HTML injection
     function sanitizeText(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
     
     // Safe JSON.stringify with circular reference detection
@@ -2633,9 +2668,12 @@
     }
     
     function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
     
     // ========================================
@@ -3669,7 +3707,7 @@ function hello() {
         // 2. Fix space after list hyphen (e.g., " -apple" -> " - apple")
         line = line.replace(/^(\s*)-([^\s\-].*)$/g, '$1- $2');
         
-        // 3. Fix key-value spaces without breaking URLs
+        // 3. Fix key-value spaces without breaking URLs or strings
         let colonIdx = line.indexOf(':');
         if (colonIdx !== -1) {
           let key = line.substring(0, colonIdx);
@@ -3677,9 +3715,14 @@ function hello() {
           
           if (!key.trim().startsWith('#') && !key.trim().startsWith('---') && !key.trim().startsWith('...')) {
             if (!value.trim().startsWith('//') && value.trim().length > 0) {
-              let trimmedValue = value.trim();
-              if (!value.startsWith(' ') || value.match(/^\s{2,}/)) {
-                line = key + ': ' + trimmedValue;
+              let keyHasUnbalancedDoubleQuote = (key.match(/"/g) || []).length % 2 !== 0;
+              let keyHasUnbalancedSingleQuote = (key.match(/'/g) || []).length % 2 !== 0;
+              
+              if (!keyHasUnbalancedDoubleQuote && !keyHasUnbalancedSingleQuote) {
+                let trimmedValue = value.trim();
+                if (!value.startsWith(' ') || value.match(/^\s{2,}/)) {
+                  line = key + ': ' + trimmedValue;
+                }
               }
             }
           }
@@ -3792,6 +3835,64 @@ function hello() {
       } else {
         copyUsingExecCommand(text, message);
       }
+    }
+    // ========================================
+    // QR CODE GENERATOR IMPLEMENTATION
+    // ========================================
+    function generateQRCode() {
+      const input = document.getElementById('qr-input').value;
+      const container = document.getElementById('qrcode-display');
+      
+      container.innerHTML = ''; // Clear previous
+      
+      if (!input.trim()) {
+        container.innerHTML = '<span class="text-muted-light">QR code will appear here</span>';
+        return;
+      }
+      
+      try {
+        new QRCode(container, {
+          text: input,
+          width: 256,
+          height: 256,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+        
+        // Fix styling for generated image/canvas
+        const img = container.querySelector('img');
+        const canvas = container.querySelector('canvas');
+        if (img) img.style.margin = "auto";
+        if (canvas) canvas.style.margin = "auto";
+      } catch (e) {
+        container.innerHTML = '<span class="text-red-500 text-sm">Failed to generate QR Code</span>';
+      }
+    }
+
+    function downloadQRCode() {
+      const container = document.getElementById('qrcode-display');
+      const img = container.querySelector('img');
+      const canvas = container.querySelector('canvas');
+      let src = null;
+      
+      if (img && img.src) {
+        src = img.src;
+      } else if (canvas) {
+        src = canvas.toDataURL("image/png");
+      }
+      
+      if (!src) {
+        showToast('Please generate a QR code first.', 'warning');
+        return;
+      }
+      
+      const link = document.createElement('a');
+      link.href = src;
+      link.download = 'qrcode.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   </script>
 
