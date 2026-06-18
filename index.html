@@ -462,6 +462,25 @@
             </div>
           </article>
 
+          <!-- Card: QR Code Generator -->
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('qr')" tabindex="0" onkeypress="handleCardKeypress(event, 'qr')">
+            <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark border border-muted-light/20 dark:border-muted-dark/30 group-hover:border-primary/50 dark:group-hover:border-primary-dark/50 flex items-center justify-center transition-all theme-image-radius shadow-sm group-hover:shadow-md relative overflow-hidden group-hover:bg-primary/5 dark:group-hover:bg-primary-dark/10">
+              <span class="material-symbols-outlined text-[64px] text-primary/40 dark:text-primary-dark/40 group-hover:text-primary dark:group-hover:text-primary-dark transition-all group-hover:scale-110">qr_code_2</span>
+            </div>
+            <div class="flex flex-col gap-2 px-1">
+              <div class="flex justify-between items-baseline">
+                <h2 class="font-heading text-2xl text-text-light dark:text-text-dark font-normal group-hover:text-primary dark:group-hover:text-primary-dark transition-colors">QR Code Generator</h2>
+                <span class="dark:text-muted-dark text-[10px] font-bold tracking-widest text-muted-light uppercase font-display">New</span>
+              </div>
+              <p class="text-text-light/80 dark:text-text-dark/80 text-sm leading-relaxed line-clamp-2 font-display">
+                Generate high-quality scannable QR codes instantly from text, data, or URLs.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 bg-primary/10 dark:bg-accent-dark/10 text-primary dark:text-accent-dark text-[10px] font-semibold uppercase tracking-[1.5px] rounded-full dark:rounded-sm border border-primary/20 dark:border-accent-dark/40 font-display">Utility</span>
+              </div>
+            </div>
+          </article>
+
           <!-- Card: More Tools Placeholder -->
           <article class="flex flex-col gap-4 pb-6 opacity-50 select-none">
             <div class="w-full aspect-[16/9] bg-surface-light/40 dark:bg-surface-dark/40 theme-image-radius border border-dashed border-text-light/15 dark:border-muted-dark/30 transition-all duration-300 flex items-center justify-center">
