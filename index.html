@@ -316,7 +316,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
           
           <!-- Card: JSON Generator -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('json')" tabindex="0" onkeypress="handleCardKeypress(event, 'json')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('json')" tabindex="0" onkeydown="handleCardKeydown(event, 'json')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">schema</span>
@@ -337,7 +337,7 @@
           </article>
 
           <!-- Card: HTML↔Markdown -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('markdown')" tabindex="0" onkeypress="handleCardKeypress(event, 'markdown')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('markdown')" tabindex="0" onkeydown="handleCardKeydown(event, 'markdown')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">history_edu</span>
@@ -358,7 +358,7 @@
           </article>
 
           <!-- Card: Diff Checker -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('diff')" tabindex="0" onkeypress="handleCardKeypress(event, 'diff')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('diff')" tabindex="0" onkeydown="handleCardKeydown(event, 'diff')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">balance</span>
@@ -379,7 +379,7 @@
           </article>
 
           <!-- Card: SIP Calculator -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('sip')" tabindex="0" onkeypress="handleCardKeypress(event, 'sip')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('sip')" tabindex="0" onkeydown="handleCardKeydown(event, 'sip')">
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">trending_up</span>
@@ -400,7 +400,7 @@
           </article>
 
           <!-- Card: EMI Calculator -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('emi')" tabindex="0" onkeypress="handleCardKeypress(event, 'emi')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('emi')" tabindex="0" onkeydown="handleCardKeydown(event, 'emi')">>
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">cottage</span>
@@ -421,7 +421,7 @@
           </article>
 
           <!-- Card: Base64 Tool -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('base64')" tabindex="0" onkeypress="handleCardKeypress(event, 'base64')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('base64')" tabindex="0" onkeydown="handleCardKeydown(event, 'base64')">>
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">key</span>
@@ -442,7 +442,7 @@
           </article>
 
           <!-- Card: YAML Validator -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('yaml')" tabindex="0" onkeypress="handleCardKeypress(event, 'yaml')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('yaml')" tabindex="0" onkeydown="handleCardKeydown(event, 'yaml')">>
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark theme-image-radius overflow-hidden relative theme-shadow theme-shadow-hover theme-border transition-all duration-300 flex items-center justify-center">
               <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent-light/10 dark:from-primary-dark/10 dark:to-accent-dark/10 group-hover:opacity-80 transition-opacity"></div>
               <span class="material-symbols-outlined text-6xl text-primary dark:text-primary-dark transition-transform group-hover:scale-110 duration-300">description</span>
@@ -463,7 +463,7 @@
           </article>
 
           <!-- Card: QR Code Generator -->
-          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('qr')" tabindex="0" onkeypress="handleCardKeypress(event, 'qr')">
+          <article class="flex flex-col gap-4 pb-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-2 select-none" onclick="launchTool('qr')" tabindex="0" onkeydown="handleCardKeydown(event, 'qr')">>
             <div class="w-full aspect-[16/9] bg-surface-light dark:bg-surface-dark border border-muted-light/20 dark:border-muted-dark/30 group-hover:border-primary/50 dark:group-hover:border-primary-dark/50 flex items-center justify-center transition-all theme-image-radius shadow-sm group-hover:shadow-md relative overflow-hidden group-hover:bg-primary/5 dark:group-hover:bg-primary-dark/10">
               <span class="material-symbols-outlined text-[64px] text-primary/40 dark:text-primary-dark/40 group-hover:text-primary dark:group-hover:text-primary-dark transition-all group-hover:scale-110">qr_code_2</span>
             </div>
@@ -561,7 +561,7 @@
                 📦 Load Sample
               </button>
             </div>
-            <button class="flex items-center gap-2 text-xs font-bold uppercase tracking-[1.5px] text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark px-4 py-2 border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm" onclick="toggleHelp()" aria-label="Toggle help information" aria-expanded="false">
+            <button class="help-toggle-btn flex items-center gap-2 text-xs font-bold uppercase tracking-[1.5px] text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark px-4 py-2 border border-muted-light/20 dark:border-muted-dark/40 rounded-full dark:rounded-sm" onclick="toggleHelp()" aria-label="Toggle help information" aria-expanded="false">
               <span class="material-symbols-outlined text-sm">help</span>
               <span>Help</span>
             </button>
@@ -1265,7 +1265,7 @@
   <!-- ========================================
      GLOBAL MODAL: SEARCH TOOLS
      ======================================== -->
-  <div id="searchModal" class="fixed inset-0 z-[2000] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalSearchTitle">
+  <div id="searchModal" class="fixed inset-0 z-[2000] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalSearchTitle" onkeydown="handleSearchKeydown(event)">
     <!-- Backdrop overlay -->
     <div class="fixed inset-0 bg-background-dark/80 backdrop-blur-sm" onclick="closeSearch()"></div>
     
@@ -1273,8 +1273,8 @@
       <div class="relative w-full max-w-[600px] bg-surface-light dark:bg-surface-dark rounded-xl border border-muted-light/30 dark:border-muted-dark/50 shadow-2xl p-6 overflow-hidden theme-border-radius relative z-10 transition-colors duration-300">
         <div class="flex items-center gap-3 border-b border-muted-light/20 dark:border-muted-dark/30 pb-4 mb-4">
           <span class="material-symbols-outlined text-primary dark:text-accent-dark text-2xl">search</span>
-          <input type="text" id="searchInput" placeholder="Search developer tools... (type key, e.g. json, emi)" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-4 py-2.5 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark text-sm transition-shadow font-semibold" oninput="handleSearchInput()" onkeydown="handleSearchKeydown(event)">
-          <button class="text-xs font-bold uppercase tracking-wider text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark" onclick="closeSearch()">ESC</button>
+          <input type="text" id="searchInput" placeholder="Search developer tools... (type key, e.g. json, emi)" class="w-full bg-background-light dark:bg-background-dark border border-muted-light/20 dark:border-muted-dark/40 rounded px-4 py-2.5 outline-none text-text-light dark:text-text-dark focus:ring-1 focus:ring-primary dark:focus:ring-accent-dark focus:border-primary dark:focus:border-accent-dark text-sm transition-shadow font-semibold" oninput="handleSearchInput()">
+          <button id="closeSearchBtn" class="text-xs font-bold uppercase tracking-wider text-muted-light hover:text-primary dark:text-muted-dark dark:hover:text-primary-dark" onclick="closeSearch()">ESC</button>
         </div>
         
         <div class="flex flex-col gap-2 max-h-[300px] overflow-y-auto" id="searchResults">
@@ -1294,14 +1294,14 @@
     const THEME_KEY = 'devtools-theme';
     
     const TOOLS = {
-      'json': { name: 'JSON Schema Generator', icon: 'schema' },
-      'markdown': { name: 'Markdown Converter', icon: 'history_edu' },
-      'diff': { name: 'Diff Checker', icon: 'balance' },
-      'sip': { name: 'SIP Calculator', icon: 'trending_up' },
-      'emi': { name: 'EMI Calculator', icon: 'cottage' },
-      'base64': { name: 'Base64 Tool', icon: 'key' },
-      'yaml': { name: 'YAML Validator', icon: 'description' },
-      'qr': { name: 'QR Code Generator', icon: 'qr_code_2' }
+      'json': { name: 'JSON Schema Generator', icon: 'schema', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
+      'markdown': { name: 'Markdown Converter', icon: 'history_edu', description: 'Convert between HTML and Markdown formats' },
+      'diff': { name: 'Text Diff Checker', icon: 'balance', description: 'Compare texts to identify changes line-by-line' },
+      'sip': { name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
+      'emi': { name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' },
+      'base64': { name: 'Base64 Tool', icon: 'key', description: 'Secure client-side Unicode Base64 and Hex encoder/decoder' },
+      'yaml': { name: 'YAML Validator & Linter', icon: 'description', description: 'Validate YAML syntax and automatically correct formatting and linting errors' },
+      'qr': { name: 'QR Code Generator', icon: 'qr_code_2', description: 'Generate scannable QR codes instantly from text or URLs' }
     };
     
     // ========================================
@@ -1382,7 +1382,6 @@
     
     function navigateHome() {
       window.location.hash = '';
-      updateBreadcrumb('Home');
     }
     
     function updateBreadcrumb(toolName) {
@@ -1405,13 +1404,10 @@
         console.warn('Tool not available:', toolId);
         return;
       }
-      
-      addToRecentApps(toolId);
       window.location.hash = toolId;
-      updateBreadcrumb(TOOLS[toolId].name);
     }
     
-    function handleCardKeypress(event, toolId) {
+    function handleCardKeydown(event, toolId) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         launchTool(toolId);
@@ -1552,10 +1548,7 @@
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       setTheme(newTheme);
     }
-    
-    function updateThemeIcon(theme) {
-      // Transition is handled automatically by CSS on themeIconMoon and themeIconSun!
-    }
+
     
     // ========================================
     // SEARCH MODAL
@@ -1591,6 +1584,20 @@
       
       if (event.key === 'Escape') {
         closeSearch();
+      } else if (event.key === 'Tab') {
+        const closeBtn = document.getElementById('closeSearchBtn');
+        const input = document.getElementById('searchInput');
+        if (event.shiftKey) {
+          if (document.activeElement === input) {
+            event.preventDefault();
+            if (closeBtn) closeBtn.focus();
+          }
+        } else {
+          if (document.activeElement === closeBtn) {
+            event.preventDefault();
+            if (input) input.focus();
+          }
+        }
       } else if (event.key === 'ArrowDown') {
         event.preventDefault();
         if (!selected && results.length > 0) {
@@ -1635,22 +1642,13 @@
       const resultsContainer = document.getElementById('searchResults');
       const searchQuery = query.toLowerCase();
       
-      const toolsList = [
-        { id: 'json', name: 'JSON Schema Generator', icon: 'schema', description: 'Generate JSON schemas, validate data, minify and beautify JSON' },
-        { id: 'markdown', name: 'Markdown Converter', icon: 'history_edu', description: 'Convert between HTML and Markdown formats' },
-        { id: 'diff', name: 'Text Diff Checker', icon: 'balance', description: 'Compare texts to identify changes line-by-line' },
-        { id: 'sip', name: 'SIP Calculator', icon: 'trending_up', description: 'Calculate mutual fund SIP returns' },
-        { id: 'emi', name: 'EMI Calculator', icon: 'cottage', description: 'Calculate home loan EMI' },
-        { id: 'base64', name: 'Base64 Tool', icon: 'key', description: 'Secure client-side Unicode Base64 and Hex encoder/decoder' },
-        { id: 'yaml', name: 'YAML Validator & Linter', icon: 'description', description: 'Validate YAML syntax and automatically correct formatting and linting errors' },
-        { id: 'qr', name: 'QR Code Generator', icon: 'qr_code_2', description: 'Generate scannable QR codes instantly from text or URLs' }
-      ];
-      
-      const filtered = toolsList.filter(tool => {
-        return tool.name.toLowerCase().includes(searchQuery) ||
-               tool.description.toLowerCase().includes(searchQuery) ||
-               tool.id.toLowerCase().includes(searchQuery);
-      });
+      const filtered = Object.entries(TOOLS)
+        .map(([id, tool]) => ({ id, ...tool }))
+        .filter(tool => {
+          return tool.name.toLowerCase().includes(searchQuery) ||
+                 (tool.description || '').toLowerCase().includes(searchQuery) ||
+                 tool.id.toLowerCase().includes(searchQuery);
+        });
       
       if (filtered.length === 0) {
         resultsContainer.innerHTML = '<div class="search-empty">No tools found</div>';
@@ -1664,7 +1662,7 @@
           </div>
           <div class="search-result-info">
             <div class="search-result-title">${tool.name}</div>
-            <div class="search-result-description">${tool.description}</div>
+            <div class="search-result-description">${tool.description || ''}</div>
           </div>
         </div>
       `).join('');
@@ -2198,7 +2196,7 @@
         // Check required properties
         if (schema.required && Array.isArray(schema.required)) {
           for (const req of schema.required) {
-            if (!(req in data)) {
+            if (!Object.prototype.hasOwnProperty.call(data, req)) {
               errors.push({
                 path: path,
                 message: `Missing required property: "${req}"`
@@ -2210,9 +2208,11 @@
         // Validate properties
         if (schema.properties) {
           for (const key in schema.properties) {
-            if (key in data) {
-              const propErrors = validateData(data[key], schema.properties[key], `${path}.${key}`);
-              errors.push(...propErrors);
+            if (Object.prototype.hasOwnProperty.call(schema.properties, key)) {
+              if (Object.prototype.hasOwnProperty.call(data, key)) {
+                const propErrors = validateData(data[key], schema.properties[key], `${path}.${key}`);
+                errors.push(...propErrors);
+              }
             }
           }
         }
@@ -2220,11 +2220,13 @@
         // Check additionalProperties
         if (schema.additionalProperties === false) {
           for (const key in data) {
-            if (!(key in (schema.properties || {}))) {
-              errors.push({
-                path: path,
-                message: `Additional property not allowed: "${key}"`
-              });
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+              if (!Object.prototype.hasOwnProperty.call(schema.properties || {}, key)) {
+                errors.push({
+                  path: path,
+                  message: `Additional property not allowed: "${key}"`
+                });
+              }
             }
           }
         }
@@ -2424,7 +2426,7 @@
       }
     }
     
-    function downloadFile(content, filename, type) {
+    function downloadFile(content, filename, type = 'text/plain') {
       const blob = new Blob([content], { type });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -2457,7 +2459,11 @@
     
     function updateSizeIndicator(elementId, bytes) {
       const element = document.getElementById(elementId);
+      if (!element) return;
       const MAX_SIZE_MB = 5;
+      
+      // Reset color style
+      element.style.color = '';
       
       if (bytes === 0) {
         element.textContent = '0 bytes';
@@ -2474,8 +2480,6 @@
           element.style.color = 'var(--color-error)';
         } else if (parseFloat(sizeMB) > MAX_SIZE_MB * 0.8) {
           element.style.color = 'var(--color-warning)';
-        } else {
-          element.style.color = 'var(--color-text-muted)';
         }
       }
     }
@@ -2889,7 +2893,8 @@
     }
     
     function markdownToHtml(md, useGFM) {
-      let html = md;
+      // Normalize newlines
+      let html = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
       
       // Escape HTML first
       html = html.replace(/&/g, '&amp;')
@@ -2919,19 +2924,12 @@
       html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
       
       // Unordered lists
-      const ulLines = [];
-      html.split('\n').forEach(line => {
-        if (line.match(/^[-*]\s+(.+)$/)) {
-          ulLines.push('<li>' + line.replace(/^[-*]\s+/, '') + '</li>');
-        } else if (ulLines.length > 0) {
-          html = html.replace(ulLines.join('\n'), '<ul>\n' + ulLines.join('\n') + '\n</ul>');
-          ulLines.length = 0;
-        }
-      });
+      html = html.replace(/^[-*+]\s+(.+)$/gm, '<ul><li>$1</li></ul>');
+      html = html.replace(/<\/ul>\n?<ul>/g, '\n');
       
       // Ordered lists
-      html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
-      html = html.replace(/(<li>.*?<\/li>\n?)+/gs, '<ol>$&</ol>');
+      html = html.replace(/^\d+\.\s+(.+)$/gm, '<ol><li>$1</li></ol>');
+      html = html.replace(/<\/ol>\n?<ol>/g, '\n');
       
       // Blockquotes
       html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
@@ -2990,8 +2988,9 @@
       const mode = document.getElementById('conversionMode').value;
       const ext = mode === 'html-to-md' ? 'md' : 'html';
       const filename = `converted.${ext}`;
+      const type = ext === 'md' ? 'text/markdown' : 'text/html';
       
-      downloadFile(output, filename);
+      downloadFile(output, filename, type);
     }
     
     function loadMarkdownSample() {
@@ -3287,8 +3286,9 @@ function hello() {
         interestPaidData.push(Math.round(accumInterestSim));
       }
       
-      // Build actual scheduling table rows
+      // Build actual scheduling table rows (batched inside a single innerHTML write)
       balance = principal;
+      let rowsHtml = '';
       for (let m = 1; m <= months; m++) {
         if (balance <= 0) break;
         
@@ -3316,22 +3316,22 @@ function hello() {
         accumPrepay += prepaymentPaid;
         actualMonths = m;
         
-        const row = document.createElement('tr');
-        row.className = "hover:bg-surface-light/20 dark:hover:bg-surface-dark/25 transition-colors border-b border-muted-light/5 dark:border-muted-dark/10";
-        row.innerHTML = `
-          <td class="p-3 text-center font-bold text-muted-light dark:text-muted-dark">${m}</td>
-          <td class="p-3">${formatCurrency(openingBal)}</td>
-          <td class="p-3 font-semibold">${formatCurrency(emi)}</td>
-          <td class="p-3 text-green-500">${formatCurrency(principalPaid)}</td>
-          <td class="p-3 text-red-500">${formatCurrency(interestPaid)}</td>
-          <td class="p-3 text-accent-light dark:text-accent-dark font-bold">${prepaymentPaid > 0 ? formatCurrency(prepaymentPaid) : '—'}</td>
-          <td class="p-3 font-bold">${formatCurrency(endingBal)}</td>
+        rowsHtml += `
+          <tr class="hover:bg-surface-light/20 dark:hover:bg-surface-dark/25 transition-colors border-b border-muted-light/5 dark:border-muted-dark/10">
+            <td class="p-3 text-center font-bold text-muted-light dark:text-muted-dark">${m}</td>
+            <td class="p-3">${formatCurrency(openingBal)}</td>
+            <td class="p-3 font-semibold">${formatCurrency(emi)}</td>
+            <td class="p-3 text-green-500">${formatCurrency(principalPaid)}</td>
+            <td class="p-3 text-red-500">${formatCurrency(interestPaid)}</td>
+            <td class="p-3 text-accent-light dark:text-accent-dark font-bold">${prepaymentPaid > 0 ? formatCurrency(prepaymentPaid) : '—'}</td>
+            <td class="p-3 font-bold">${formatCurrency(endingBal)}</td>
+          </tr>
         `;
-        tbody.appendChild(row);
         
         balance = endingBal;
         if (balance <= 0) break;
       }
+      tbody.innerHTML = rowsHtml;
       
       // Calculate and update Prepayment Savings Card results
       const revisedTotalInterest = accumInterest;
