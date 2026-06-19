@@ -249,6 +249,9 @@ https://devtoolbox.domain.com/#/[tool-name]
 /#/html-markdown        → HTML ↔ Markdown Converter
 /#/text-diff            → Text Difference Checker
 /#/emi-calculator       → EMI Calculator
+/#/base64               → Base64 Tool
+/#/yaml                 → YAML Validator & Linter
+/#/qr                   → QR Code Generator
 
 // Example
 https://devtoolbox.domain.com/#/sip-calculator
@@ -3112,7 +3115,7 @@ function loadState() {
 
 ### ADR-008: Lazy Loading for Tool Modules
 **Decision:** Lazy load tool-specific JS/CSS on navigation  
-**Context:** 6 tools, only 1 used per session typically  
+**Context:** 8 tools, only 1 used per session typically  
 **Alternatives:** Bundle all tools together  
 **Rationale:** Faster initial load, lower bandwidth for single-tool users  
 **Consequences:** Small delay when switching tools (~200ms)

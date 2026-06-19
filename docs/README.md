@@ -54,6 +54,7 @@ Detailed documentation for each feature:
 - [Home Page](./features/06-home-page.md)
 - [Base64 Tool](./features/07-base64-tool.md)
 - [YAML Validator & Linter](./features/08-yaml-validator.md)
+- [QR Code Generator](./features/09-qr-code-generator.md)
 
 ### [🎨 /design](./design/) - Design System
 UI/UX design and frontend implementation:
@@ -91,7 +92,7 @@ Completed sprints, reports, and historical artifacts:
 | Aspect | Status | Details |
 |--------|--------|---------|
 | **Production Status** | ✅ Live | Deployed to production |
-| **Features** | ✅ 8/8 Complete | All planned features delivered |
+| **Features** | ✅ 9/9 Complete | All planned features delivered |
 | **Test Coverage** | ✅ 100% Pass | All core and new feature tests passing |
 | **Security Grade** | ✅ A (100/100) | All critical issues resolved |
 | **Performance** | ✅ 60% faster | Exceeds all targets |
@@ -133,8 +134,8 @@ See [Developer Guide](./DEVELOPER_GUIDE.md) for documentation contribution guide
 
 ---
 
-**Last Updated:** May 26, 2026
+**Last Updated:** June 19, 2026
 
-**Documentation Version:** 3.0 (Base64 & YAML Tool Additions - May 26, 2026)
+**Documentation Version:** 3.2 (QR Code Generator Addition - June 19, 2026)
 
-**Documentation Status:** ✅ Reorganized and up-to-date
+**Documentation Status:** ✅ Up-to-date with audit optimization and QR code generator

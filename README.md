@@ -52,6 +52,12 @@ DevToolbox is a collection of professional-grade developer utilities that run en
    - Smart linter auto-corrects spaces/tabs
    - [Documentation](./docs/features/08-yaml-validator.md)
 
+8. **QR Code Generator**
+   - Instant client-side QR generation
+   - High error correction level (H)
+   - One-click PNG image download
+   - [Documentation](./docs/features/09-qr-code-generator.md)
+
 ## 🚀 Quick Start
 
 ### Option 1: Use Online
@@ -124,9 +130,9 @@ open http://localhost:8000
 
 ## 📊 Project Status
 
-**Status**: ✅ Production Ready (May 2026)
+**Status**: ✅ Production Ready (June 19, 2026)
 
-- ✅ 7/7 individual tools complete and tested
+- ✅ 8/8 individual tools complete and tested
 - ✅ 100% test pass rate on latest features
 - ✅ 0 critical bugs
 - ✅ 60% faster than performance targets
@@ -168,6 +174,7 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 - [x] EMI Calculator with prepayment
 - [x] Base64 Encoder/Decoder
 - [x] YAML Validator & Linter
+- [x] QR Code Generator
 - [ ] Code Formatter (XML/CSS/JS)
 - [ ] JWT Decoder
 - [ ] Regular Expression Tester
@@ -178,4 +185,4 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 **Built with ❤️ for developers, by developers.**
 
-Last Updated: May 26, 2026
+Last Updated: June 19, 2026

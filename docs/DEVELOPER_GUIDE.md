@@ -1,7 +1,7 @@
 # Developer Guide - DevToolbox Platform
 
-**Version:** 1.0  
-**Last Updated:** March 19, 2026  
+**Version:** 3.2  
+**Last Updated:** June 19, 2026  
 **Audience:** Developers contributing to the DevToolbox platform
 
 ---

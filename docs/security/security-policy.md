@@ -212,6 +212,6 @@ This software is provided "AS IS" under the MIT License. See [LICENSE](LICENSE) 
 
 ---
 
-**Last Updated**: 2026-03-19  
-**Version**: 1.0.0  
-**Next Review**: 2026-06-19 (Quarterly)
+**Last Updated**: 2026-06-19  
+**Version**: 1.1.0  
+**Next Review**: 2026-09-19 (Quarterly)

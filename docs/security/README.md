@@ -123,5 +123,5 @@ To report security issues:
 
 ---
 
-**Last Updated:** March 20, 2026  
-**Next Review:** June 20, 2026
+**Last Updated:** June 19, 2026  
+**Next Review:** September 19, 2026

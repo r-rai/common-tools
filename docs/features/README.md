@@ -1,15 +1,15 @@
 # Feature Specifications Index
 
 **Project:** Developer Toolset Platform  
-**Version:** 1.0  
-**Last Updated:** March 19, 2026  
-**Status:** Ready for Architecture Phase
+**Version:** 3.1  
+**Last Updated:** June 19, 2026  
+**Status:** Completed & Staged
 
 ---
 
 ## Overview
 
-This directory contains detailed feature specifications for all 6 tools in the Developer Toolset Platform. Each specification document provides production-ready requirements for development, testing, and implementation.
+This directory contains detailed feature specifications for all 8 tools (and the main Home Page dashboard) in the Developer Toolset Platform. Each specification document provides production-ready requirements for development, testing, and implementation.
 
 ---
 
@@ -112,6 +112,53 @@ Landing page and navigation hub for the entire platform.
 
 ---
 
+### 7. [Base64 Tool](./07-base64-tool.md)
+**Priority:** High | **RICE Score:** 1200  
+**Timeline:** May 2026  
+**Status:** Completed & Integrated  
+
+Secure client-side Base64, Base64Url, and Hex encoder/decoder tool.
+
+**Key Features:**
+- Standard text & Unicode/UTF-8 support
+- Base64Url formatting
+- Hex conversion
+- Real-time character stats
+- Easy export toolbars
+
+---
+
+### 8. [YAML Validator & Linter](./08-yaml-validator.md)
+**Priority:** High | **RICE Score:** 1500  
+**Timeline:** May 2026  
+**Status:** Completed & Integrated  
+
+Browser-side YAML syntax validator and auto-correct formatting linter.
+
+**Key Features:**
+- Secure local validation (js-yaml)
+- Precision error pointing
+- Smart auto-correct linter
+- URL/comment safety checks
+
+---
+
+### 9. [QR Code Generator](./09-qr-code-generator.md)
+**Priority:** High | **RICE Score:** 1350  
+**Timeline:** June 2026  
+**Status:** Completed & Integrated  
+
+Client-side QR Code Generator utilizing dynamic local script loading.
+
+**Key Features:**
+- Fast dynamic QR generation
+- 400ms debounce safety
+- High-level error correction (H)
+- One-click PNG download
+- Responsive placeholder states
+
+---
+
 ## Implementation Guidelines
 
 ### Reading Order for Development Team
@@ -130,6 +177,9 @@ Despite RICE scores, implement in this order for logical dependencies:
 4. Text Difference Checker (Standalone tool)
 5. EMI Calculator (Complex standalone tool)
 6. Home Page (Integration of all tools)
+7. Base64 Tool (SPA Integration)
+8. YAML Validator & Linter (SPA Integration)
+9. QR Code Generator (SPA Integration)
 
 ### Cross-Feature Dependencies
 
