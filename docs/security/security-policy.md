@@ -12,13 +12,14 @@ DevToolbox is designed with security as a core principle. All tools run entirely
 - **Privacy First**: Your data is never sent to any server
 
 ### 2. Content Security Policy (CSP)
-We enforce a strict Content Security Policy to prevent XSS and injection attacks:
+We enforce a Content Security Policy to prevent XSS and injection attacks while allowing required local library dependencies and standard CDNs (Tailwind & Google Fonts):
 
 ```
 Content-Security-Policy: 
   default-src 'self';
-  script-src 'unsafe-inline';
-  style-src 'unsafe-inline';
+  script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
   img-src 'self' data:;
   object-src 'none';
   base-uri 'self';
